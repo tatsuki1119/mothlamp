@@ -33,7 +33,7 @@ $(function () {
 
                 })
                 .fail(function () {
-                    $.get("/pages/_404.html", function (data) {
+                    $.get("/pages/404.html", function (data) {
                         $("#contents").html(data);
                     });
                 });
