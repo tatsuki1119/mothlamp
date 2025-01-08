@@ -43,9 +43,36 @@ $(function () {
             });
         }
     }
+    // $('#loader').fadeOut(500);
+    // $('#main').fadeIn(800);
+
+    // // アンカータグが指定されていればその位置に移動
+    // var hash = window.location.hash; // URLのハッシュ部分を取得
+    // if (hash) {
+    //     var anchor = $(hash); // ハッシュに対応する要素を探す
+    //     console.log(anchor);
+    //     if (anchor.length) {
+    //         $('html, body').animate({
+    //             scrollTop: anchor.offset().top
+    //         }, 500); // 500ミリ秒でスクロール
+    //     }
+    // }
+
     $('#loader').fadeOut(500);
-    $('#main').fadeIn(800);
-})
+    $('#main').fadeIn(500, function () {
+        // アニメーション完了後にアンカータグが指定されていればその位置に移動
+        var hash = window.location.hash; // URLのハッシュ部分を取得
+        if (hash) {
+            var anchor = $(hash); // HTML全体から該当要素を検索
+            console.log(anchor);
+            if (anchor.length) {
+                $('html, body').animate({
+                    scrollTop: anchor.offset().top - 10
+                }, 0); // スクロール
+            }
+        }
+    });
+});
 
 $(function () {
     // フォームが Submit されたときの処理
