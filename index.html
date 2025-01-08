@@ -198,16 +198,20 @@ l105 32 120 106 c66 58 146 127 178 153 l59 47 -434 -2 c-238 -1 -458 -3 -488
                         <div class="menu_sub">- web articles -</div>
                     </a>
                 </div>
-                <div id="menu_dev" class="local">
-                    <a href="" id="public-mode-link" class="menu_a">
-                        <div class="admin_content">Pub</div>
-                    </a>
+                <div id="menu_dev" class="local menu_a">
+                    <div class="admin_content">Pub</div>
                     <script>
                         $(document).ready(function () {
-                            const urlParams = new URLSearchParams(window.location.search);
-                            urlParams.set('mode', 'public');
-                            const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
-                            $('a#public-mode-link').attr('href', newUrl);
+                            // 外側のdivにクリックイベントを設定
+                            $('#menu_dev').on('click', function () {
+                                // クエリパラメータを作成して新しいURLを生成
+                                const urlParams = new URLSearchParams(window.location.search);
+                                urlParams.set('mode', 'public');
+                                const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+
+                                // ページを移動
+                                window.location.href = newUrl;
+                            });
                         });
                     </script>
                 </div>
