@@ -24,7 +24,6 @@
         var pathQuery = urlParams.get('p');
 
         $.getJSON(articles_json_path, function (data) {
-            console.log(data)
             data.forEach(function (data_i) {
                 // privateではないデータのみ
                 if (!data_i.private) {
