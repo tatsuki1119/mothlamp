@@ -20,7 +20,7 @@ $(function () {
         if (pathQuery) {
             console.log(pathQuery)
             var path = pathQuery.replace(/\./g, '/');
-            var noCacheUrl = "./pages/" + path + ".html?nocache=" + new Date().getTime();
+            var noCacheUrl = "/pages/" + path + ".html?nocache=" + new Date().getTime();
             $.get(noCacheUrl)
                 .done(function (data) {
                     $("#contents").html(data);
