@@ -37,6 +37,10 @@ $(function () {
                         $("#contents").html(data);
                     });
                 });
+        } else {
+            $.get("/index-page.html?nocache=" + new Date().getTime(), function (data) {
+                $("#contents").html(data);
+            });
         }
     }
     $('#loader').fadeOut(500);

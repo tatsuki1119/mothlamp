@@ -1,15 +1,15 @@
 {
-    "name": "誘蛾灯の導き[非公式ファンサイト]",
-    "short_name": "誘蛾灯の導き",
+    "name": "Phantom Siita [UNOFFICIAL]",
+    "short_name": "PhantomSiita",
     "display": "standalone",
-    "scope": "/",
-    "start_url": "/",
+    "scope": "/phantom-siita/",
+    "start_url": "/phantom-siita/",
     "theme_color": "#600E0E",
     "background_color": "#600E0E",
     "orientation": "any",
     "icons": [
         {
-            "src": "/static/apple-touch-icon.png",
+            "src": "/phantom-siita/static/apple-touch-icon.png",
             "sizes": "180x180"
         }
     ]
