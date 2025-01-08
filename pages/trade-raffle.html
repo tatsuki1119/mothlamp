@@ -1,0 +1,130 @@
+<!-- title -->
+<div id="page-title" style="display: none;">ラッフルくじ交換</div>
+
+<style>
+    .trade-div {
+        background-color: #ffffff44;
+        display: flex;
+        margin-bottom: 5px;
+    }
+
+    .trade-div:last-child {
+        margin-bottom: 0;
+    }
+
+    .trade-last-0 {
+        filter: brightness(30%);
+    }
+
+    .trade-img {
+        max-width: 25%;
+    }
+
+    .trade-name {
+        margin-left: 8px;
+    }
+
+    .trade-num {
+        margin-left: 16px;
+    }
+</style>
+
+<div class="contents_block">
+    <p>ファントムシータ ラッフルくじ 買取</p>
+</div>
+<div class="contents_block">
+    <p>ご覧いただきありがとうございます。</p>
+    <p>[C,D,E,F,G賞] について、以下に記載の個数で買取の募集をしています。交換は募集しておりませんのでご了承ください。</p>
+    <p>[B賞,5連特典,10連特典] について、別で交換募集を出していますので投稿をご確認ください。</p>
+    <p>残り個数については随時更新してきますが、タイミング次第で入れ違う可能性があるのでご了承ください。</p>
+    <p>ご希望のものについては、私のX(Twitter)での募集ポストまでリプライをお願いします。またDMを利用しますので、できればフォローもお願いします。</p>
+    <p>アカウントのフォロワー数が極端に少ない方や捨て垢の場合にはお断りする場合がございます。取引垢の方は、別途で本垢をご提示いただく可能性がございます。</p>
+</div>
+
+<div class="contents_block">
+    <p>値段について</p>
+    <hr>
+    <p>くじ1回あたり770円、10連ごとに+660円より、平均して836円とします。ここから下位賞は少し引き、</p>
+    <ul>
+        <li>C賞：800円</li>
+        <li>D賞：750円</li>
+        <li>E賞：700円</li>
+        <li>F賞：600円</li>
+        <li>G賞：500円</li>
+    </ul>
+    <p>とさせていただきます。</p>
+    <p>ここに送料などをプラスいたします。</p>
+    <p>個数が多い場合にはさらに引かせていただくこともあります。</p>
+    <p>発送の場合の支払いは、PayPayか振込にて対応可能です。</p>
+    <p>都内～横浜付近でしたら手渡し、現金も可能です。</p>
+</div>
+
+<div class="contents_block">
+    <p>お取引方法について</p>
+    <hr>
+    <p>以下リンク先より、内容をご確認ください。また必要に応じて臨機応変に対応させていただきます。</p>
+    <p><a href="/?p=trade">お取引について</a></p>
+
+</div>
+
+<div id="trade-block" class="contents_block">
+    <div id="articles-loading">
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+        Loading...
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+    </div>
+    <script>
+        const apiurl = "https://script.google.com/macros/s/AKfycbyWOBPQTSR_-Y4hdSNbY02c8OhkYEwIRJxyjEQ7j58H0Dyqpi4D7IIFVvtW33rFnGIc/exec";
+        const target_sheet = "gacha";
+
+        const url = apiurl + "?target=" + target_sheet;
+
+        // 記事データを取得して表示
+        $(document).ready(function () {
+            $.getJSON(url, function (data) {
+                data.forEach(function (data_i) {
+                    let listItem;
+                    if (data_i.name === "koukan") {
+                        listItem = `<br><br><br><hr><p>以下は対象外</p><br>`;
+                    } else if (data_i.name != "") {
+                        listItem = `
+                        <div class="trade-div trade-last-${data_i.num}">
+                            <a href="./static/img/raffle-kuji/${data_i.src}.png" class="trade-img">
+                                <img src="./static/img/raffle-kuji/${data_i.src}.png" alt=""></a>
+                            <div>
+                                <p class="trade-name">
+                                    ${data_i.name}
+                                </p>
+                                <p class="trade-num">残：${data_i.num}</p>
+                            </div>
+                        </div>
+                        `;
+                    } else {
+                        listItem = `<br><hr><br>`;
+                    }
+
+                    // 追加
+                    $('#trade-block').append(listItem);
+                });
+                $('#articles-loading').hide();
+            });
+        });
+    </script>
+</div>
+
+<!-- 
+<div class="trade-div trade-last-${data_i.num}">
+    <a href="./static/img/raffle-kuji/${data_i.src}.png" class="trade-img">
+        <img src="./static/img/raffle-kuji/${data_i.src}.png" alt=""></a>
+    <div>
+        <p class="trade-name">
+            ${data_i.name}
+        </p>
+        <p class="trade-num">残：${data_i.num}</p>
+    </div>
+</div>
+ -->

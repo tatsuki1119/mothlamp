@@ -1,0 +1,50 @@
+<div id="page-title" style="display: none;">Web記事一覧 [誘蛾灯の導き]</div>
+
+<div class="contents_block">
+    <h1 class="glitch-text">Web記事一覧</h1>
+    <hr class="hr-no-margin">
+    <div id="web-loading" class="list-loading">
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+        Loading...
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+    </div>
+    <ul id="web" class="link-list">
+    </ul>
+    <script>
+        const apiurl = "https://script.google.com/macros/s/AKfycbyWOBPQTSR_-Y4hdSNbY02c8OhkYEwIRJxyjEQ7j58H0Dyqpi4D7IIFVvtW33rFnGIc/exec";
+        const target_sheet = "web-articles";
+
+        const url = apiurl + "?target=" + target_sheet;
+
+        // 記事データを取得して表示
+        $(document).ready(function () {
+            $.getJSON(url, function (data) {
+                data.forEach(function (web) {
+                    console.log(web)
+                    const listItem = `
+                        <a href="${web.url}" target="_blank" class="link-list-a">
+                            <li>
+                                <p class="date">
+                                    <svg role="img" aria-label="蝶々">
+                                        <use href="#butterfly"></use>
+                                    </svg>${web.date}
+                                </p>
+                                <p class="title">${web.title}</p>
+                                <p class="media">${web.media}</p>
+                                ${web.local_link ? `<a href="?p=web.${web.local_link}" class="local-link-a local">記事へ</a>` : ''}
+                            </li>
+                        </a>
+                    `;
+
+                    // <ul>に追加
+                    $('#web').append(listItem);
+                });
+                $('#web-loading').hide();
+            });
+        });
+    </script>
+</div>

@@ -1,0 +1,700 @@
+/*==================================================
+tatsu css update 24.03.26
+
+〇 目次
+    - height コンテンツ全体の高さ関連
+    - tags 通常HTMLタグ
+    - global
+    - contents
+    - dev
+    - url area
+    - menu
+    - loading
+    - modal
+    - bg para
+    - pwa
+    - captures
+
+==================================================*/
+
+:root {
+    --safeareainsetbottom: env(safe-area-inset-bottom);
+    --safeareainsettop: env(safe-area-inset-top);
+}
+
+/*-----------------------------------
+height コンテンツ全体の高さ関連
+-----------------------------------*/
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100svh;
+
+    @media (display-mode: standalone) {
+        min-height: 100lvh;
+    }
+}
+
+.bg_para {
+    height: 100%;
+}
+
+#loader {
+    height: 100vh;
+    height: 100svh;
+
+    @media (display-mode: standalone) {
+        height: 100lvh;
+    }
+}
+
+/*--------------------
+tags 通常HTMLタグ
+--------------------*/
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    line-height: 1.5;
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+}
+
+p {
+    line-height: 1.4;
+    margin-top: 0.5em;
+    margin-bottom: 0.2em;
+}
+
+h1 {
+    font-size: 1.9rem;
+}
+
+h2 {
+    font-size: 1.6rem;
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+h5 {
+    font-size: 1rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+pre {
+    white-space: pre-line;
+    /* インデントを無視 */
+    margin: 0;
+}
+
+/*--------------------
+global
+--------------------*/
+
+.admin_content, .dev {
+    color: #ffff00;
+    border-color: #ffff00;
+}
+
+* {
+    box-sizing: border-box;
+    /*boxsizeにpaddingやborderを含める*/
+    word-wrap: break-word;
+}
+
+
+a {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    word-wrap: break-word;
+}
+
+a:link:not([class]) {
+    text-decoration: none;
+    color: #00ddff;
+}
+
+a:visited:not([class]) {
+    color: #dd00ff;
+}
+
+a:hover:not([class]) {
+    text-decoration: underline;
+}
+
+a.a_no_visited {
+    text-decoration: none;
+    color: #00ddff;
+}
+
+a.a_no_visited:hover {
+    text-decoration: underline;
+}
+
+body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ffffff;
+    background-color: #000;
+    font-family: "Noto Sans JP", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+blockquote {
+    border-left: 5px solid #888;
+    color: #bbb;
+    padding: 0.8em;
+    padding-right: 0;
+    margin: 1em 0 1em 5px;
+}
+
+code:not([class]) {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ddd;
+    margin: 0 0.2em;
+    padding: 0.1em 0.2em;
+    font-family: monospace;
+}
+
+img:not([class]) {
+    display: block;
+    margin: 0 auto;
+    border: none;
+    /* max-width: 90%; */
+    object-fit: cover;
+    -ms-interpolation-mode: bicubic;
+    height: auto;
+}
+
+video {
+    display: block;
+}
+
+input[type=text], input[type=password], input[type=email] {
+    min-width: 50%;
+    max-width: 100%;
+}
+
+select {
+    width: 50%;
+    text-align: center;
+    text-align: -webkit-center;
+}
+
+/* safariのsubmit用 */
+input, select {
+    appearance: none;
+    border-radius: 0;
+}
+
+/*--------------------
+contents
+--------------------*/
+
+/* 要素が入る大枠 */
+.container {
+    width: auto;
+    margin: 0 auto;
+    padding: 0;
+    padding-top: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    max-width: 960px;
+}
+
+#contents {
+    width: auto;
+    margin: 0;
+    /* 一番上のスペース */
+    padding-top: 20px;
+}
+
+.contents_block {
+    position: relative;
+    width: auto;
+    /* 左右のスペースと間のスペース */
+    margin: 0 20px 30px 20px;
+    padding: 10px;
+    border: 1px solid #ffffff;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.contents_block_has_a {
+    /* 以下のaタグ用クラスを持つブロック用 */
+    border: 1px solid;
+    animation: contents_block_has_a_anim 3s infinite;
+}
+
+.contents_block_a {
+    /* ブロック自体に重ねる */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.contents_block_a,
+.contents_block_a:link,
+.contents_block_a:visited,
+.contents_block_a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+
+@keyframes contents_block_has_a_anim {
+
+    /* aタグのブロックのアニメーション */
+    0% {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    50% {
+        background-color: rgba(50, 50, 50, 0.5);
+    }
+
+    100% {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.contents_block_has_a:hover {
+    background-color: rgba(100, 100, 100, 0.5) !important;
+}
+
+.bottom_logo {
+    height: 5vh;
+    margin: 0 auto;
+    pointer-events: none;
+}
+
+
+/*--------------------
+url area
+--------------------*/
+/* スマホ用 画面上部のURL表示 */
+
+.url_area_parent {
+    position: relative;
+    top: 0;
+
+    @media screen and (min-width: 767px) {
+        top: -75px;
+    }
+}
+
+.url_area {
+    display: block;
+    position: absolute;
+    top: 0px;
+    transform: translateY(-70px);
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    padding-bottom: 50px;
+}
+
+/*--------------------
+menu
+--------------------*/
+
+#menu_btn_area {
+    /* スマホ用ボタンエリア */
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 44px;
+    margin-bottom: calc(env(safe-area-inset-bottom) + 44px);
+    width: 100%;
+    z-index: 99;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media screen and (min-width: 767px) {
+        display: none;
+    }
+}
+
+#menu_btn {
+    /* スマホ用ボタン */
+    margin: 0 30px;
+    padding: 15px 20px;
+    background-color: rgba(100, 100, 100, 0.9);
+    border: 1px solid #aaaaaa;
+    border-radius: 25px;
+    text-align: center;
+    width: 30vw;
+    font-size: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    pointer-events: all;
+}
+
+#back_btn, #reload_btn {
+    /* PWA用ボタン */
+    position: relative;
+    width: 10vw;
+    height: 10vw;
+    margin: 0;
+    padding: 10px;
+    background-color: rgba(100, 100, 100, 0.9);
+    border: 1px solid #aaaaaa;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    pointer-events: all;
+}
+
+#back_btn_a, #reload_btn_a {
+    /* PWA用ボタン内aタグ */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#menu_list_area {
+    /* メニュー用エリア スマホ用 */
+    display: none;
+    position: fixed;
+    bottom: calc(44px + 64px);
+    bottom: calc(env(safe-area-inset-bottom) + 44px + 64px + 12px);
+    margin: auto;
+    width: 100%;
+    width: calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right));
+    z-index: 98;
+
+    @media screen and (min-width: 767px) {
+        /* メニュー用エリア PC用 上部 */
+        display: block !important;
+        top: 0;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        max-width: 960px;
+        z-index: 100;
+    }
+}
+
+#menu_space_top {
+    /* PCメニュー用上部スペース */
+    height: 0;
+
+    @media screen and (min-width: 767px) {
+        height: 75px;
+    }
+}
+
+#menu_space_btm {
+    /* スマホメニュー用下部スペース */
+    height: 122px;
+    height: calc(env(safe-area-inset-bottom) + 122px);
+
+    @media screen and (min-width: 767px) {
+        height: 0.1px;
+    }
+}
+
+#menu_list {
+    /* メニュー スマホ縦 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    @media screen and (min-width: 767px) {
+        /* メニュー PC横 */
+        flex-direction: row;
+        padding: 20px 10px 0 10px;
+        padding-top: calc(20px + env(safe-area-inset-top));
+    }
+}
+
+.menu_element {
+    width: 70vw;
+    height: 60px;
+
+    @media screen and (min-width: 767px) {
+        width: auto;
+        height: 55px;
+        flex: 1;
+    }
+}
+
+#menu_login {
+    width: 25vw;
+    height: 40px;
+
+    @media screen and (min-width: 767px) {
+        width: 60px;
+        height: 55px;
+        font-size: 14px;
+    }
+}
+
+#menu_dev {
+    width: 15vw;
+    height: 40px;
+
+    @media screen and (min-width: 767px) {
+        width: 40px;
+        height: 55px;
+        font-size: 14px;
+    }
+}
+
+.menu_element, #menu_login, #menu_dev {
+    margin: 10px 0 10px 0;
+    background-color: rgba(100, 100, 100, 0.9);
+    border: 1px solid #aaaaaa;
+    border-radius: 25px;
+    text-align: center;
+
+    @media screen and (min-width: 767px) {
+        margin: 0 10px 0 10px;
+        padding: 0;
+        border-radius: 0;
+    }
+}
+
+.menu_element:hover, #menu_login:hover, #menu_dev:hover {
+    background-color: rgba(150, 150, 150, 0.9);
+}
+
+.menu_a {
+    text-decoration: none;
+}
+
+.menu_element>a, #menu_login>a, #menu_dev>a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu_name {
+    line-height: 20px;
+    font-size: 16px;
+}
+
+.menu_sub {
+    line-height: 14px;
+    font-size: 12px;
+}
+
+
+/*--------------------
+loading
+--------------------*/
+
+#loader {
+    position: fixed;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    /* タッチ判定を有効化 */
+    pointer-events: auto;
+}
+
+.loading_contents {
+    width: 100px;
+    height: 100px;
+    padding: 0 0 0px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.loading_contents img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loading_circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 10px solid rgba(255, 255, 255, 0.5);
+    border-top-color: rgba(255, 255, 255, 1);
+
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/*--------------------
+modal
+--------------------*/
+
+.modal_overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 49;
+    pointer-events: auto;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: calc(5% + env(safe-area-inset-top));
+    left: 5%;
+    width: 90%;
+    height: calc(90% - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 122px);
+    background-color: #000000;
+    border: 1px solid #888888;
+    overflow-y: scroll;
+    z-index: 50;
+}
+
+
+
+/*--------------------
+bg para
+--------------------*/
+
+.bg_para {
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-y: hidden;
+    z-index: -1;
+    background-repeat: repeat-y;
+    background-position: center top;
+    background-size: 100% auto;
+    /* background-attachment: scroll; */
+}
+
+
+
+/*--------------------
+pwa
+--------------------*/
+
+.pwa_only {
+    display: none;
+}
+
+/*--------------------
+captures
+--------------------*/
+
+.captures_block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-between;
+    align-items: flex-start;
+}
+
+.captures_img {
+    margin: 5px auto;
+    width: 32%;
+    height: auto;
+}
+
+.captures_block_mini {
+    display: flex;
+    overflow-x: scroll;
+    z-index: 10;
+}
+
+.captures_img_mini {
+    margin: 2px auto;
+    width: auto;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+@media screen and (min-width: 767px) {
+    .captures_img_mini {
+        width: auto;
+        height: 90px;
+        flex-shrink: 0;
+    }
+}
+
+
+/*--------------------
+Diary
+--------------------*/
+
+.diary_day_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.diary_day_item {
+    background-color: transparent !important;
+    position: relative;
+    width: calc(100% / 3);
+    padding: 2px;
+
+    @media screen and (min-width: 767px) {
+        width: calc(100% / 5);
+    }
+}
+
+.diary_day_text {
+    position: absolute;
+    bottom: 0;
+    background-color: #00000099;
+    display: inline-block;
+    padding: 1px 5px;
+}
+
+.diary_media {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.diary_media_item {
+    scroll-snap-align: start;
+}
+
+.diary_media_two_icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5%;
+}

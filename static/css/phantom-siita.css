@@ -1,0 +1,326 @@
+:root {
+    --color-mona: #E56FAA;
+    --color-miu: #EFF2FB;
+    --color-rinka: #652C78;
+    --color-hisui: #009E4A;
+    --color-moka: #00CCF9;
+}
+
+@font-face {
+    font-family: "PixelMplus12 Regular";
+    src: url("/static/font/PixelMplus12-Regular.ttf") format("truetype")
+}
+
+* {
+    font-family: "PixelMplus12 Regular", "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "MS Pゴシック", "MS PGothic", sans-serif;
+    ;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.keep-all-break-word {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    /* overflow-wrap: anywhere; が2024年1月8日現在で一番良い */
+}
+
+svg {
+    fill: #CFDFE6;
+    height: 100px;
+    width: 100px;
+}
+
+.list-svg {
+    display: inline-block;
+    fill: #CFDFE6;
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+}
+
+.hr-no-margin {
+    margin: 0;
+}
+
+/* ##############################
+footer
+############################## */
+
+.footer-link {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    margin: 0 20px 10px 20px;
+    padding: 10px;
+    border: 1px solid #555555;
+    font-size: 0.8rem;
+}
+
+.footer-link a {
+    display: block;
+}
+
+.footer-link a:link,
+.footer-link a:visited {
+    color: #aaaaaa;
+}
+
+/* ##############################
+local
+############################## */
+
+.local {
+    border: solid 1px #ff0000;
+}
+
+.local img, .local video {
+    @media screen and (min-width: 767px) {
+        max-width: 60%;
+        margin: 0 auto;
+    }
+}
+
+.local-link-a {
+    display: block;
+    background-color: #CFDFE6;
+    color: #050406;
+    padding: 5px;
+    text-decoration: none;
+    width: 15vw;
+    margin-left: auto;
+    margin-left: auto;
+    max-width: 150px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.local-link-a:hover {
+    animation: hover 0.1s linear forwards;
+    background-color: #050406;
+    color: #fff;
+}
+
+/* ##############################
+public
+############################## */
+
+.tweet-container>div {
+    margin: 0 auto;
+    /* 中央 */
+}
+
+a.twitter-tweet-data {
+    display: block;
+    min-height: 55vh;
+}
+
+/* ##############################
+public
+############################## */
+
+.link-btn-div {
+    margin: 3% 2% 1% 2%;
+}
+
+.link-btn-a {
+    display: block;
+    background-color: #CFDFE6;
+    color: #050406;
+    border: 1px solid #595959;
+    padding: 5px;
+    text-decoration: none;
+    width: 15vw;
+    margin-left: auto;
+    margin-left: auto;
+    max-width: 150px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.link-btn-a:hover {
+    animation: hover 0.1s linear forwards;
+    background-color: #050406;
+    color: #fff;
+}
+
+
+#official-link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 2% 2%;
+}
+
+#official-link li {
+    list-style: none;
+}
+
+#official-link li::after {
+    /* 各liの直後にスラッシュを表示 */
+    content: "/";
+    color: #aaaaaa;
+    margin-left: 2px;
+    margin-right: 4px;
+}
+
+#official-link li:last-child::after {
+    /* 最後のliのスラッシュを非表示にする */
+    content: "";
+}
+
+#official-link .official-a {
+    color: #CFDFE6;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+#official-link .official-a svg {
+    fill: #CFDFE6;
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.official-a:hover {
+    color: #83a3de !important;
+    transition: 0.2s;
+}
+
+.link-list {
+    margin: 0 2% 1% 2%;
+    padding: 0;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    /*IE,edge*/
+    scrollbar-width: none;
+    /*Firefox*/
+}
+
+.link-list::-webkit-scrollbar {
+    display: none;
+    /*Chrome,Safari*/
+}
+
+.link-list li {
+    list-style: none;
+    border-bottom: solid 1px #ffffff;
+    padding: 1%;
+}
+
+/* .link-list li:last-child {
+    border-bottom: none;
+} */
+
+.link-list li:hover {
+    background-color: #ffffff33;
+    animation: hover 0.1s linear forwards;
+    transition: 0.2s;
+
+}
+
+.link-list svg {
+    fill: #CFDFE6;
+    height: 30px;
+    width: 30px;
+    vertical-align: bottom;
+    margin-right: 10px;
+}
+
+.link-list .media {
+    text-align: right;
+}
+
+.list-loading {
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 4% 0 2% 0;
+}
+
+.list-loading svg {
+    fill: #CFDFE6;
+    height: 50px;
+    width: 50px;
+    vertical-align: middle;
+}
+
+.link-list-a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.link-list-a:hover {
+    text-decoration: none;
+}
+
+@keyframes hover {
+    0% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+
+    25% {
+        opacity: 0.7;
+        transform: scaleX(1.3);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scaleX(1.1);
+    }
+
+    75% {
+        opacity: 0.5;
+        transform: scaleX(1.4);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}
+
+
+/* ##############################
+setlist
+############################## */
+
+.setlist-mokuji a:link,
+.setlist-mokuji a:visited {
+    color: #FFFFFF;
+}
+
+.setlist-ul {
+    list-style-type: none;
+    padding-left: 25px;
+}
+
+.setlist-ul li {
+    position: relative;
+}
+
+.setlist-ul li p {
+    margin-left: 30px;
+}
+
+.setlist-ul li svg {
+    fill: #CFDFE6;
+    height: 20px;
+    width: 20px;
+    vertical-align: middle;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.setlist-anchor {
+    display: block;
+    padding-top: calc(25px + var(--safeareainsettop));
+    margin-top: calc(-25px - var(--safeareainsettop));
+}

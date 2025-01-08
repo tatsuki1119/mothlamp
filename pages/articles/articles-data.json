@@ -1,0 +1,41 @@
+[
+    {
+        "private": true,
+        "title": "ファントムシータのこれまで",
+        "p": "0001-general"
+    },
+    {
+        "show_index": true,
+        "title": "セットリスト",
+        "p": "0002-setlist"
+    },
+    {
+        "show_index": true,
+        "title": "ハイネ謎解き",
+        "p": "0003-hainenazo"
+    },
+    {
+        "show_index": true,
+        "title": "おともだち",
+        "p": "1001-otomodachi"
+    },
+    {
+        "private": true,
+        "title": "HANAGATAMI",
+        "p": "1007-hanagatami"
+    },
+    {
+        "private": true,
+        "title": "ハイネ",
+        "p": "2006-haine"
+    },
+    {
+        "title": "悪魔 Nigit Duel Buster 動画まとめ",
+        "p": "2007-akuma-night-video"
+    },
+    {
+        "private": true,
+        "title": "悪魔 Nigit Duel Buster 写真まとめ",
+        "p": "2007-akuma-night-photo"
+    }
+]

@@ -1,0 +1,16 @@
+{
+    "name": "Phantom Siita [UNOFFICIAL]",
+    "short_name": "PhantomSiita",
+    "display": "standalone",
+    "scope": "/phantom-siita/",
+    "start_url": "/phantom-siita/",
+    "theme_color": "#600E0E",
+    "background_color": "#600E0E",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "/phantom-siita/static/apple-touch-icon.png",
+            "sizes": "180x180"
+        }
+    ]
+}

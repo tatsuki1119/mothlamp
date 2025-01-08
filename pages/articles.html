@@ -1,0 +1,62 @@
+<div id="page-title" style="display: none;">記事一覧 [誘蛾灯の導き]</div>
+
+<div class="contents_block">
+    <h1 class="glitch-text">全記事一覧</h1>
+    <hr class="hr-no-margin">
+    <ul id="articles" class="link-list">
+    </ul>
+</div>
+
+<div class="contents_block local">
+    <h3>非公開</h3>
+    <hr class="hr-no-margin">
+    <ul id="articles-private" class="link-list">
+    </ul>
+</div>
+
+<script>
+    const articles_json_path = `./pages/articles/articles-data.json?nocache=${new Date().getTime()}`;
+
+    // 記事データを取得して表示
+    $(document).ready(function () {
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var pathQuery = urlParams.get('p');
+
+        $.getJSON(articles_json_path, function (data) {
+            console.log(data)
+            data.forEach(function (data_i) {
+                // privateではないデータのみ
+                if (!data_i.private) {
+                    const listItem = `
+                    <a href="?p=articles.${data_i.p}" class="link-list-a">
+                        <li>
+                            <p>
+                                <svg role="img" aria-label="蝶々">
+                                    <use href="#butterfly"></use>
+                                </svg>${data_i.title}
+                            </p>
+                        </li>
+                    </a>
+                `;
+                    $('#articles').append(listItem);
+                }
+                else {
+                    // privateのもの
+                    const listItem = `
+                    <a href="?p=articles.${data_i.p}" class="link-list-a">
+                        <li>
+                            <p>
+                                <svg role="img" aria-label="蝶々">
+                                    <use href="#butterfly"></use>
+                                </svg>${data_i.title}
+                            </p>
+                        </li>
+                    </a>
+                `;
+                    $('#articles-private').append(listItem);
+                }
+            });
+        });
+    });
+</script>

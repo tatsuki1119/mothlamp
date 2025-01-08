@@ -1,0 +1,509 @@
+/* バグ風アニメーション1 */
+@keyframes glitch-text-1 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    1% {
+        transform: translate(0, 0);
+    }
+
+    1.05% {
+        transform: translate(0.1rem, -0.1rem);
+    }
+
+    1.10% {
+        transform: translate(-0.5rem, 0.3rem);
+    }
+
+    1.15% {
+        transform: translate(0.3rem, -0.4rem);
+    }
+
+    1.2% {
+        transform: translate(0, 0);
+    }
+
+    12% {
+        transform: translate(0, 0);
+    }
+
+    12.05% {
+        transform: translate(0.9rem, 0.3rem);
+    }
+
+    12.1% {
+        transform: translate(-1.0rem, 0.6rem);
+    }
+
+    12.15% {
+        transform: translate(0.6rem, -0.8rem);
+    }
+
+    12.2% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* バグ風アニメーション2 */
+@keyframes glitch-text-2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    1% {
+        transform: translate(0, 0);
+    }
+
+    1.05% {
+        transform: translate(-0.3rem, 0.1rem);
+    }
+
+    1.1% {
+        transform: translate(0.6rem, -0.5rem);
+    }
+
+    1.15% {
+        transform: translate(-0.4rem, 0.3rem);
+    }
+
+    1.2% {
+        transform: translate(0, 0);
+    }
+
+    8% {
+        transform: translate(0, 0);
+    }
+
+    8.05% {
+        transform: translate(0.8rem, -0.3rem);
+    }
+
+    8.1% {
+        transform: translate(-1.0rem, 0.7rem);
+    }
+
+    8.15% {
+        transform: translate(0.4rem, -0.5rem);
+    }
+
+    8.2% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* バグ風アニメーション3 */
+@keyframes glitch-text-3 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    1% {
+        transform: translate(0, 0);
+    }
+
+    1.05% {
+        transform: translate(0.4rem, -0.3rem);
+    }
+
+    1.1% {
+        transform: translate(-0.5rem, 0.5rem);
+    }
+
+    1.15% {
+        transform: translate(0.3rem, -0.4rem);
+    }
+
+    1.2% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(0, 0);
+    }
+
+    10.05% {
+        transform: translate(0.9rem, 0.4rem);
+    }
+
+    10.1% {
+        transform: translate(-1.1rem, 0.7rem);
+    }
+
+    10.15% {
+        transform: translate(0.7rem, -0.9rem);
+    }
+
+    10.2% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* バグ風アニメーション4 */
+@keyframes glitch-text-4 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    1% {
+        transform: translate(0, 0);
+    }
+
+    1.05% {
+        transform: translate(-0.1rem, 0.2rem);
+    }
+
+    1.1% {
+        transform: translate(0.7rem, -0.1rem);
+    }
+
+    1.15% {
+        transform: translate(-0.4rem, 0.3rem);
+    }
+
+    1.2% {
+        transform: translate(0, 0);
+    }
+
+    7% {
+        transform: translate(0, 0);
+    }
+
+    7.05% {
+        transform: translate(0.9rem, -0.2rem);
+    }
+
+    7.1% {
+        transform: translate(-1.2rem, 0.6rem);
+    }
+
+    7.15% {
+        transform: translate(0.5rem, -0.7rem);
+    }
+
+    7.2% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* バグ風アニメーション5 */
+@keyframes glitch-text-5 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    1% {
+        transform: translate(0, 0);
+    }
+
+    1.05% {
+        transform: translate(0.5rem, -0.4rem);
+    }
+
+    1.1% {
+        transform: translate(-0.2rem, 0.3rem);
+    }
+
+    1.15% {
+        transform: translate(0.4rem, -0.1rem);
+    }
+
+    1.2% {
+        transform: translate(0, 0);
+    }
+
+    5% {
+        transform: translate(0, 0);
+    }
+
+    5.05% {
+        transform: translate(1.0rem, -0.5rem);
+    }
+
+    5.1% {
+        transform: translate(-1.1rem, 0.7rem);
+    }
+
+    5.15% {
+        transform: translate(0.6rem, -0.8rem);
+    }
+
+    5.2% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* バグ風アニメーション6 */
+@keyframes glitch-text-6 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    1% {
+        transform: translate(0, 0);
+    }
+
+    1.05% {
+        transform: translate(0.4rem, 0.2rem);
+    }
+
+    1.1% {
+        transform: translate(-0.5rem, -0.3rem);
+    }
+
+    1.15% {
+        transform: translate(0.3rem, 0.4rem);
+    }
+
+    1.2% {
+        transform: translate(0, 0);
+    }
+
+    12% {
+        transform: translate(0, 0);
+    }
+
+    12.05% {
+        transform: translate(1.0rem, -0.4rem);
+    }
+
+    12.1% {
+        transform: translate(-1.2rem, 0.8rem);
+    }
+
+    12.15% {
+        transform: translate(0.8rem, -1.0rem);
+    }
+
+    12.2% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* バグ風アニメーション7 */
+@keyframes glitch-text-7 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    1% {
+        transform: translate(0, 0);
+    }
+
+    1.05% {
+        transform: translate(-0.3rem, 0.2rem);
+    }
+
+    1.1% {
+        transform: translate(0.6rem, 0.3rem);
+    }
+
+    1.15% {
+        transform: translate(-0.5rem, 0.4rem);
+    }
+
+    1.2% {
+        transform: translate(0, 0);
+    }
+
+    14% {
+        transform: translate(0, 0);
+    }
+
+    14.05% {
+        transform: translate(1.1rem, -0.6rem);
+    }
+
+    14.1% {
+        transform: translate(-1.2rem, 0.8rem);
+    }
+
+    14.15% {
+        transform: translate(0.9rem, -1.1rem);
+    }
+
+    14.2% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* バグ風アニメーション8 */
+@keyframes glitch-text-8 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    1% {
+        transform: translate(0, 0);
+    }
+
+    1.05% {
+        transform: translate(0.4rem, -0.1rem);
+    }
+
+    1.1% {
+        transform: translate(-0.6rem, 0.5rem);
+    }
+
+    1.15% {
+        transform: translate(0.3rem, -0.2rem);
+    }
+
+    1.2% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(0, 0);
+    }
+
+    10.05% {
+        transform: translate(0.8rem, -0.4rem);
+    }
+
+    10.1% {
+        transform: translate(-1.0rem, 0.6rem);
+    }
+
+    10.15% {
+        transform: translate(0.6rem, -0.7rem);
+    }
+
+    10.2% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* バグ風アニメーション9 */
+@keyframes glitch-text-9 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    1% {
+        transform: translate(0, 0);
+    }
+
+    1.05% {
+        transform: translate(-0.2rem, 0.3rem);
+    }
+
+    1.1% {
+        transform: translate(0.7rem, -0.2rem);
+    }
+
+    1.15% {
+        transform: translate(-0.3rem, 0.4rem);
+    }
+
+    1.2% {
+        transform: translate(0, 0);
+    }
+
+    13% {
+        transform: translate(0, 0);
+    }
+
+    13.05% {
+        transform: translate(1.1rem, -0.7rem);
+    }
+
+    13.1% {
+        transform: translate(-1.2rem, 0.8rem);
+    }
+
+    13.15% {
+        transform: translate(0.8rem, -1.0rem);
+    }
+
+    13.2% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* バグ風アニメーション10 */
+@keyframes glitch-text-10 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    1% {
+        transform: translate(0, 0);
+    }
+
+    1.05% {
+        transform: translate(0.3rem, -0.4rem);
+    }
+
+    1.1% {
+        transform: translate(-0.4rem, 0.1rem);
+    }
+
+    1.15% {
+        transform: translate(0.5rem, -0.3rem);
+    }
+
+    1.2% {
+        transform: translate(0, 0);
+    }
+
+    12% {
+        transform: translate(0, 0);
+    }
+
+    12.05% {
+        transform: translate(0.8rem, -0.6rem);
+    }
+
+    12.1% {
+        transform: translate(-0.9rem, 0.5rem);
+    }
+
+    12.15% {
+        transform: translate(0.6rem, -1.0rem);
+    }
+
+    12.2% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
