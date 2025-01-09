@@ -13,7 +13,6 @@
 
 * {
     font-family: "PixelMplus12 Regular", "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "MS Pゴシック", "MS PGothic", sans-serif;
-    ;
     box-sizing: border-box;
 }
 
@@ -192,7 +191,8 @@ public
     transition: 0.2s;
 }
 
-.link-list {
+.link-list,
+.notice-list {
     margin: 0 2% 1% 2%;
     padding: 0;
     overflow-y: scroll;
@@ -207,7 +207,8 @@ public
     /*Chrome,Safari*/
 }
 
-.link-list li {
+.link-list li,
+.notice-list li {
     list-style: none;
     border-bottom: solid 1px #ffffff;
     padding: 1%;
@@ -224,7 +225,8 @@ public
 
 }
 
-.link-list svg {
+.link-list svg,
+.notice-list svg {
     fill: #CFDFE6;
     height: 30px;
     width: 30px;
@@ -323,4 +325,15 @@ setlist
     display: block;
     padding-top: calc(25px + var(--safeareainsettop));
     margin-top: calc(-25px - var(--safeareainsettop));
+}
+
+/* ##############################
+notice
+############################## */
+
+.notice-div svg {
+    height: 30px;
+    width: 30px;
+    vertical-align: bottom;
+    margin-right: 10px;
 }
