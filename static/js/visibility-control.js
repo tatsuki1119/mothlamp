@@ -16,7 +16,8 @@ $(document).ready(function () {
     function toggleVisibility() {
         if (isPublicMode) {
             $('.public').show();
-            $('.local').hide();
+            // $('.local').hide();
+            $('.local').remove();
         } else if (domain === '192.168.3.81' || domain === '140.83.54.211') {
             $('.local').show();
             if (isLocalMode) {
@@ -24,7 +25,8 @@ $(document).ready(function () {
             }
         } else {
             $('.public').show();
-            $('.local').hide();
+            // $('.local').hide();
+            $('.local').remove();
         }
     }
 
