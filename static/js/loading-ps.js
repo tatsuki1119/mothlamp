@@ -6,8 +6,10 @@
 // <script src="/static/js/loading.js" data-load_page="true"></script>
 
 // 読み込むHTML内に
-// <div id="page-title" style="display: none;">title</div>
-// と記載すると title を置換する
+// <div id="page-title" style="display: none;">new title</div>
+// と記載すると title, meta情報 を置換する
+// <div id="page-description" style="display: none;">new description</div>
+// と記載すると meta情報 を置換する
 
 var load_page = $("script[src*='loading-ps.js']").attr("data-load_page");
 
@@ -23,18 +25,38 @@ $(function () {
             var noCacheUrl = "/pages/" + path + ".html?nocache=" + new Date().getTime();
             $.get(noCacheUrl)
                 .done(function (data) {
+                    // ページ内容更新
                     $("#contents").html(data);
 
-                    // 読み込んだHTMLからタイトルを取得してページタイトルに反映
                     var newTitle = $("#contents").find("#page-title").text();
+                    var newDescription = $("#contents").find("#page-description").text();
+
                     if (newTitle) {
                         document.title = newTitle;
+
+                        $('meta[property="og:title"]').attr("content", newTitle);
+                        $('meta[name="twitter:title"]').attr("content", newTitle);
+                    }
+
+                    if (newDescription) {
+                        $('meta[name="description"]').attr("content", newDescription);
+                        $('meta[property="og:description"]').attr("content", newDescription);
+                        $('meta[name="twitter:description"]').attr("content", newDescription);
                     }
 
                 })
                 .fail(function () {
                     $.get("/pages/404.html", function (data) {
                         $("#contents").html(data);
+                        var newTitle = $("#contents").find("#page-title").text();
+                        if (newTitle) {
+                            document.title = newTitle;
+                        }
+                        if ($('meta[name="robots"]').length) {
+                            $('meta[name="robots"]').attr("content", "noindex");
+                        } else {
+                            $("head").append('<meta name="robots" content="noindex">');
+                        }
                     });
                 });
         } else {
@@ -43,20 +65,7 @@ $(function () {
             });
         }
     }
-    // $('#loader').fadeOut(500);
-    // $('#main').fadeIn(800);
 
-    // // アンカータグが指定されていればその位置に移動
-    // var hash = window.location.hash; // URLのハッシュ部分を取得
-    // if (hash) {
-    //     var anchor = $(hash); // ハッシュに対応する要素を探す
-    //     console.log(anchor);
-    //     if (anchor.length) {
-    //         $('html, body').animate({
-    //             scrollTop: anchor.offset().top
-    //         }, 500); // 500ミリ秒でスクロール
-    //     }
-    // }
 
     $('#loader').fadeOut(500);
     $('#main').fadeIn(500, function () {
