@@ -60,7 +60,6 @@
 
 <div class="contents_block">
     <div id="filters">
-        <p>フィルタ</p>
         <div class="filter-group">
             <div class="filter-toggle" data-key="mona">もな</div>
             <div class="filter-toggle" data-key="miu">美雨</div>
@@ -300,13 +299,13 @@
                 'rinka': '凛花',
                 'hisui': '灯翠',
                 'moka': '百花',
-                'zokuzoku': 'ゾクゾク',
+                'otomodachi': 'おともだち',
+                'kimibatsu': 'キミと××××したいだけ',
                 'masyou': '魔性少女',
                 'hanabami': '花喰み',
                 'otome': '乙女心中',
-                'otomodachi': 'おともだち',
+                'zokuzoku': 'ゾクゾク',
                 'sukisuki': '好き好き大好き',
-                'kimibatsu': 'キミと××××したいだけ',
                 'mc': 'MC',
                 'fansa': 'ファンサ',
                 'video': '動画',
@@ -318,13 +317,14 @@
             );
             const songFilters = activeFilters.filter(filterKey =>
                 [
-                    'zokuzoku',
+                    'otomodachi',
+                    'kimibatsu',
                     'masyou',
                     'hanabami',
                     'otome',
-                    'otomodachi',
+                    'zokuzoku',
+                    'hanagatami',
                     'sukisuki',
-                    'kimibatsu',
                     'mc',
                     'fansa',
                 ].includes(filterKey)
@@ -378,9 +378,11 @@
                         .join(', ');
 
                     const listItem = `
-                        <div class="contents_block twitter-container">
+                        <div class="contents_block tweet-container">
                             <p><span class="local">${data_i.row}</span>${transformedValues}</p>
                             <a class="twitter-tweet-data" href="${data_i.url}"></a>
+                            <a href="${data_i.url}">${data_i.url}</a>
+
                         </div>
                     `;
                     $('#xposts').append(listItem);
@@ -394,88 +396,3 @@
         });
     });
 </script>
-
-<style>
-    .twitter-container>div {
-        margin: 0 auto;
-    }
-
-    .filter-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 10px;
-    }
-
-    .filter-toggle {
-        padding: 4px 10px;
-        border: 1px solid #757575;
-        border-radius: 5px;
-        background-color: #391515;
-        /* OFF */
-        color: #999999;
-        cursor: pointer;
-        user-select: none;
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-    .filter-toggle.active {
-        background-color: rgb(137, 12, 12);
-        /* ON */
-        border-color: #e8e8e8;
-        color: #ffffff;
-    }
-
-    #apply-filters,
-    #reset-filters {
-        padding: 8px 16px;
-        border: none;
-        border-radius: 5px;
-        background-color: #7f7f7f;
-        color: #ffffff;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.2s;
-    }
-
-    #reset-filters {
-        padding: 4px 10px;
-        margin-left: 10px;
-    }
-
-    #apply-filters:hover,
-    #reset-filters:hover {
-        background-color: #9a9a9a;
-        transform: scale(1.05);
-    }
-
-    #apply-filters:active,
-    #reset-filters:active {
-        transform: scale(0.95);
-    }
-
-    .page-radio {
-        display: none;
-    }
-
-    .page-radio-label {
-        display: inline-block;
-        width: 15%;
-        background-color: rgba(50, 50, 50, 0.9);
-        border: 1px solid #aaaaaa;
-        text-align: center;
-    }
-
-    .pages-block {
-        display: flex;
-        justify-content: center;
-    }
-
-    .pages-range {
-        text-align: center;
-        margin: 0 0 5px 0;
-    }
-
-    .page-radio-label.selected-page {
-        background-color: rgba(150, 150, 150, 0.9);
-    }
-</style>
