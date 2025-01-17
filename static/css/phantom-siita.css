@@ -351,8 +351,8 @@ filter
 .filter-group {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 16px;
+    gap: 6px;
+    margin-bottom: 10px;
 }
 
 .filter-toggle {
