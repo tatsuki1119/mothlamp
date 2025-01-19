@@ -9,7 +9,9 @@
 // <div id="page-title" style="display: none;">new title</div>
 // と記載すると title, meta情報 を置換する
 // <div id="page-description" style="display: none;">new description</div>
-// と記載すると meta情報 を置換する
+// と記載すると meta情報のdescription を置換する
+// <div id="page-ogimg" style="display: none;">ogimg-path</div>
+// と記載すると ogimgとtwitter img を置換する
 
 var load_page = $("script[src*='loading-ps.js']").attr("data-load_page");
 
@@ -30,6 +32,7 @@ $(function () {
 
                     var newTitle = $("#contents").find("#page-title").text();
                     var newDescription = $("#contents").find("#page-description").text();
+                    var newOgimg = $("#contents").find("#page-ogimg").text();
 
                     if (newTitle) {
                         document.title = newTitle;
@@ -42,6 +45,11 @@ $(function () {
                         $('meta[name="description"]').attr("content", newDescription);
                         $('meta[property="og:description"]').attr("content", newDescription);
                         $('meta[name="twitter:description"]').attr("content", newDescription);
+                    }
+
+                    if (newOgimg) {
+                        $('meta[property="og:image"]').attr("content", newOgimg);
+                        $('meta[name="twitter:image"]').attr("content", newOgimg);
                     }
 
                 })

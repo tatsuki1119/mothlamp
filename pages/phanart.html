@@ -1,0 +1,90 @@
+<div id="page-title" style="display: none;">ファンアート [誘蛾灯の導き]</div>
+<div id="page-description" style="display: none;">ファントムシータのファンアートを描かれている絵師様を紹介します。</div>
+
+<div class="contents_block">
+    <h1 class="glitch-text">ファントムシータ ファンアート集</h1>
+    <p>絵師さんによる素敵なファンアートを紹介します！</p>
+</div>
+
+<div class="load-content" data-loadfile="/pages/parts/phanart-copyright.html"></div>
+
+<div class="contents_block contents_block_has_a phanart-artist-block">
+    <a class="contents_block_a" href="?p=phanart.guoxoua"></a>
+    <h3 style="font-family: Meiryo, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;">कㄑ”‎^. .^ ੭
+    </h3>
+    <img src="/static/img/phanart/guoxoua/000-cover.jpg" alt="" class="phanart-artist-cover"
+        style="object-position: 50% 65%; /* 左,上 */">
+</div>
+
+
+<div class="load-content" data-loadfile="/pages/parts/phanart-recruit"></div>
+
+
+<style>
+    .phanart-artist-block {
+        position: relative;
+        aspect-ratio: 1.618 / 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        padding: 0;
+        animation: none;
+    }
+
+    .phanart-artist-block:hover {
+        background-color: #ffffff00 !important;
+    }
+
+    .phanart-artist-block h3 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .phanart-artist-block:hover h3 {
+        display: none;
+    }
+
+    .phanart-artist-block .phanart-artist-cover {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        filter: sepia(50%) brightness(0.8) saturate(50%) contrast(90%);
+    }
+
+    .phanart-artist-block:hover .phanart-artist-cover {
+        filter: none
+    }
+
+    .phanart-artist-block::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #ffffff99;
+        mix-blend-mode: screen;
+        top: 0;
+        left: 0;
+        transform: scale(0, 1);
+        transform-origin: right top;
+        transition: transform 0.3s;
+        opacity: 0.3;
+        z-index: 2;
+    }
+
+    .phanart-artist-block:hover:before {
+        transform: scale(1, 1);
+        transform-origin: left top;
+        pointer-events: none;
+    }
+</style>

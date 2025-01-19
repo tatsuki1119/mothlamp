@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://mothlamp.info/</loc>
-        <lastmod>2025-01-13</lastmod>
+        <lastmod>2025-01-19</lastmod>
     </url>
 
     <url>
@@ -23,6 +23,11 @@
     <url>
         <loc>https://mothlamp.info/?p=notice</loc>
         <lastmod>2025-01-13</lastmod>
+    </url>
+
+    <url>
+        <loc>https://mothlamp.info/?p=phanart</loc>
+        <lastmod>2025-01-19</lastmod>
     </url>
 
     <url>
