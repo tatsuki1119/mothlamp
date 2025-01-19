@@ -1,6 +1,6 @@
 <div id="page-title" style="display: none;">कㄑ”‎^. .^ ੭ [誘蛾灯の導き]</div>
 <div id="page-description" style="display: none;">कㄑ”‎^. .^ ੭ （あぐ）さんのイラストを紹介します！</div>
-<div id="page-ogimg" style="display: none;">/static/img/phanart/guoxoua/000-ogimg.jpg</div>
+<div id="page-ogimg" style="display: none;">https://mothlamp.info/static/img/phanart/guoxoua/000-ogimg.jpg</div>
 
 <div class="contents_block">
     <h1 class="glitch-text" style="font-family: Meiryo, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;">
@@ -115,81 +115,13 @@
 
 <div id="phanart-modal" class="phanart-modal">
     <span id="phanart-modal-close">×</span>
-    <img class="modal-content" id="phanart-modal-img">
+    <img class="phanart-modal-content" id="phanart-modal-img">
 </div>
 
 <div class="load-content" data-loadfile="/pages/parts/phanart-recruit"></div>
 
 <style>
-    .block-description {
-        color: #bbbbbb;
-        margin: 0;
-        font-size: 0.75rem;
-        line-height: 1.2;
-    }
 
-    .phanart-modal {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.9);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s, visibility 0.5s;
-    }
-
-    #phanart-modal-close {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .modal-content {
-        display: block;
-        max-width: 90vw;
-        max-height: 90vh;
-    }
-
-    .phanart-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .phanart-container>div {
-        position: relative;
-        width: calc((100% - 10px) / 2);
-        aspect-ratio: 1/1;
-
-        @media screen and (min-width: 767px) {
-            width: calc((100% - 20px) / 3);
-        }
-    }
-
-    .phanart-container>div>img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transform: translate(-50%, -50%);
-    }
-
-    .protected-img {
-        pointer-events: none;
-    }
 </style>
 
 <script>

@@ -44,6 +44,11 @@ svg {
     margin: 0;
 }
 
+.protected-img {
+    pointer-events: none;
+}
+
+
 /* ##############################
 footer
 ############################## */
@@ -429,4 +434,141 @@ page
 
 .page-radio-label.selected-page {
     background-color: rgba(150, 150, 150, 0.9);
+}
+
+/* ##############################
+phanart
+############################## */
+
+.phanart-artist-block {
+    position: relative;
+    aspect-ratio: 1.618 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 0;
+    animation: none;
+}
+
+.phanart-artist-block:hover {
+    background-color: #ffffff00 !important;
+}
+
+.phanart-artist-block h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.phanart-artist-block:hover h3 {
+    display: none;
+}
+
+.phanart-artist-block .phanart-artist-cover {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    filter: sepia(50%) brightness(0.8) saturate(50%) contrast(90%);
+}
+
+.phanart-artist-block:hover .phanart-artist-cover {
+    filter: none
+}
+
+.phanart-artist-block::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #ffffff99;
+    mix-blend-mode: screen;
+    top: 0;
+    left: 0;
+    transform: scale(0, 1);
+    transform-origin: right top;
+    transition: transform 0.3s;
+    opacity: 0.3;
+    z-index: 2;
+}
+
+.phanart-artist-block:hover:before {
+    transform: scale(1, 1);
+    transform-origin: left top;
+    pointer-events: none;
+}
+
+.block-description {
+    color: #bbbbbb;
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+.phanart-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+#phanart-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.phanart-modal-content {
+    display: block;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+.phanart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.phanart-container>div {
+    position: relative;
+    width: calc((100% - 10px) / 2);
+    aspect-ratio: 1/1;
+
+    @media screen and (min-width: 767px) {
+        width: calc((100% - 20px) / 3);
+    }
+}
+
+.phanart-container>div>img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
 }
