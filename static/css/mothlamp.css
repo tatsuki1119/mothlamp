@@ -572,3 +572,44 @@ phanart
     object-fit: cover;
     transform: translate(-50%, -50%);
 }
+
+/* ##############################
+donation
+############################## */
+
+.donation-block {
+    display: flex;
+}
+
+.donation-text {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.donation-button {
+    display: block;
+    margin: 20px auto;
+    padding: 12px 24px;
+    border: #ffffff 2px solid;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.donation-button:hover {
+    animation: hover 0.1s linear forwards;
+    color: #050406;
+    background-color: #ffffff;
+}
+
+.donation-button svg {
+    fill: #CFDFE6;
+    height: 1.2rem;
+    width: 1.2rem;
+    vertical-align: text-top;
+}
+
+.donation-button:hover svg {
+    fill: #050406;
+
+}
