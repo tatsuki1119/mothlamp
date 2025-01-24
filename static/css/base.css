@@ -1,5 +1,5 @@
 /*==================================================
-tatsu css update 24.03.26
+tatsu css update 25.01.20
 
 〇 目次
     - height コンテンツ全体の高さ関連
@@ -204,7 +204,7 @@ contents
 --------------------*/
 
 /* 要素が入る大枠 */
-.container {
+#container {
     width: auto;
     margin: 0 auto;
     padding: 0;
