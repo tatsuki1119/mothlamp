@@ -92,7 +92,7 @@
     <title>誘蛾灯の導き</title>
 </head>
 
-<body ontouchstart="" style="animation: glitch-all 10s ease infinite;">
+<body ontouchstart="">
     <!-- SVG定義 -->
     <svg style="display: none;">
         <symbol id="butterfly" viewBox="0 0 1252.000000 1252.000000">
@@ -176,7 +176,35 @@ l105 32 120 106 c66 58 146 127 178 153 l59 47 -434 -2 c-238 -1 -458 -3 -488
         </symbol>
     </svg>
 
-    <div id="loader">
+    <noscript>
+        <style>
+            @font-face {
+                font-family: "PixelMplus12 Regular";
+                src: url("/static/font/PixelMplus12-Regular.ttf") format("truetype")
+            }
+
+            .noscript-div {
+                color: #ffffff;
+                background-color: #600E0E;
+                width: 100vw;
+                height: 100vh;
+                font-family: "PixelMplus12 Regular", "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "MS Pゴシック", "MS PGothic", sans-serif;
+                padding: 2%;
+            }
+        </style>
+        <div class="noscript-div">
+            <h1>誘蛾灯の導き</h1>
+            <br>
+            <p>JavaScriptが無効になっています。</p>
+            <p>本サイトを利用するためには、JavaScriptを有効にする必要があります。</p>
+        </div>
+
+    </noscript>
+
+    <div id="loader" style="display: none;">
+        <script>
+            $('#loader').show();
+        </script>
         <div class="loading_contents">
             <img src="/static/logo/tatsu-logo-no-bg.png" alt="" class="loading_logo">
             <div class="loading_circle"></div>
@@ -194,7 +222,11 @@ l105 32 120 106 c66 58 146 127 178 153 l59 47 -434 -2 c-238 -1 -458 -3 -488
         </div>
     </div>
 
-    <div class="container">
+
+    <div id="container" style="display: none;">
+        <script>
+            $('#container').show();
+        </script>
 
         <div id="menu_list_area">
             <div id="menu_list">
@@ -263,6 +295,7 @@ l105 32 120 106 c66 58 146 127 178 153 l59 47 -434 -2 c-238 -1 -458 -3 -488
                 <div class="footer-link">
                     <a href="?p=about">本サイトについて</a>
                     <a href="?p=admin-profile">管理人について</a>
+                    <a href="?p=donation">ご寄付について</a>
                     <a href="https://forms.gle/nSAq8ozNZM46TPYM7">お問い合わせ</a>
                 </div>
                 <img src="/static/logo/tatsu-logo-no-bg.png" alt="logo" class="bottom_logo">
