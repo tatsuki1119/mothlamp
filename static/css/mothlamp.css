@@ -44,8 +44,30 @@ svg {
     margin: 0;
 }
 
+img:not([class]) {
+    max-height: 45vh;
+    margin: 0 auto;
+}
+
 .protected-img {
     pointer-events: none;
+}
+
+.update {
+    position: absolute;
+    font-size: 0.7rem;
+    text-align: right;
+    margin: 10px;
+    bottom: 0;
+    right: 0;
+}
+
+/* ##############################
+indent
+############################## */
+
+.indent-lv1 {
+    padding-left: 1.5em;
 }
 
 

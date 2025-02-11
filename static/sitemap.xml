@@ -7,7 +7,7 @@
 
     <url>
         <loc>https://mothlamp.info/?p=about</loc>
-        <lastmod>2025-01-13</lastmod>
+        <lastmod>2025-02-11</lastmod>
     </url>
 
     <url>
@@ -30,6 +30,11 @@
         <lastmod>2025-01-19</lastmod>
     </url>
 
+        <url>
+        <loc>https://mothlamp.info/?p=donation</loc>
+        <lastmod>2025-02-11</lastmod>
+    </url>
+
     <url>
         <loc>https://mothlamp.info/?p=discord</loc>
         <lastmod>2025-01-13</lastmod>
@@ -38,6 +43,11 @@
     <url>
         <loc>https://mothlamp.info/?p=articles.2007-akuma-night-video</loc>
         <lastmod>2024-12-13</lastmod>
+    </url>
+
+        <url>
+        <loc>https://mothlamp.info/?p=articles.2008-moth-to-a-flame-video</loc>
+        <lastmod>2025-02-11</lastmod>
     </url>
 
     <url>
