@@ -1,5 +1,5 @@
 /*==================================================
-tatsu css update 25.01.20
+tatsu css update 25.02.11
 
 〇 目次
     - height コンテンツ全体の高さ関連
@@ -280,6 +280,31 @@ contents
     height: 5vh;
     margin: 0 auto;
     pointer-events: none;
+}
+
+.block-description {
+    color: #bbbbbb;
+    margin: 0;
+    font-size: 0.75rem;
+    line-height: 1.2;
+}
+
+.update {
+    position: absolute;
+    font-size: 0.7rem;
+    text-align: right;
+    margin: 10px;
+    bottom: 0;
+    right: 0;
+}
+
+
+/* ##############################
+indent
+############################## */
+
+.indent-lv1 {
+    padding-left: 1.5em;
 }
 
 

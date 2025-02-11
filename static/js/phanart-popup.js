@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    const modal = $('#phanart-modal');          // モーダル
-    const modalImg = $('#phanart-modal-img');  // モーダル内の画像
-    const imgs = $('.phanart-popup-img');              // .phanart-popup-img クラスの画像
+    const modal = $('#phanart-modal'); // モーダル
+    const modalImg = $('#phanart-modal-img'); // モーダル内の画像
+    const modalOrigLink = $('#phanart-modal-orig-link'); // 元ポストへのリンク
+    const imgs = $('.phanart-popup-img'); // .phanart-popup-img クラスの画像
     const wrapper = $('.phanart-wrapper'); // 外側の div
     const closeSpan = $('#phanart-modal-close'); // モーダルを閉じるボタン
 
@@ -23,6 +24,20 @@ $(document).ready(function () {
             } else {
                 modalImg.css('pointer-events', 'auto'); // 通常時は操作可能にする
             }
+
+            // モーダル内にリンクを反映
+            // 兄弟要素から元の投稿リンクを取得
+            const origLinkElement = targetImg.siblings('.phanart-popup-orig-link');
+
+            if (origLinkElement.length) {
+                // 元の投稿リンクがある場合
+                const origLink = origLinkElement.attr('href');
+                modalOrigLink.attr('href', origLink).show(); // リンクを設定して表示
+            } else {
+                // 元の投稿リンクがない場合
+                modalOrigLink.hide(); // リンクを非表示
+            }
+
         }
     }
 
