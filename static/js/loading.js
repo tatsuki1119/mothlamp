@@ -1,7 +1,9 @@
 // ロード画面
 
-// http://~~~?p=xxx.yyy のとき phantom-siita/pages/xxx/yyy.html を読み込み
+// http://~~~?p=xxx.yyy のとき /pages/xxx/yyy.html を読み込み
 // #contents の中身を置換する
+// ページの読み込みを有効化する場合 data-load_page="true" とする
+// <script src="/static/js/loading.js" data-load_page="true"></script>
 
 // 読み込むHTML内に
 // <div id="page-title" style="display: none;">new title</div>
@@ -11,62 +13,66 @@
 // <div id="page-ogimg" style="display: none;">ogimg-path</div>
 // と記載すると ogimgとtwitter img を置換する
 
+var load_page = $("script[src*='loading.js']").attr("data-load_page");
 
 $(function () {
-    var queryString = window.location.search;
-    var urlParams = new URLSearchParams(queryString);
-    var pathQuery = urlParams.get('p');
+    if (load_page == "true") {
 
-    if (pathQuery) {
-        console.log(pathQuery)
-        var path = pathQuery.replace(/\./g, '/');
-        var noCacheUrl = "/pages/" + path + ".html?nocache=" + new Date().getTime();
-        $.get(noCacheUrl)
-            .done(function (data) {
-                // ページ内容更新
-                $("#contents").html(data);
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var pathQuery = urlParams.get('p');
 
-                var newTitle = $("#contents").find("#page-title").text();
-                var newDescription = $("#contents").find("#page-description").text();
-                var newOgimg = $("#contents").find("#page-ogimg").text();
-
-                if (newTitle) {
-                    document.title = newTitle;
-
-                    $('meta[property="og:title"]').attr("content", newTitle);
-                    $('meta[name="twitter:title"]').attr("content", newTitle);
-                }
-
-                if (newDescription) {
-                    $('meta[name="description"]').attr("content", newDescription);
-                    $('meta[property="og:description"]').attr("content", newDescription);
-                    $('meta[name="twitter:description"]').attr("content", newDescription);
-                }
-
-                if (newOgimg) {
-                    $('meta[property="og:image"]').attr("content", newOgimg);
-                    $('meta[name="twitter:image"]').attr("content", newOgimg);
-                }
-
-            })
-            .fail(function () {
-                $.get("/pages/404.html", function (data) {
+        if (pathQuery) {
+            console.log(pathQuery)
+            var path = pathQuery.replace(/\./g, '/');
+            var noCacheUrl = "/pages/" + path + ".html?nocache=" + new Date().getTime();
+            $.get(noCacheUrl)
+                .done(function (data) {
+                    // ページ内容更新
                     $("#contents").html(data);
+
                     var newTitle = $("#contents").find("#page-title").text();
+                    var newDescription = $("#contents").find("#page-description").text();
+                    var newOgimg = $("#contents").find("#page-ogimg").text();
+
                     if (newTitle) {
                         document.title = newTitle;
+
+                        $('meta[property="og:title"]').attr("content", newTitle);
+                        $('meta[name="twitter:title"]').attr("content", newTitle);
                     }
-                    if ($('meta[name="robots"]').length) {
-                        $('meta[name="robots"]').attr("content", "noindex");
-                    } else {
-                        $("head").append('<meta name="robots" content="noindex">');
+
+                    if (newDescription) {
+                        $('meta[name="description"]').attr("content", newDescription);
+                        $('meta[property="og:description"]').attr("content", newDescription);
+                        $('meta[name="twitter:description"]').attr("content", newDescription);
                     }
+
+                    if (newOgimg) {
+                        $('meta[property="og:image"]').attr("content", newOgimg);
+                        $('meta[name="twitter:image"]').attr("content", newOgimg);
+                    }
+
+                })
+                .fail(function () {
+                    $.get("/pages/404.html", function (data) {
+                        $("#contents").html(data);
+                        var newTitle = $("#contents").find("#page-title").text();
+                        if (newTitle) {
+                            document.title = newTitle;
+                        }
+                        if ($('meta[name="robots"]').length) {
+                            $('meta[name="robots"]').attr("content", "noindex");
+                        } else {
+                            $("head").append('<meta name="robots" content="noindex">');
+                        }
+                    });
                 });
+        } else {
+            $.get("/pages/index-page.html?nocache=" + new Date().getTime(), function (data) {
+                $("#contents").html(data);
             });
-    } else {
-        $.get("/pages/index-page.html?nocache=" + new Date().getTime(), function (data) {
-            $("#contents").html(data);
-        });
+        }
     }
 
 
