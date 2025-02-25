@@ -62,7 +62,10 @@
 
             // ASCIIアートをHTML要素に追加（改行を適切に表示）
             const graveContainer = document.getElementById("grave");
-            graveContainer.innerHTML = asciiArt.replace(/\n/g, "<br>");
+            const numberOfHaine = shuffledNames.length;
+            const message = `${numberOfHaine}名のハイネ、ここに眠る。`;
+
+            graveContainer.innerHTML = `${asciiArt.replace(/\n/g, "<br>")}<br><br>${message}`;
         });
     });
 </script>
@@ -70,7 +73,6 @@
 <style>
     #grave {
         text-align: center;
-        font-family: monospace;
         white-space: pre-wrap;
     }
 
