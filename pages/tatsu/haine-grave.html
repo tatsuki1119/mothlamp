@@ -52,7 +52,8 @@
     function generateAsciiArt(names) {
         return names.map(name => {
             name = convertToFullWidth(name); // 文字列を全角に変換
-            return `＿＿\n${verticalString(name)}\n|￣￣￣￣￣|\n|　|三三|　|\n￣￣￣￣￣￣￣\n`;
+            // return `＿＿\n${verticalString(name)}\n|￣￣￣￣￣|\n|　|三三|　|\n￣￣￣￣￣￣￣\n`;
+            return `＿＿\n${verticalString(name)}\n┌┴─┴┐\n│[ ＊ ]│\n[￣凸(￣)凸￣]\n`;
         }).join("\n");
     }
 
