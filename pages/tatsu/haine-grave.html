@@ -19,6 +19,18 @@
     const target_sheet = "haine-grave";
     const url = apiurl + "?target=" + target_sheet;
 
+    // 半角から全角に変換する関数（記号、英数字、スペースを含む）
+    function convertToFullWidth(str) {
+        return str.replace(/[a-zA-Z0-9!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, function (char) {
+            // 半角英数字と記号を全角に変換
+            return String.fromCharCode(char.charCodeAt(0) + 0xFEE0);
+        }).replace(/[〝〟]/g, function (char) {
+            // 〝〟記号を変換
+            return char === '〝' ? '「' : '」';
+        }).replace(/ /g, "　"); // 半角スペースを全角スペースに変換
+    }
+
+
     // 配列をランダムにシャッフルする関数（Fisher-Yates shuffle）
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -39,6 +51,7 @@
     // ASCIIアートを生成する関数
     function generateAsciiArt(names) {
         return names.map(name => {
+            name = convertToFullWidth(name); // 文字列を全角に変換
             return `＿＿\n${verticalString(name)}\n|￣￣￣￣￣|\n|　|三三|　|\n￣￣￣￣￣￣￣\n`;
         }).join("\n");
     }
