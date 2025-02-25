@@ -1,0 +1,82 @@
+<div id="page-title" style="display: none;">ハイネ墓地</div>
+<div id="page-description" style="display: none;">推しの尊さによって4んでしまったハイネの墓場</div>
+
+<div class="contents_block">
+    <h1 class="glitch-text">ハイネ墓地</h1>
+    <p>推しの尊さによって4んでしまったハイネの墓場</p>
+
+    <p>「私も入る。。。」という方は <a href="https://forms.gle/1WXxoDnpXBarRMm19">こちら</a> からお名前をお送りください！</p>
+</div>
+
+<div class="contents_block">
+    <p id="loadingMessage">お墓を作成中......</p>
+    <p id="grave"></p>
+</div>
+
+
+<script>
+    const apiurl = "https://script.google.com/macros/s/AKfycbyWOBPQTSR_-Y4hdSNbY02c8OhkYEwIRJxyjEQ7j58H0Dyqpi4D7IIFVvtW33rFnGIc/exec";
+    const target_sheet = "haine-grave";
+    const url = apiurl + "?target=" + target_sheet;
+
+    // 配列をランダムにシャッフルする関数（Fisher-Yates shuffle）
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    // 文字列を縦に変換する関数（5文字未満なら全角スペースで埋める）
+    function verticalString(str) {
+        while (str.length < 5) {
+            str += "　"; // 全角スペースを追加
+        }
+        return str.split("").map(char => `｜${char}｜`).join("\n");
+    }
+
+    // ASCIIアートを生成する関数
+    function generateAsciiArt(names) {
+        return names.map(name => {
+            return `＿＿\n${verticalString(name)}\n|￣￣￣￣￣|\n|　|三三|　|\n￣￣￣￣￣￣￣\n`;
+        }).join("\n");
+    }
+
+    // 記事データを取得して表示
+    $(document).ready(function () {
+        $.getJSON(url, function (data) {
+            console.log("取得データ:", data);
+
+            // name要素のみを抽出
+            let names = data.map(item => item.name);
+
+            // ランダムにシャッフル
+            let shuffledNames = shuffleArray(names);
+
+            // ASCIIアートを生成
+            let asciiArt = generateAsciiArt(shuffledNames);
+
+            // お墓を作成中メッセージを非表示にする
+            document.getElementById("loadingMessage").style.display = "none";
+
+            // ASCIIアートをHTML要素に追加（改行を適切に表示）
+            const graveContainer = document.getElementById("grave");
+            graveContainer.innerHTML = asciiArt.replace(/\n/g, "<br>");
+        });
+    });
+</script>
+
+<style>
+    #grave {
+        text-align: center;
+        font-family: monospace;
+        white-space: pre-wrap;
+    }
+
+    #loadingMessage {
+        text-align: center;
+        font-size: 20px;
+        color: #999;
+    }
+</style>
