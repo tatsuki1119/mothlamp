@@ -53,13 +53,21 @@
         return names.map(name => {
             name = convertToFullWidth(name); // 文字列を全角に変換
 
-            // ランダムに90%または10%で選択
-            if (Math.random() < 0.9) {
-                // 90%の確率で最初のASCIIアート
-                return `＿＿\n${verticalString(name)}\n|￣￣￣￣￣|\n|　|三三|　|\n￣￣￣￣￣￣￣\n`;
+            // ランダムに90%、9%、1%で選択
+            const random = Math.random();
+            if (random < 0.9) {
+                // 90%の確率
+                return `＿＿\n${verticalString(name)}\n|￣￣￣￣￣|\n|　|三三|　|\n￣￣￣￣￣￣￣￣\n`;
+            } else if (random < 0.95) {
+                // 5%の確率
+                return `＿＿\n${verticalString(name)}\n┌┴─┴┐\n│　　　│\n[￣￣￣￣￣]\n￣￣￣￣￣￣￣￣\n`;
+            } else if (random < 0.99) {
+                // 4%の確率
+                return `＿＿\n${verticalString(name)}\n┌┴─┴┐\n│[ ＊ ]│\n[￣凸(￣)凸￣]\n￣￣￣￣￣￣￣￣￣\n`;
             } else {
-                // 10%の確率で2番目のASCIIアート
-                return `＿＿\n${verticalString(name)}\n┌┴─┴┐\n│[ ＊ ]│\n[￣凸(￣)凸￣]\n`;
+                // 1%の確率
+                return `／＼\n${verticalString(name)}\n│　│\n│￣　 　￣│\n￣│　│￣\n│☆│\n￣￣\n`;
+
             }
         }).join("\n");
     }
