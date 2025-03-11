@@ -106,15 +106,17 @@ word-break 改行制御
 --------------------*/
 
 .keep-all-break-word {
+    /* 編集時に以下に移行 */
     word-break: keep-all;
     overflow-wrap: break-word;
     /* overflow-wrap: anywhere; が2024年1月8日現在で一番良い */
 }
 
-.avoid-break-word {
-    word-break: keep-all;
-    white-space: nowrap;
-    overflow-wrap: normal;
+.word-chunk {
+    /* 単語の塊に使用 */
+    display: inline-block;
+    overflow-wrap: anywhere;
+    word-break: normal;
 }
 
 /*--------------------
