@@ -4,11 +4,11 @@
 
 <script>
     // URL書き換え
-    window.onload = function () {
+    (function () {
         let currentUrl = new URL(window.location.href);
         let currentParams = new URLSearchParams(currentUrl.search);
         history.replaceState(null, "", "/r/guoxoua?" + currentParams.toString());
-    };
+    })();
 </script>
 
 <script src="/static/js/phanart-popup.js"></script>
