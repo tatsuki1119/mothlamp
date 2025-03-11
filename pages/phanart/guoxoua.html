@@ -2,6 +2,17 @@
 <div id="page-description" style="display: none;">कㄑ”‎^. .^ ੭ （あぐ）さんのイラストを紹介します！</div>
 <div id="page-ogimg" style="display: none;">https://mothlamp.info/static/img/phanart/guoxoua/000-ogimg.jpg</div>
 
+<script>
+    // URL書き換え
+    $(document).ready(function () {
+        let currentUrl = new URL(window.location.href);
+        let currentParams = new URLSearchParams(currentUrl.search);
+        let newUrl = "/?" + currentParams.toString();
+        $(window).on("load", function () {
+            history.replaceState(null, "", "/r/guoxoua?" + currentParams.toString());
+        });
+    });
+</script>
 
 <script src="/static/js/phanart-popup.js"></script>
 
@@ -83,7 +94,7 @@
         <img src="/static/img/phanart/guoxoua/nametag-00-all.png" alt="" loading="lazy" class="phanart-popup-img"
             style="max-height: 50vh; margin: 0 auto;">
     </div>
-    <p style="font-weight: bold;">メンバーごと、ペアの素材は <a href="?p=phanart.guoxoua-nametag">こちら</a></p>
+    <p style="font-weight: bold;">メンバーごと、ペアの素材は <a href="/?p=phanart.guoxoua-nametag">こちら</a></p>
 </div>
 
 <div class="contents_block">
