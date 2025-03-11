@@ -4,9 +4,10 @@ tatsu css update 25.02.11
 〇 目次
     - height コンテンツ全体の高さ関連
     - tags 通常HTMLタグ
-    - global
+    - word-break 改行制御
+    - global htmlタグ
     - contents
-    - dev
+    - indent
     - url area
     - menu
     - loading
@@ -97,6 +98,23 @@ pre {
     white-space: pre-line;
     /* インデントを無視 */
     margin: 0;
+}
+
+
+/*--------------------
+word-break 改行制御
+--------------------*/
+
+.keep-all-break-word {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    /* overflow-wrap: anywhere; が2024年1月8日現在で一番良い */
+}
+
+.avoid-break-word {
+    word-break: keep-all;
+    white-space: nowrap;
+    overflow-wrap: normal;
 }
 
 /*--------------------

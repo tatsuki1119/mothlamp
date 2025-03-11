@@ -20,11 +20,7 @@ html {
     scroll-behavior: smooth;
 }
 
-.keep-all-break-word {
-    word-break: keep-all;
-    overflow-wrap: break-word;
-    /* overflow-wrap: anywhere; が2024年1月8日現在で一番良い */
-}
+
 
 svg {
     fill: #CFDFE6;
@@ -51,6 +47,11 @@ img:not([class]) {
 
 .protected-img {
     pointer-events: none;
+}
+
+.anchor-list a:link,
+.anchor-list a:visited {
+    color: #FFFFFF;
 }
 
 
@@ -114,7 +115,7 @@ local
 }
 
 /* ##############################
-public
+twitter
 ############################## */
 
 .tweet-container>div {
@@ -125,6 +126,20 @@ public
 a.twitter-tweet-data {
     display: block;
     min-height: 55vh;
+}
+
+/* ##############################
+youtube
+############################## */
+
+.yt-shorts-container iframe {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 550px;
+    height: 100vh;
+    max-height: 80vh;
+    aspect-ratio: 9 / 16;
 }
 
 /* ##############################
@@ -307,11 +322,6 @@ list
 /* ##############################
 setlist
 ############################## */
-
-.setlist-mokuji a:link,
-.setlist-mokuji a:visited {
-    color: #FFFFFF;
-}
 
 .setlist-ul {
     list-style-type: none;

@@ -29,11 +29,11 @@ $(document).ready(function () {
                     const loadingDiv = $(`
                         <div class="list-loading">
                             <svg role="img" aria-label="リボン">
-                                <use href="#butterfly02"></use>
+                                <use href="#butterfly"></use>
                             </svg>
                             Loading...
                             <svg role="img" aria-label="リボン">
-                                <use href="#butterfly02"></use>
+                                <use href="#butterfly"></use>
                             </svg>
                         </div>
                     `);
