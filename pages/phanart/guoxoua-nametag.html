@@ -1,7 +1,15 @@
 <div id="page-title" style="display: none;">名刺用素材 - कㄑ”‎^. .^ ੭ [誘蛾灯の導き]</div>
 <div id="page-description" style="display: none;">कㄑ”‎^. .^ ੭ （あぐ）さんによる名刺素材です！</div>
-<div id="page-ogimg" style="display: none;">https://mothlamp.info/static/img/phanart/guoxoua/000-ogimg.jpg</div>
+<div id="page-ogimg" style="display: none;">https://mothlamp.info/static/img/phanart/guoxoua/nametag-000-ogimg.jpg</div>
 
+<script>
+    // URL書き換え
+    (function () {
+        let currentUrl = new URL(window.location.href);
+        let currentParams = new URLSearchParams(currentUrl.search);
+        history.replaceState(null, "", "/r/guoxoua-nametag?" + currentParams.toString());
+    })();
+</script>
 
 <script src="/static/js/phanart-popup.js"></script>
 
