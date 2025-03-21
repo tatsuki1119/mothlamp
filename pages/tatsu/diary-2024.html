@@ -1,0 +1,73 @@
+<div id="page-title" style="display: none;">ハイネ推し活記録 2024 [tatsu]</div>
+<div id="page-description" style="display: none;"></div>
+
+<div class="contents_block">
+    <h1 class="glitch-text">
+        <span class="word-chunk">tatsuの</span><span class="word-chunk">ハイネ</span><span class="word-chunk">推し活記録</span>
+        <span class="word-chunk">2024</span>
+    </h1>
+    <p>プロフィールは <a href="/?p=tatsu.profile">こちら </a></p>
+    <hr>
+    <h3>ハイネ推し活記録</h3>
+    <ul>
+        <li>2024</li>
+        <li><a href="/?p=tatsu.diary-2025">2025</a></li>
+    </ul>
+</div>
+
+<div id="pinned-tweets"></div>
+
+<div class="contents_block">
+    <ul>
+        <li>2024</li>
+        <li><a href="/?p=tatsu.diary-2025">2025</a></li>
+    </ul>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var tweetData = [
+            { url: "https://x.com/ta_moon_/status/1851184187753246878", date: "2024-10.29" },
+            { url: "https://x.com/ta_moon_/status/1852201595783778377", date: "2024-11.01" },
+            { url: "https://x.com/ta_moon_/status/1852222178621837699", date: "2024-11.01" },
+            { url: "https://x.com/ta_moon_/status/1852343321714430142", date: "2024-11.01" },
+            { url: "https://x.com/ta_moon_/status/1852366571307720855", date: "2024-11.01" },
+            { url: "https://x.com/ta_moon_/status/1852389099841458326", date: "2024-11.02" },
+            { url: "https://x.com/ta_moon_/status/1860983010654630154", date: "2024-11.25" },
+            { url: "https://x.com/ta_moon_/status/1862044814969303098", date: "2024-11.28" },
+            { url: "https://x.com/ta_moon_/status/1862761246141161753", date: "2024-11.30" },
+            { url: "https://x.com/ta_moon_/status/1862764457619071302", date: "2024-11.30" },
+            { url: "https://x.com/ta_moon_/status/1862767591821124038", date: "2024-11.30" },
+            { url: "https://x.com/ta_moon_/status/1864349373293097197", date: "2024-12.05" },
+            { url: "https://x.com/ta_moon_/status/1864349373293097197", date: "2024-12.05" },
+            { url: "https://x.com/ta_moon_/status/1866048350858121222", date: "2024-12.09" },
+            { url: "https://x.com/ta_moon_/status/1868161379452305801", date: "2024-12.15" },
+            { url: "https://x.com/ta_moon_/status/1868867624081539223", date: "2024-12.17" },
+            { url: "https://x.com/ta_moon_/status/1868907708365390074", date: "2024-12.17" },
+            { url: "https://x.com/ta_moon_/status/1868947591024783661", date: "2024-12.17" },
+            { url: "https://x.com/ta_moon_/status/1869051793881399656", date: "2024-12.17" },
+            { url: "https://x.com/ta_moon_/status/1869026475221176602", date: "2024-12-17" },
+            { url: "https://x.com/ta_moon_/status/1869178629432942725", date: "2024-12-18" },
+            { url: "https://x.com/ta_moon_/status/1872212093329702977", date: "2024-12-26" },
+            { url: "https://x.com/ta_moon_/status/1873517412307644754", date: "2024-12-30" },
+            { url: "https://x.com/ta_moon_/status/1873576351854452914", date: "2024-12-30" },
+            { url: "https://x.com/ta_moon_/status/1873589186839945223", date: "2024-12-30" },
+            { url: "https://x.com/ta_moon_/status/1873628324138013055", date: "2024-12-30" },
+            { url: "https://x.com/ta_moon_/status/1873641001061150943", date: "2024-12-30" },
+        ];
+
+        var container = $("#pinned-tweets");
+        tweetData.forEach(function (data) {
+            var tweetBlock = $(
+                '<div class="contents_block" data-date="' + data.date + '">' +
+                '<div class="tweet-container">' +
+                '<a class="twitter-tweet-data" href="' + data.url + '"></a>' +
+                '</div>' +
+                '<p class="local"><a href="' + data.url + '">' + data.url + '</a></p>' +
+                '</div>'
+            );
+            container.append(tweetBlock);
+        });
+    });
+
+</script>
