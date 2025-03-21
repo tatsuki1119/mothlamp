@@ -1,5 +1,13 @@
 <div id="page-title" style="display: none;">プロフィール [tatsu]</div>
-<div id="page-description" style="display: none;">本サイト運営者のプロフィールです。</div>
+<div id="page-description" style="display: none;">本サイト運営者 tatsu のプロフィールです。</div>
+
+<script>
+    (function () {
+        let currentUrl = new URL(window.location.href);
+        let currentParams = new URLSearchParams(currentUrl.search);
+        history.replaceState(null, "", "/r/tatsu-profile?" + currentParams.toString());
+    })();
+</script>
 
 <div class="contents_block">
     <h1 class="glitch-text">tatsu プロフィール</h1>
