@@ -25,6 +25,11 @@
         "p": "1007-hanagatami"
     },
     {
+        "show_index": true,
+        "title": "チケット抽選結果集計",
+        "p": "2000-ticket-results"
+    },
+    {
         "private": true,
         "title": "ハイネ",
         "p": "2006-haine"

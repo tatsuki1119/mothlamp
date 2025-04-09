@@ -1,0 +1,81 @@
+<style>
+    img {
+        max-height: 20vh;
+        margin: 0 auto;
+    }
+</style>
+
+<!-- タイトル、説明、ogimg -->
+<div id="page-title" style="display: none;">HOW TO USE [誘蛾灯の導き]</div>
+<div id="page-description" style="display: none;">各要素の使い方</div>
+<div id="page-ogimg" style="display: none;">https://mothlamp.info/static/logo/tatsu-ogimg.jpg</div>
+
+<!-- 文章の区切り -->
+<div class="contents_block">
+    <span class="word-chunk">
+        <span class="word-chunk">aaaaaaaaaaaaaaaaaaaa</span><span class="word-chunk">bbbbbbbbbbbbbbbbbbbb
+        </span><span class="word-chunk">cccccccccccccccccccc</span><span class="word-chunk">dddddddddddddddddddd</span>
+    </span>
+</div>
+
+
+<!-- リンクのブロック -->
+<div class="contents_block contents_block_has_a">
+    <a class="contents_block_a" href="/?p="></a>
+    <p>text</p>
+</div>
+
+
+<!-- glitch text -->
+<div class="contents_block">
+    <p class="glitch-text">glitch text</p>
+</div>
+
+
+<!-- butterfly list -->
+<div class="contents_block">
+    <p>butterfly list</p>
+    <ul class="butterfly-list">
+        <li>
+            <p>aaaa</p>
+        </li>
+        <li>
+            <p>bbbb</p>
+        </li>
+    </ul>
+</div>
+
+<!-- 画像の保護 -->
+<div class="contents_block">
+    <p>protected img</p>
+    <div class="protected-img-wrapper">
+        <img src="/static/logo/tatsu-logo-star.png" alt="" loading="lazy" class="protected-img">
+    </div>
+</div>
+
+<!-- 画像のポップアップ表示 -->
+<div class="contents_block">
+    <p>popup img</p>
+    <div class="popupimg-wrapper">
+        <img src="/static/logo/tatsu-logo-star.png" alt="" loading="lazy" class="popupimg-popup-img"
+            style="object-position: 50% 50%; /* 左,上 */">
+        <a class="phanart-popup-orig-link" href="https://x.com/ta_moon_"></a>
+    </div>
+
+    <p>popup img protected</p>
+    <div class="popupimg-wrapper protected-img-wrapper">
+        <img src="/static/logo/tatsu-logo-star.png" alt="" loading="lazy" class="popupimg-popup-img protected-img"
+            style="object-position: 50% 50%; /* 左,上 */">
+        <a class="phanart-popup-orig-link" href="https://x.com/ta_moon_"></a>
+    </div>
+</div>
+
+<div id="popupimg-modal">
+    <span id="popupimg-modal-close">×</span>
+    <img id="popupimg-modal-img">
+    <div id="popupimg-modal-protected-img-wrapper" class="protected-img-wrapper">
+        <img id="popupimg-modal-protected-img" class="protected-img">
+    </div>
+    <p><a id="popupimg-modal-orig-link" href="">X(Twitter)の投稿はこちら</a></p>
+    <script src="/static/js/popup-img.js"></script>
+</div>

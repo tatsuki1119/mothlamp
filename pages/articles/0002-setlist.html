@@ -1,21 +1,14 @@
-<script>
-    $(document).ready(function () {
-        // setlist-ul 内のすべての <li> 要素に対して処理を行う
-        $('.setlist-ul li').each(function () {
-            // 先頭に追加する SVG 要素を作成
-            var svgIcon = $('<svg role="img" aria-label="蝶々">' +
-                '<use href="#butterfly"></use>' +
-                '</svg>');
-
-            // <li> の先頭に SVG アイコンを追加
-            $(this).prepend(svgIcon);
-        });
-    });
-</script>
-
 <div id="page-title" style="display: none;">セットリスト [誘蛾灯の導き]</div>
 <div id="page-description" style="display: none;">ファントムシータのライブのセトリ（セットリスト）を記載しています。This page contains the setlist for
     Phantom Siita's live performances.</div>
+
+<style>
+    .setlist-anchor {
+        display: block;
+        padding-top: calc(25px + var(--safeareainsettop));
+        margin-top: calc(-25px - var(--safeareainsettop));
+    }
+</style>
 
 <div class="contents_block">
     <h1 class="glitch-text">セットリスト</h1>
@@ -42,7 +35,7 @@
 <div class="contents_block">
     <p class="setlist-anchor" id="monayoko">Ado JAPAN TOUR 2024「モナ・リザの横顔」オープニングアクト</p>
     <p>[大阪07.14,15 新潟07.20,21 広島07.27,28 北海道08.17,18 千葉08.31,09.01]</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>キミと××××したいだけ</p>
         </li>
@@ -51,7 +44,7 @@
         </li>
     </ul>
     <p>[宮城09.07,08 福岡09.15,16]</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>キミと××××したいだけ</p>
         </li>
@@ -60,7 +53,7 @@
         </li>
     </ul>
     <p>[神奈川10.12]</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>キミと××××したいだけ</p>
         </li>
@@ -69,7 +62,7 @@
         </li>
     </ul>
     <p>[神奈川10.13]</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>キミと××××したいだけ</p>
         </li>
@@ -78,7 +71,7 @@
         </li>
     </ul>
     <p>[愛知12.27,28]</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>ゾクゾク</p>
         </li>
@@ -92,7 +85,7 @@
 <div class="contents_block">
     <p class="setlist-anchor" id="boukenou2024">お台場冒険王2024</p>
     <p>2024.08.19</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>おともだち</p>
         </li>
@@ -109,7 +102,7 @@
 <div class="contents_block">
     <p class="setlist-anchor" id="atjam2024">@JAM EXPO 2024 supported by UP-T</p>
     <p>2024.09.14</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>おともだち</p>
         </li>
@@ -135,7 +128,7 @@
 <div class="contents_block">
     <p class="setlist-anchor" id="nstfes2024">NSTまつり2024アイドルスペシャルライブ</p>
     <p>2024.09.28</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>おともだち</p>
         </li>
@@ -155,7 +148,7 @@
 <div class="contents_block">
     <p class="setlist-anchor" id="larmefes1">LARME fes vol.1</p>
     <p>2024.10.06</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>キミと××××したいだけ</p>
         </li>
@@ -172,7 +165,7 @@
 <div class="contents_block">
     <p class="setlist-anchor" id="heine">ファントムシータ 1st LIVE 2024「ハイネ」2024年11月1日 日本武道館</p>
     <p>2024.11.03</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>おともだち</p>
         </li>
@@ -246,7 +239,7 @@
 <div class="contents_block">
     <p class="setlist-anchor" id="akumanight">悪魔のキッスpresents「悪魔Night Duel Buster」</p>
     <p>2024.12.17</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>ゾクゾク</p>
         </li>
@@ -281,7 +274,7 @@
 <div class="contents_block">
     <p class="setlist-anchor" id="cdj2425">COUNTDOWN JAPAN 24/25</p>
     <p>2024.12.30</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>[リハ]おともだち（ダンスなし、ワンコーラス）</p>
         </li>
@@ -342,7 +335,7 @@
     <p>[2025.02.15 パリ Bataclan]</p>
     <p>[2025.02.17 ベルリン Metropol]</p>
     <p>[2025.02.19 ロンドン Electric Ballroom]</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>キミと××××したいだけ</p>
         </li>
@@ -415,7 +408,7 @@
 <div class="contents_block">
     <p class="setlist-anchor" id="dreamscape">yosugala presents -DREAMSCAPE-"AICHI"</p>
     <p>2025.03.23</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>ゾクゾク</p>
         </li>
@@ -458,7 +451,7 @@
 <div class="contents_block">
     <p class="setlist-anchor" id="ladysteadypremium">Lady Steady Premium</p>
     <p>2025.04.05</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>キミと××××したいだけ</p>
         </li>
@@ -489,7 +482,7 @@
 <!-- <div class="contents_block">
     <p class="setlist-anchor" id=""></p>
     <p>202x.xx.xx</p>
-    <ul class="setlist-ul">
+    <ul class="butterfly-list">
         <li>
             <p>?????</p>
         </li>
