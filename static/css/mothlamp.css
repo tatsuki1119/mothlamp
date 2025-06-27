@@ -2,7 +2,8 @@
     --color-main: #600E0E;
     --color-mona: #E56FAA;
     --color-miu: #EFF2FB;
-    --color-rinka: #652C78;
+    /* --color-rinka: #652C78; */
+    --color-rinka: #a54cc3;
     --color-hisui: #009E4A;
     --color-moka: #00CCF9;
 }
@@ -176,7 +177,7 @@ link btn
 official link
 ############################## */
 
-#official-link {
+.official-link {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -184,11 +185,11 @@ official link
     padding: 2% 2%;
 }
 
-#official-link li {
+.official-link li {
     list-style: none;
 }
 
-#official-link li::after {
+.official-link li::after {
     /* 各liの直後にスラッシュを表示 */
     content: "/";
     color: #aaaaaa;
@@ -196,29 +197,63 @@ official link
     margin-right: 4px;
 }
 
-#official-link li:last-child::after {
+.official-link li:last-child::after {
     /* 最後のliのスラッシュを非表示にする */
     content: "";
 }
 
-#official-link .official-a {
+.official-link .official-a {
     color: #CFDFE6;
     text-decoration: underline;
     text-underline-offset: 3px;
 }
 
-#official-link .official-a svg {
-    fill: #CFDFE6;
+.official-link .official-a svg {
     height: 20px;
     width: 20px;
     vertical-align: middle;
     margin-right: 5px;
 }
 
+#official-link .official-a svg {
+    fill: #CFDFE6;
+}
+
 .official-a:hover {
     color: #83a3de !important;
     transition: 0.2s;
 }
+
+.mona-link *,
+.mona-link *::after {
+    color: var(--color-mona) !important;
+    fill: var(--color-mona);
+}
+
+.miu-link *,
+.miu-link *::after {
+    color: var(--color-miu) !important;
+    fill: var(--color-miu);
+}
+
+.rinka-link *,
+.rinka-link *::after {
+    color: var(--color-rinka) !important;
+    fill: var(--color-rinka);
+}
+
+.hisui-link *,
+.hisui-link *::after {
+    color: var(--color-hisui) !important;
+    fill: var(--color-hisui);
+}
+
+.moka-link *,
+.moka-link *::after {
+    color: var(--color-moka) !important;
+    fill: var(--color-moka);
+}
+
 
 /* ##############################
 list 
