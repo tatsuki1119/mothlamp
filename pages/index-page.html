@@ -353,43 +353,65 @@
     </div>
     <script>
         const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
-        // const apiurl = "https://script.google.com/macros/s/AKfycbyWOBPQTSR_-Y4hdSNbY02c8OhkYEwIRJxyjEQ7j58H0Dyqpi4D7IIFVvtW33rFnGIc/exec";
         const target_sheet = "web-articles";
-
         const url = apiurl + "?target=" + target_sheet;
 
-        // 記事データを取得して表示
+        // キャッシュ保持時間（ミリ秒）→ 12時間 = 12 * 60 * 60 * 1000
+        const CACHE_DURATION = 12 * 60 * 60 * 1000;
+        const CACHE_KEY = "web_articles_cache";
+        const TIMESTAMP_KEY = "web_articles_cache_time";
+
         $(document).ready(function () {
             var queryString = window.location.search;
             var urlParams = new URLSearchParams(queryString);
             var pathQuery = urlParams.get('p');
 
-            if (!(pathQuery)) { // indexの時だけ
-                $.getJSON(url, function (data) {
-                    // ループして<li>を作成し追加
-                    for (let i = 0; i < data.length && i < 3; i++) {
-                        const web = data[i];  // 指定の個数を取得
-                        const listItem = `
-                            <a href="${web.url}" target="_blank" class="link-list-a">
-                                <li>
-                                    <p class="date">
-                                        <svg role="img" aria-label="蝶々">
-                                            <use href="#butterfly"></use>
-                                        </svg>${web.date}
-                                    </p>
-                                    <p class="title">${web.title}</p>
-                                    <p class="media">${web.media}</p>
-                                    ${web.local_link ? `<a href="/?p=web.${web.local_link}" class="local-link-a local">記事へ</a>` : ''}
-                                </li>
-                            </a>
-                    `;
-                        $('#web').append(listItem);
-                    }
-                    $('#web-loading').hide();
-                });
+            if (!pathQuery) { // index のときだけ実行
+                const cachedData = sessionStorage.getItem(CACHE_KEY);
+                const cachedTime = sessionStorage.getItem(TIMESTAMP_KEY);
+                const now = new Date().getTime();
+
+                if (cachedData && cachedTime && (now - cachedTime < CACHE_DURATION)) {
+                    // セッションキャッシュが有効な場合
+                    const data = JSON.parse(cachedData);
+                    renderArticles(data);
+                } else {
+                    // キャッシュがない、または期限切れの場合
+                    $.getJSON(url, function (data) {
+                        // セッションキャッシュ保存
+                        sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+                        sessionStorage.setItem(TIMESTAMP_KEY, now.toString());
+
+                        renderArticles(data);
+                    });
+                }
+            }
+
+            // 記事を描画する関数
+            function renderArticles(data) {
+                for (let i = 0; i < data.length && i < 3; i++) {
+                    const web = data[i];
+                    const listItem = `
+                    <a href="${web.url}" target="_blank" class="link-list-a">
+                        <li>
+                            <p class="date">
+                                <svg role="img" aria-label="蝶々">
+                                    <use href="#butterfly"></use>
+                                </svg>${web.date}
+                            </p>
+                            <p class="title">${web.title}</p>
+                            <p class="media">${web.media}</p>
+                            ${web.local_link ? `<a href="/?p=web.${web.local_link}" class="local-link-a local">記事へ</a>` : ''}
+                        </li>
+                    </a>
+                `;
+                    $('#web').append(listItem);
+                }
+                $('#web-loading').hide();
             }
         });
     </script>
+
 </div>
 
 

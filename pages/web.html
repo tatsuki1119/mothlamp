@@ -19,16 +19,36 @@
 
 <script>
     const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
-    // const apiurl = "https://script.google.com/macros/s/AKfycbyWOBPQTSR_-Y4hdSNbY02c8OhkYEwIRJxyjEQ7j58H0Dyqpi4D7IIFVvtW33rFnGIc/exec";
     const target_sheet = "web-articles";
-
     const url = apiurl + "?target=" + target_sheet;
 
-    // 記事データを取得して表示
+    // キャッシュキーと有効期間（ミリ秒）→ 12時間
+    const CACHE_KEY = "web_articles_cache";
+    const TIMESTAMP_KEY = "web_articles_cache_time";
+    const CACHE_DURATION = 12 * 60 * 60 * 1000;
+
     $(document).ready(function () {
-        $.getJSON(url, function (data) {
+        const cachedData = sessionStorage.getItem(CACHE_KEY);
+        const cachedTime = sessionStorage.getItem(TIMESTAMP_KEY);
+        const now = Date.now();
+
+        if (cachedData && cachedTime && (now - parseInt(cachedTime) < CACHE_DURATION)) {
+            // セッションキャッシュから取得して表示
+            const data = JSON.parse(cachedData);
+            renderArticles(data);
+        } else {
+            // APIから取得し、セッションストレージに保存
+            $.getJSON(url, function (data) {
+                sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+                sessionStorage.setItem(TIMESTAMP_KEY, now.toString());
+                renderArticles(data);
+            });
+        }
+
+        // 記事を描画する共通関数
+        function renderArticles(data) {
             data.forEach(function (web) {
-                console.log(web)
+                console.log(web);
                 const listItem = `
                     <a href="${web.url}" target="_blank" class="link-list-a">
                         <li>
@@ -43,11 +63,9 @@
                         </li>
                     </a>
                 `;
-
-                // <ul>に追加
                 $('#web').append(listItem);
             });
             $('#web-loading').hide();
-        });
+        }
     });
 </script>
