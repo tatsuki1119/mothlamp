@@ -1,0 +1,107 @@
+<div id="page-title" style="display: none;">スケジュール [誘蛾灯の導き]</div>
+<div id="page-description" style="display: none;">ファントムシータのイベント等のスケジュールです。</div>
+
+<div class="contents_block">
+    <h1 class="glitch-text">スケジュール</h1>
+    <p style="font-size: small;">
+        <span class="word-chunk">
+            ※ 公式ではないため、間違いがある可能性があります。
+        </span>
+        <span class="word-chunk">
+            あらかじめご了承ください。
+        </span>
+    </p>
+    <hr class="hr-no-margin">
+    <div id="schedule-loading" class="list-loading">
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+        Loading...
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+    </div>
+    <ul id="schedule" class="link-list">
+    </ul>
+</div>
+
+<script>
+    $(document).ready(function () {
+        const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
+        const target_sheet = "schedule";
+        const url = apiurl + "?target=" + target_sheet;
+
+        // キャッシュ保持時間（ミリ秒）
+        const CACHE_DURATION = 0;
+        // const CACHE_DURATION = 12 * 60 * 60 * 1000;
+        const CACHE_KEY = "schedule_cache";
+        const TIMESTAMP_KEY = "schedule_cache_time";
+
+        const cachedData = sessionStorage.getItem(CACHE_KEY);
+        const cachedTime = sessionStorage.getItem(TIMESTAMP_KEY);
+        const now = new Date().getTime();
+
+        if (cachedData && cachedTime && (now - cachedTime < CACHE_DURATION)) {
+            // セッションキャッシュが有効な場合
+            const data = JSON.parse(cachedData);
+            renderSchedule(data);
+        } else {
+            // キャッシュがない、または期限切れの場合
+            $.getJSON(url, function (data) {
+                // セッションキャッシュ保存
+                sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+                sessionStorage.setItem(TIMESTAMP_KEY, now.toString());
+
+                renderSchedule(data);
+            });
+        }
+
+        function renderSchedule(data) {
+            const youbiArray = ['日', '月', '火', '水', '木', '金', '土'];
+
+            // JSTの現在日時（日付部分のみ）
+            const jstNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+            const jstToday = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
+
+            let foundNext = false; // 最初の1件だけに #next を付けるためのフラグ
+
+            for (let i = 0; i < data.length; i++) {
+                const schedule = data[i];
+
+                // JSTに変換
+                const scheduleDate = new Date(new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+                const scheduleDay = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate());
+
+                // フォーマット（例：2025.07.20）
+                const year = scheduleDate.getFullYear();
+                const month = String(scheduleDate.getMonth() + 1).padStart(2, '0');
+                const day = String(scheduleDate.getDate()).padStart(2, '0');
+                const formattedDate = `${year}.${month}.${day}`;
+                const dayOfWeek = youbiArray[scheduleDate.getDay()];
+
+                // 最初の「本日以降」のデータにだけ id="next" を付ける
+                const liId = (!foundNext && scheduleDay >= jstToday) ? 'id="next"' : '';
+                if (liId) foundNext = true;
+
+                const listItem = `
+                    <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
+                        <li>
+                            <p class="date">
+                                <svg role="img" aria-label="蝶々">
+                                    <use href="#butterfly"></use>
+                                </svg>${formattedDate}（${dayOfWeek}）
+                            </p>
+                            <p class="title">${schedule.title}</p>
+                        </li>
+                    </a>
+                `;
+                $('#schedule').append(listItem);
+            }
+
+            $('#schedule-loading').hide();
+        }
+
+
+
+    });
+</script>

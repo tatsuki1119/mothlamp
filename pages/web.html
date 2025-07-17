@@ -18,16 +18,16 @@
 </div>
 
 <script>
-    const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
-    const target_sheet = "web-articles";
-    const url = apiurl + "?target=" + target_sheet;
-
-    // キャッシュキーと有効期間（ミリ秒）→ 12時間
-    const CACHE_KEY = "web_articles_cache";
-    const TIMESTAMP_KEY = "web_articles_cache_time";
-    const CACHE_DURATION = 12 * 60 * 60 * 1000;
-
     $(document).ready(function () {
+        const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
+        const target_sheet = "web-articles";
+        const url = apiurl + "?target=" + target_sheet;
+
+        // キャッシュキーと有効期間（ミリ秒）→ 12時間
+        const CACHE_KEY = "web_articles_cache";
+        const TIMESTAMP_KEY = "web_articles_cache_time";
+        const CACHE_DURATION = 12 * 60 * 60 * 1000;
+
         const cachedData = sessionStorage.getItem(CACHE_KEY);
         const cachedTime = sessionStorage.getItem(TIMESTAMP_KEY);
         const now = Date.now();

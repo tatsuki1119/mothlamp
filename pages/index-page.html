@@ -241,22 +241,6 @@
 
 </div>
 
-
-<div class="contents_block contents_block_has_a">
-    <a class="contents_block_a" href="https://phantomsiita.com/news/detail/74"></a>
-    <p>[公式より]</p>
-    <h2>ライブにおける注意事項及び禁止事項のご案内</h2>
-    <p>大切な注意事項が書いてあるので、ライブに参戦予定の方は要確認です！！(公式ホームページへジャンプします。)</p>
-</div>
-
-
-<div class="contents_block contents_block_has_a">
-    <a class="contents_block_a" href="/?p=phanart.hisui-special"></a>
-    <h2>灯翠ちゃん ありがとう</h2>
-    <p>灯翠ちゃんのファンアートをまとめてご紹介しています。</p>
-</div>
-
-
 <div class="contents_block contents_block_has_a phanart-link-block">
     <a class="contents_block_a" href="/?p=phanart"></a>
     <h2 class="glitch-text">ファンアート</h2>
@@ -275,19 +259,120 @@
     </script>
 </div>
 
+<div class="contents_block">
+    <h3 class="glitch-text">スケジュール</h3>
+    <p style="font-size: xx-small;">
+        <span class="word-chunk">
+            ※ 公式ではないため、間違いがある可能性があります。
+        </span>
+        <span class="word-chunk">
+            あらかじめご了承ください。
+        </span>
+    </p>
+    <hr class="hr-no-margin">
+    <div id="schedule-loading" class="list-loading">
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+        Loading...
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+    </div>
+    <ul id="schedule" class="link-list">
+    </ul>
+    <div class="link-btn-div">
+        <a href="/?p=schedule#next" class="link-btn-a">すべて見る</a>
+    </div>
+    <script>
+        $(document).ready(function () {
+            const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
+            const target_sheet = "schedule";
+            const url = apiurl + "?target=" + target_sheet;
 
-<div class="contents_block contents_block_has_a">
-    <a class="contents_block_a" href="/?p=articles.2008-moth-to-a-flame-vlog"></a>
-    <h4 class="keep-all-break-word glitch-text">Moth to a flame 公式の投稿まとめ</h4>
-    <p>公式より投稿された、“Moth to a flame” Vlogなどの投稿をまとめています。</p>
+            // キャッシュ保持時間（ミリ秒）
+            const CACHE_DURATION = 0;
+            // const CACHE_DURATION = 12 * 60 * 60 * 1000;
+            const CACHE_KEY = "schedule_cache";
+            const TIMESTAMP_KEY = "schedule_cache_time";
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const pathQuery = urlParams.get('p');
+
+            if (!pathQuery) { // index のときだけ実行
+                const cachedData = sessionStorage.getItem(CACHE_KEY);
+                const cachedTime = sessionStorage.getItem(TIMESTAMP_KEY);
+                const now = new Date().getTime();
+
+                if (cachedData && cachedTime && (now - cachedTime < CACHE_DURATION)) {
+                    // セッションキャッシュが有効な場合
+                    const data = JSON.parse(cachedData);
+                    renderSchedule(data);
+                } else {
+                    // キャッシュがない、または期限切れの場合
+                    $.getJSON(url, function (data) {
+                        // セッションキャッシュ保存
+                        sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+                        sessionStorage.setItem(TIMESTAMP_KEY, now.toString());
+
+                        renderSchedule(data);
+                    });
+                }
+            }
+
+            // スケジュールを描画する関数（JSTの現在日時以降の3件のみ表示）
+            function renderSchedule(data) {
+                const youbiArray = ['日', '月', '火', '水', '木', '金', '土'];
+
+                // JSTの現在日時を取得
+                const now = new Date();
+                const jstNow = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+
+                let count = 0;
+
+                for (let i = 0; i < data.length; i++) {
+                    if (count >= 3) break;
+
+                    const schedule = data[i];
+
+                    // 日時をJSTとして変換
+                    const scheduleDate = new Date(new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+
+                    // 当日以降か判定（時刻は無視して日付だけで比較）
+                    const jstToday = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
+                    const scheduleDay = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate());
+
+                    if (scheduleDay >= jstToday) {
+                        // フォーマット（例：2025.07.20）
+                        const year = scheduleDate.getFullYear();
+                        const month = String(scheduleDate.getMonth() + 1).padStart(2, '0');
+                        const day = String(scheduleDate.getDate()).padStart(2, '0');
+                        const formattedDate = `${year}.${month}.${day}`;
+                        const dayOfWeek = youbiArray[scheduleDate.getDay()];
+
+                        const listItem = `
+                            <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
+                                <li>
+                                    <p class="date">
+                                        <svg role="img" aria-label="蝶々">
+                                            <use href="#butterfly"></use>
+                                        </svg>${formattedDate}（${dayOfWeek}）
+                                    </p>
+                                    <p class="title">${schedule.title}</p>
+                                </li>
+                            </a>
+                        `;
+                        $('#schedule').append(listItem);
+                        count++;
+                    }
+                }
+
+                $('#schedule-loading').hide();
+            }
+        });
+    </script>
 </div>
-
-<div class="contents_block contents_block_has_a">
-    <a class="contents_block_a" href="/?p=articles.2008-moth-to-a-flame-video"></a>
-    <h4 class="glitch-text">Moth to a flame</h4>
-    <p>ハイネの撮影した 動画/写真 まとめ</p>
-</div>
-
 
 <div class="contents_block">
     <h3 class="glitch-text">まとめ記事</h3>
@@ -352,19 +437,19 @@
         <a href="/?p=web" class="link-btn-a">すべて見る</a>
     </div>
     <script>
-        const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
-        const target_sheet = "web-articles";
-        const url = apiurl + "?target=" + target_sheet;
-
-        // キャッシュ保持時間（ミリ秒）→ 12時間 = 12 * 60 * 60 * 1000
-        const CACHE_DURATION = 12 * 60 * 60 * 1000;
-        const CACHE_KEY = "web_articles_cache";
-        const TIMESTAMP_KEY = "web_articles_cache_time";
-
         $(document).ready(function () {
-            var queryString = window.location.search;
-            var urlParams = new URLSearchParams(queryString);
-            var pathQuery = urlParams.get('p');
+            const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
+            const target_sheet = "web-articles";
+            const url = apiurl + "?target=" + target_sheet;
+
+            // キャッシュ保持時間（ミリ秒）→ 12時間 = 12 * 60 * 60 * 1000
+            const CACHE_DURATION = 12 * 60 * 60 * 1000;
+            const CACHE_KEY = "web_articles_cache";
+            const TIMESTAMP_KEY = "web_articles_cache_time";
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const pathQuery = urlParams.get('p');
 
             if (!pathQuery) { // index のときだけ実行
                 const cachedData = sessionStorage.getItem(CACHE_KEY);
@@ -427,28 +512,25 @@
     <div class="notice-div">
         <svg role="img" aria-label="蝶々">
             <use href="#butterfly"></use>
+        </svg>2025.06.26
+        <p>トップページにメンバーのSNSリンクを追加しました。</p>
+    </div>
+    <hr>
+
+    <div class="notice-div">
+        <svg role="img" aria-label="蝶々">
+            <use href="#butterfly"></use>
+        </svg>2025.05.31
+        <p><a href="/?p=phanart.hisui-special">灯翠さん ファンアート</a> まとめページを公開しました。</p>
+    </div>
+    <hr>
+
+    <div class="notice-div">
+        <svg role="img" aria-label="蝶々">
+            <use href="#butterfly"></use>
         </svg>2025.04.03
         <p><a href="/?p=play.haine-test">ハイネ共通テスト</a>
             を公開しました。</p>
-    </div>
-    <hr>
-
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.03.11
-        <p><a href="/?p=articles.2008-moth-to-a-flame-vlog">Phantom Siita 1st WORLD TOUR “Moth to a
-                flame” 公式の投稿まとめ</a>
-            を公開しました。</p>
-    </div>
-    <hr>
-
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.03.06
-        <p><a href="/?p=phanart">ファンアート集</a> の <a href="/?p=phanart.guoxoua">कㄑ”‎^. .^ ੭</a> さんのページに <a
-                href="/?p=phanart.guoxoua-nametag">名刺用素材</a> を追加しました。「〇〇会」などで素材としてご利用ください。</p>
     </div>
     <hr>
 
