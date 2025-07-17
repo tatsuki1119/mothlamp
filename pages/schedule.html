@@ -4,6 +4,7 @@
 <style>
     #next {
         background-color: #ffffff33;
+        font-weight: bold;
     }
 </style>
 
@@ -17,7 +18,67 @@
             あらかじめご了承ください。
         </span>
     </p>
-    <hr class="hr-no-margin">
+    <hr>
+    <div id="filters">
+        <div class="filter-group" style="margin-bottom: 0;">
+            <div class="filter-toggle active" data-key="all">ALL</div>
+            <div class="filter-toggle" data-key="live">LIVE</div>
+            <div class="filter-toggle" data-key="event">EVENT</div>
+            <div class="filter-toggle" data-key="tv">TV</div>
+            <div class="filter-toggle" data-key="radio">RADIO</div>
+            <div class="filter-toggle" data-key="magazine">MAGAZINE</div>
+            <div class="filter-toggle" data-key="web">WEB</div>
+            <div class="filter-toggle" data-key="ticket">TICKET</div>
+            <div class="filter-toggle" data-key="goods">GOODS</div>
+            <div class="filter-toggle" data-key="other">OTHER</div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            // フィルター切り替えイベント
+            $('#filters').on('click', '.filter-toggle', function () {
+                // ラジオボタン風に .active を切り替える
+                $('.filter-toggle').removeClass('active');
+                $(this).addClass('active');
+
+                // 選択されたキーを使ってフィルターを適用
+                const key = $(this).data('key');
+                applyFilter(key);
+            });
+
+            // フィルター適用関数（key: all, live, other など）
+            function applyFilter(key) {
+                $('#schedule')
+                    .find('[class^="schedule_"]') // schedule_ で始まるクラスを持つ要素すべて
+                    .each(function () {
+                        const $item = $(this);
+                        if (key === 'all') {
+                            $item.show();
+                        } else {
+                            if ($item.hasClass(`schedule_${key}`)) {
+                                $item.show();
+                            } else {
+                                $item.hide();
+                            }
+                        }
+                    });
+            }
+
+            // 動的にコンテンツを追加した後もフィルターを再適用する場合に呼び出す
+            function refreshFilter() {
+                const activeKey = $('.filter-toggle.active').data('key');
+                applyFilter(activeKey);
+            }
+
+            // 例：renderSchedule などの最後でこれを呼べばOK
+            // renderSchedule の末尾に追加：
+            // refreshFilter();
+        });
+
+    </script>
+</div>
+
+<div class="contents_block">
     <div id="schedule-loading" class="list-loading">
         <svg role="img" aria-label="リボン">
             <use href="#butterfly"></use>
@@ -38,7 +99,8 @@
         const url = apiurl + "?target=" + target_sheet;
 
         // キャッシュ保持時間（ミリ秒）
-        const CACHE_DURATION = 12 * 60 * 60 * 1000;
+        // const CACHE_DURATION = 12 * 60 * 60 * 1000;
+        const CACHE_DURATION = 0;
         const CACHE_KEY = "schedule_cache";
         const TIMESTAMP_KEY = "schedule_cache_time";
 
@@ -50,6 +112,7 @@
             // セッションキャッシュが有効な場合
             const data = JSON.parse(cachedData);
             renderSchedule(data);
+            scrollToNext();
         } else {
             // キャッシュがない、または期限切れの場合
             $.getJSON(url, function (data) {
@@ -58,6 +121,7 @@
                 sessionStorage.setItem(TIMESTAMP_KEY, now.toString());
 
                 renderSchedule(data);
+                scrollToNext();
             });
         }
 
@@ -90,11 +154,11 @@
 
                 const listItem = `
                     <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
-                        <li ${liId}>
+                        <li ${liId} class="schedule_${schedule.tag}">
                             <p class="date">
                                 <svg role="img" aria-label="蝶々">
                                     <use href="#butterfly"></use>
-                                </svg>${formattedDate}（${dayOfWeek}）
+                                </svg>${formattedDate}（${dayOfWeek}）【${String(schedule.tag).toUpperCase()}】
                             </p>
                             <p class="title">${schedule.title}</p>
                         </li>
@@ -106,7 +170,14 @@
             $('#schedule-loading').hide();
         }
 
-
-
+        // #next 要素までスクロールする関数
+        function scrollToNext() {
+            const next = $('#next');
+            if (next.length) {
+                $('html, body').animate({
+                    scrollTop: next.offset().top - 10
+                }, 0);
+            }
+        }
     });
 </script>
