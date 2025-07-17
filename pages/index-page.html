@@ -282,7 +282,7 @@
     <ul id="schedule" class="link-list">
     </ul>
     <div class="link-btn-div">
-        <a href="/?p=schedule#next" class="link-btn-a">すべて見る</a>
+        <a href="/?p=schedule" class="link-btn-a">すべて見る</a>
     </div>
     <script>
         $(document).ready(function () {
@@ -357,7 +357,7 @@
                                     <p class="date">
                                         <svg role="img" aria-label="蝶々">
                                             <use href="#butterfly"></use>
-                                        </svg>${formattedDate}（${dayOfWeek}）
+                                        </svg>${formattedDate}（${dayOfWeek}）【${String(schedule.tag).toUpperCase()}】
                                     </p>
                                     <p class="title">${schedule.title}</p>
                                 </li>
