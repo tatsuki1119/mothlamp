@@ -48,7 +48,7 @@
 
             // フィルター適用関数（key: all, live, other など）
             function applyFilter(key) {
-                $('#schedule')
+                $('#schedule, #schedule-past')
                     .find('[class^="schedule_"]') // schedule_ で始まるクラスを持つ要素すべて
                     .each(function () {
                         const $item = $(this);
@@ -78,6 +78,11 @@
     </script>
 </div>
 
+<div id="show-past-link" class="contents_block contents_block_has_a">
+    <a class="contents_block_a" href="/?p=schedule&past=true"></a>
+    <p>過去のスケジュールを表示</p>
+</div>
+
 <div class="contents_block">
     <div id="schedule-loading" class="list-loading">
         <svg role="img" aria-label="リボン">
@@ -88,9 +93,25 @@
             <use href="#butterfly"></use>
         </svg>
     </div>
+    <ul id="schedule-past" class="link-list" style="display: none;">
+    </ul>
     <ul id="schedule" class="link-list">
     </ul>
 </div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const showPast = urlParams.get('past') === 'true';
+
+    if (showPast) {
+        // 過去スケジュールを表示
+        $('#schedule-past').show();
+
+        // リンクとテキストを書き換え
+        $('#show-past-link a').attr('href', '/?p=schedule');
+        $('#show-past-link p').text('過去のスケジュールを非表示');
+    }
+</script>
 
 <script>
     $(document).ready(function () {
@@ -112,7 +133,6 @@
             // セッションキャッシュが有効な場合
             const data = JSON.parse(cachedData);
             renderSchedule(data);
-            scrollToNext();
         } else {
             // キャッシュがない、または期限切れの場合
             $.getJSON(url, function (data) {
@@ -121,7 +141,6 @@
                 sessionStorage.setItem(TIMESTAMP_KEY, now.toString());
 
                 renderSchedule(data);
-                scrollToNext();
             });
         }
 
@@ -132,8 +151,6 @@
             const jstNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
             const jstToday = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
 
-            let foundNext = false; // 最初の1件だけに #next を付けるためのフラグ
-
             for (let i = 0; i < data.length; i++) {
                 const schedule = data[i];
 
@@ -141,43 +158,39 @@
                 const scheduleDate = new Date(new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
                 const scheduleDay = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate());
 
-                // フォーマット（例：2025.07.20）
+                // 日付のフォーマット
                 const year = scheduleDate.getFullYear();
                 const month = String(scheduleDate.getMonth() + 1).padStart(2, '0');
                 const day = String(scheduleDate.getDate()).padStart(2, '0');
                 const formattedDate = `${year}.${month}.${day}`;
                 const dayOfWeek = youbiArray[scheduleDate.getDay()];
 
-                // 最初の「本日以降」のデータにだけ id="next" を付ける
-                const liId = (!foundNext && scheduleDay >= jstToday) ? 'id="next"' : '';
-                if (liId) foundNext = true;
+                const tagClass = `schedule_${String(schedule.tag).toLowerCase()}`;
+                const tagText = String(schedule.tag).toUpperCase();
 
                 const listItem = `
-                    <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
-                        <li ${liId} class="schedule_${schedule.tag}">
-                            <p class="date">
-                                <svg role="img" aria-label="蝶々">
-                                    <use href="#butterfly"></use>
-                                </svg>${formattedDate}（${dayOfWeek}）【${String(schedule.tag).toUpperCase()}】
-                            </p>
-                            <p class="title">${schedule.title}</p>
-                        </li>
-                    </a>
-                `;
-                $('#schedule').append(listItem);
+            <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
+                <li class="${tagClass}">
+                    <p class="date">
+                        <svg role="img" aria-label="蝶々">
+                            <use href="#butterfly"></use>
+                        </svg>${formattedDate}（${dayOfWeek}）【${tagText}】
+                    </p>
+                    <p class="title">${schedule.title}</p>
+                </li>
+            </a>
+        `;
+
+                // 日付によって表示先を分ける
+                if (scheduleDay >= jstToday) {
+                    $('#schedule').append(listItem); // 本日以降
+                } else {
+                    $('#schedule-past').append(listItem); // 過去
+                }
             }
 
             $('#schedule-loading').hide();
         }
 
-        // #next 要素までスクロールする関数
-        function scrollToNext() {
-            const next = $('#next');
-            if (next.length) {
-                $('html, body').animate({
-                    scrollTop: next.offset().top - 10
-                }, 0);
-            }
-        }
     });
 </script>
