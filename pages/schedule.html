@@ -79,7 +79,7 @@
 </div>
 
 <div id="show-past-link" class="contents_block contents_block_has_a">
-    <a class="contents_block_a" href="/?p=schedule&past=true"></a>
+    <a class="contents_block_a" href="javascript:void(0);"></a>
     <p>過去のスケジュールを表示</p>
 </div>
 
@@ -93,24 +93,29 @@
             <use href="#butterfly"></use>
         </svg>
     </div>
-    <ul id="schedule-past" class="link-list" style="display: none;">
-    </ul>
-    <ul id="schedule" class="link-list">
+    <ul class="link-list">
+        <div id="schedule-past"></div>
+        <div id="schedule"></div>
     </ul>
 </div>
 
 <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const showPast = urlParams.get('past') === 'true';
+    $(document).ready(function () {
+        $('#show-past-link').on('click', function () {
+            const $past = $('#schedule-past');
+            const isVisible = $past.is(':visible');
 
-    if (showPast) {
-        // 過去スケジュールを表示
-        $('#schedule-past').show();
-
-        // リンクとテキストを書き換え
-        $('#show-past-link a').attr('href', '/?p=schedule');
-        $('#show-past-link p').text('過去のスケジュールを非表示');
-    }
+            if (isVisible) {
+                // 非表示にする
+                $past.hide();
+                $('#show-past-link p').text('過去のスケジュールを表示');
+            } else {
+                // 表示する
+                $past.show();
+                $('#show-past-link p').text('過去のスケジュールを非表示');
+            }
+        });
+    });
 </script>
 
 <script>
