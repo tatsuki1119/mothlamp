@@ -37,8 +37,7 @@
         const url = apiurl + "?target=" + target_sheet;
 
         // キャッシュ保持時間（ミリ秒）
-        const CACHE_DURATION = 0;
-        // const CACHE_DURATION = 12 * 60 * 60 * 1000;
+        const CACHE_DURATION = 60 * 60 * 1000;
         const CACHE_KEY = "schedule_cache";
         const TIMESTAMP_KEY = "schedule_cache_time";
 
@@ -107,7 +106,7 @@
 
                 const listItem = `
                     <div class="contents_block">
-                        <p>${formattedDate}（${dayOfWeek}）</p>
+                        <p>${formattedDate}（${dayOfWeek}）【${String(schedule.tag).toUpperCase()}】</p>
                         <h3>${schedule.title}</h3>
                     </div>
                     <div class="contents_block">
