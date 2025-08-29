@@ -2,52 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://mothlamp.info/</loc>
-        <lastmod>2025-01-19</lastmod>
+        <lastmod>2025-08-29</lastmod>
     </url>
 
     <url>
         <loc>https://mothlamp.info/?p=about</loc>
-        <lastmod>2025-02-11</lastmod>
+        <lastmod>2025-08-29</lastmod>
     </url>
 
     <url>
         <loc>https://mothlamp.info/?p=articles</loc>
-        <lastmod>2025-01-13</lastmod>
+        <lastmod>2025-08-29</lastmod>
+    </url>
+
+        <url>
+        <loc>https://mothlamp.info/?p=schedule</loc>
+        <lastmod>2025-08-29</lastmod>
     </url>
 
     <url>
         <loc>https://mothlamp.info/?p=web</loc>
-        <lastmod>2025-01-13</lastmod>
+        <lastmod>2025-08-29</lastmod>
     </url>
 
     <url>
         <loc>https://mothlamp.info/?p=notice</loc>
-        <lastmod>2025-01-13</lastmod>
+        <lastmod>2025-08-29</lastmod>
     </url>
 
     <url>
         <loc>https://mothlamp.info/?p=phanart</loc>
-        <lastmod>2025-01-19</lastmod>
+        <lastmod>2025-08-29</lastmod>
     </url>
 
         <url>
         <loc>https://mothlamp.info/?p=donation</loc>
-        <lastmod>2025-02-11</lastmod>
+        <lastmod>2025-08-29</lastmod>
     </url>
 
     <url>
         <loc>https://mothlamp.info/?p=discord</loc>
-        <lastmod>2025-01-13</lastmod>
-    </url>
-
-    <url>
-        <loc>https://mothlamp.info/?p=articles.2007-akuma-night-video</loc>
-        <lastmod>2024-12-13</lastmod>
-    </url>
-
-        <url>
-        <loc>https://mothlamp.info/?p=articles.2008-moth-to-a-flame-video</loc>
-        <lastmod>2025-02-11</lastmod>
+        <lastmod>2025-08-29</lastmod>
     </url>
 
     <url>

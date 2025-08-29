@@ -1,0 +1,436 @@
+<div id="page-title" style="display: none;">Moth to a flame 投稿まとめ [誘蛾灯の導き]</div>
+<div id="page-description" style="display: none;">Moth to a flame でファンによって撮影された動画や画像をまとめています。メンバーや楽曲ごとにフィルターを付けて検索できます。
+</div>
+
+<div class="contents_block">
+    <h1 class="keep-all-break-word glitch-text">Phantom Siita 1st WORLD TOUR “Moth to a flame” 投稿まとめ</h1>
+    <hr class="hr-no-margin">
+    <p>一部ポストにて、おそらく投稿者側の設定により埋め込みで表示できないものがあります。その場合には下のURLから開いて見てください。（本当に削除されている可能性もあります）</p>
+    <p>各公演のセットリストは <a href="/?p=articles.0002-setlist#mothtoaflame">こちら</a></p>
+</div>
+
+<div class="contents_block">
+    <div id="filters">
+        <div class="filter-group">
+            <div class="filter-toggle" data-key="mona">もな</div>
+            <div class="filter-toggle" data-key="miu">美雨</div>
+            <div class="filter-toggle" data-key="rinka">凛花</div>
+            <div class="filter-toggle" data-key="hisui">灯翠</div>
+            <div class="filter-toggle" data-key="moka">百花</div>
+            <div class="filter-toggle" data-key="all">全員</div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-toggle" data-key="otomodachi">おともだち</div>
+            <div class="filter-toggle" data-key="kimibatsu">キミと××××したいだけ</div>
+            <div class="filter-toggle" data-key="masyou">魔性少女</div>
+            <div class="filter-toggle" data-key="hanabami">花喰み</div>
+            <div class="filter-toggle" data-key="otome">乙女心中</div>
+            <div class="filter-toggle" data-key="zokuzoku">ゾクゾク</div>
+            <div class="filter-toggle" data-key="hanagatami">HANAGATAMI</div>
+            <div class="filter-toggle" data-key="sukisuki">好き好き大好き</div>
+            <div class="filter-toggle" data-key="totmusica">Tot Musica</div>
+            <!-- <div class="filter-toggle" data-key="song-key-10">song-10</div>
+            <div class="filter-toggle" data-key="song-key-11">song-11</div>
+            <div class="filter-toggle" data-key="song-key-12">song-12</div>
+            <div class="filter-toggle" data-key="song-key-13">song-13</div>
+            <div class="filter-toggle" data-key="song-key-14">song-14</div>
+            <div class="filter-toggle" data-key="song-key-15">song-15</div>
+            <div class="filter-toggle" data-key="song-key-16">song-16</div>
+            <div class="filter-toggle" data-key="song-key-17">song-17</div>
+            <div class="filter-toggle" data-key="song-key-18">song-18</div>
+            <div class="filter-toggle" data-key="song-key-19">song-19</div>
+            <div class="filter-toggle" data-key="song-key-20">song-20</div> -->
+            <div class="filter-toggle" data-key="mc">MC</div>
+            <div class="filter-toggle" data-key="fansa">ファンサ</div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-toggle" data-key="taipei">台北</div>
+            <div class="filter-toggle" data-key="manila">マニラ</div>
+            <div class="filter-toggle" data-key="singapore">シンガポール</div>
+            <div class="filter-toggle" data-key="san-jose">サンノゼ</div>
+            <div class="filter-toggle" data-key="anaheim">アナハイム</div>
+            <div class="filter-toggle" data-key="dallas">ダラス</div>
+            <div class="filter-toggle" data-key="houston">ヒューストン</div>
+            <div class="filter-toggle" data-key="chicago">シカゴ</div>
+            <div class="filter-toggle" data-key="new-york">ニューヨーク</div>
+            <div class="filter-toggle" data-key="toronto">トロント</div>
+            <div class="filter-toggle" data-key="utrecht">ユトレヒト</div>
+            <div class="filter-toggle" data-key="paris">パリ</div>
+            <div class="filter-toggle" data-key="berlin">ベルリン</div>
+            <div class="filter-toggle" data-key="london">ロンドン</div>
+        </div>
+        <div class="filter-group">
+            <div class="filter-toggle" data-key="video">動画</div>
+            <div class="filter-toggle" data-key="photo">写真</div>
+        </div>
+        <button id="apply-filters">適用</button>
+        <button id="reset-filters">すべて外す</button>
+    </div>
+
+</div>
+
+
+<div id="xposts-loading" class="contents_block">
+    <div class="list-loading">
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+        Loading...
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+    </div>
+</div>
+
+<div id="pagination-container-1" class="contents_block" style="display: none;">
+    <p id="video-range-1" class="pages-range"></p>
+</div>
+
+<div id="xposts">
+</div>
+
+<div id="pagination-container-2" class="contents_block" style="display: none;">
+    <p id="video-range-2" class="pages-range"></p>
+</div>
+
+
+<script>
+    const apiurl = "https://script.google.com/macros/s/AKfycbyWOBPQTSR_-Y4hdSNbY02c8OhkYEwIRJxyjEQ7j58H0Dyqpi4D7IIFVvtW33rFnGIc/exec";
+    const target_sheet = "moth-to-a-flame";
+    const url = apiurl + "?target=" + target_sheet;
+    const itemsPerPage = 20; // 1ページあたりの項目数
+
+    // ページ番号を取得
+    function getPageNumber() {
+        const queryParams = new URLSearchParams(window.location.search);
+        const page = parseInt(queryParams.get("page")) || 1;
+        return page > 0 ? page : 1; // 負数などが指定された場合は1に戻す
+    }
+
+    // URLクエリパラメータを取得して解析
+    function getFilterParams() {
+        const queryParams = new URLSearchParams(window.location.search);
+        const filterString = queryParams.get("filter"); // filterパラメータを取得
+        return filterString ? filterString.split(".") : []; // ピリオド区切りで配列化
+    }
+
+    // URLクエリパラメータを更新
+    function updateFilterParams(newFilterArray) {
+        const queryParams = new URLSearchParams(window.location.search);
+        if (newFilterArray.length > 0) {
+            queryParams.set("filter", newFilterArray.join(".")); // フィルタを結合して更新
+        } else {
+            queryParams.delete("filter"); // 空の場合はfilterパラメータを削除
+        }
+
+        // ページ番号のパラメータを削除
+        queryParams.delete("page");
+
+        const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
+        window.history.replaceState(null, "", newUrl);
+        return newFilterArray; // 内部利用用
+    }
+
+    // ページ番号を更新 
+    function updatePageUrl(selectedPage, totalPages) {
+        const currentURL = new URL(window.location.href);
+
+        if (selectedPage === 1) {
+            // ページ数が1の場合、pageパラメータを削除
+            currentURL.searchParams.delete('page');
+        } else {
+            // ページ数が1より多い場合は、pageパラメータを設定
+            currentURL.searchParams.set('page', selectedPage);
+        }
+
+        // ローダーを表示
+        $('#loader').show();
+
+        // ページ遷移
+        window.location.href = currentURL.href;
+    }
+
+
+    // ページネーション要素を生成
+    function renderPagination(totalPages, currentPage) {
+        const paginationContainer1 = $('#pagination-container-1');
+        const paginationContainer2 = $('#pagination-container-2');
+
+        if (totalPages > 1) {
+            paginationContainer1.show(); // コンテナを表示
+            paginationContainer2.show(); // コンテナを表示
+
+            const pageBlock = $('<div>').addClass('pages-block');
+            let pagesList = [];
+
+            if (totalPages <= 5) {
+                // ページ数が5ページ以下の場合、すべてのページを表示
+                pagesList = Array.from({ length: totalPages }, (_, i) => i + 1);
+            } else {
+                // ページ数が6ページ以上の場合
+                if (currentPage <= 3) {
+                    pagesList = [1, 2, 3, 4, 0, totalPages];
+                } else if (currentPage >= totalPages - 2) {
+                    pagesList = [1, 0, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+                } else {
+                    pagesList = [1, 0, currentPage - 1, currentPage, currentPage + 1, 0, totalPages];
+                }
+            }
+
+            // ページリストを表示
+            pagesList.forEach(page => {
+                if (page === 0) {
+                    pageBlock.append(`<span>-</span>`);
+                } else {
+                    const radioInput = $('<input>', {
+                        type: 'radio',
+                        class: 'page-radio',
+                        name: 'page_',
+                        value: page,
+                        id: `page-radio-${page}`
+                    });
+
+                    const label = $('<label>', {
+                        class: 'page-radio-label',
+                        for: `page-radio-${page}`,
+                        text: page
+                    });
+
+                    if (page === currentPage) {
+                        label.addClass("selected-page"); // 現在のページにチェックをつける
+                    }
+
+                    radioInput.on('click', () => {
+                        updatePageUrl(page); // ページ変更時にURL更新
+                    });
+
+                    pageBlock.append(radioInput).append(label);
+                }
+            });
+
+            paginationContainer1.append(pageBlock); // paginationContainer1にページネーションを追加
+            paginationContainer2.append(pageBlock.clone()); // paginationContainer2にも同じページネーションを追加
+
+            // ページ番号クリック時の処理
+            $('.page-nav').on('click', function () {
+                const selectedPage = $(this).data('page');
+                updatePageUrl(selectedPage, totalPages);
+            });
+        } else {
+            paginationContainer1.hide(); // ページ数が1以下の場合は非表示
+            paginationContainer2.hide(); // ページ数が1以下の場合は非表示
+        }
+    }
+
+
+    // 現在の表示範囲を更新
+    function renderVideoRange(startIndex, endIndex, totalVideos) {
+        const videoRangeText = `${startIndex + 1} - ${endIndex} / ${totalVideos}`;
+        $('#video-range-1, #video-range-2').text(videoRangeText);
+    }
+
+
+    // ==============================
+    // メイン処理
+    // ==============================
+
+    // 記事データを取得して表示
+    $(document).ready(function () {
+
+        // 現在のフィルタを反映
+        const activeFilters = getFilterParams(); // getFilterParams() でフィルタのパラメータを取得
+        activeFilters.forEach(filter => {
+            // data-keyが一致する要素に対してactiveクラスを追加
+            $(`.filter-toggle[data-key="${filter}"]`).addClass("active");
+        });
+
+        // フィルタのトグル操作
+        $('.filter-toggle').on('click', function () {
+            $(this).toggleClass("active");
+        });
+
+        // フィルタ適用ボタンの処理
+        $('#apply-filters').on('click', function () {
+            const selectedFilters = $('.filter-toggle.active').map(function () {
+                return $(this).data('key');
+            }).get();
+            const queryParams = new URLSearchParams(window.location.search);
+            // pageを削除
+            queryParams.delete("page");
+
+            updateFilterParams(selectedFilters); // URL を更新
+            location.reload(); // ページをリロードしてフィルタを再適用
+        });
+
+        // すべてのトグルを外す
+        $('#reset-filters').on('click', () => {
+            $('.filter-toggle.active').removeClass('active');
+        });
+
+        // データを取得してフィルタリング
+        $.getJSON(url, function (data) {
+            const conversionDictionary = {
+                'all': '全員',
+                'mona': 'もな',
+                'miu': '美雨',
+                'rinka': '凛花',
+                'hisui': '灯翠',
+                'moka': '百花',
+                'otomodachi': 'おともだち',
+                'kimibatsu': 'キミと××××したいだけ',
+                'masyou': '魔性少女',
+                'hanabami': '花喰み',
+                'otome': '乙女心中',
+                'zokuzoku': 'ゾクゾク',
+                'hanagatami': 'HANAGATAMI',
+                'sukisuki': '好き好き大好き',
+                'totmusica': 'Tot Musica',
+                'song-key-10': 'song-10',
+                'song-key-11': 'song-11',
+                'song-key-12': 'song-12',
+                'song-key-13': 'song-13',
+                'song-key-14': 'song-14',
+                'song-key-15': 'song-15',
+                'song-key-16': 'song-16',
+                'song-key-17': 'song-17',
+                'song-key-18': 'song-18',
+                'song-key-19': 'song-19',
+                'song-key-20': 'song-20',
+                'mc': 'MC',
+                'fansa': 'ファンサ',
+                'video': '動画',
+                'photo': '写真',
+                'taipei': '台北',
+                'manila': 'マニラ',
+                'singapore': 'シンガポール',
+                'san-jose': 'サンノゼ',
+                'anaheim': 'アナハイム',
+                'cadallas': 'category-06',
+                'houston': 'category-07',
+                'chicago': 'category-08',
+                'new-york': 'category-09',
+                'toronto': 'category-10',
+                'utrecht': 'category-11',
+                'paris': 'category-12',
+                'berlin': 'category-13',
+                'london': 'category-14',
+            };
+            // フィルタをメンバーと曲名で分ける
+            const memberFilters = activeFilters.filter(filterKey =>
+                ['mona', 'miu', 'rinka', 'hisui', 'moka', 'all'].includes(filterKey)
+            );
+            const songFilters = activeFilters.filter(filterKey =>
+                [
+                    'otomodachi',
+                    'kimibatsu',
+                    'masyou',
+                    'hanabami',
+                    'otome',
+                    'zokuzoku',
+                    'hanagatami',
+                    'sukisuki',
+                    'totmusica',
+                    'song-key-10',
+                    'song-key-11',
+                    'song-key-12',
+                    'song-key-13',
+                    'song-key-14',
+                    'song-key-15',
+                    'song-key-16',
+                    'song-key-17',
+                    'song-key-18',
+                    'song-key-19',
+                    'song-key-20',
+                    'mc',
+                    'fansa',
+                ].includes(filterKey)
+            );
+            const categoryFilters = activeFilters.filter(filterKey =>
+                [
+                    'taipei',
+                    'manila',
+                    'singapore',
+                    'san-jose',
+                    'anaheim',
+                    'category-key-06',
+                    'houston',
+                    'chicago',
+                    'new-york',
+                    'toronto',
+                    'utrecht',
+                    'paris',
+                    'berlin',
+                    'london',
+                ].includes(filterKey)
+            );
+            const mediaFilters = activeFilters.filter(filterKey =>
+                [
+                    'video',
+                    'photo',
+                ].includes(filterKey)
+            );
+            const filteredData = data.filter(data_i => {
+                // メンバーのOR条件
+                const matchesMembers = memberFilters.length === 0 || memberFilters.some(filterKey => {
+                    return data_i[filterKey] === "o"; // 値が "o" の場合フィルタ条件を満たす
+                });
+
+                // 曲名のOR条件
+                const matchesSongs = songFilters.length === 0 || songFilters.some(filterKey => {
+                    return data_i[filterKey] === "o"; // 値が "o" の場合フィルタ条件を満たす
+                });
+
+                // カテゴリのOR条件
+                const matchesCategory = categoryFilters.length === 0 || categoryFilters.some(filterKey => {
+                    return data_i[filterKey] === "o"; // 値が "o" の場合フィルタ条件を満たす
+                });
+
+                // カテゴリのOR条件
+                const matchesMedia = mediaFilters.length === 0 || mediaFilters.some(filterKey => {
+                    return data_i[filterKey] === "o"; // 値が "o" の場合フィルタ条件を満たす
+                });
+
+                // AND条件（両方を満たす場合のみ表示）
+                return matchesMembers && matchesSongs && matchesCategory && matchesMedia && data_i.url;
+            });
+
+            console.log(filteredData);
+
+            const page = getPageNumber();
+            const totalItems = filteredData.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+            const paginatedData = filteredData.slice(startIndex, endIndex);
+
+            if (paginatedData.length === 0) {
+                $('#xposts').append(`
+                    <div class="contents_block">
+                        <p>条件に一致するデータがありません。</p>
+                    </div>
+                `);
+            } else {
+                paginatedData.forEach(data_i => {
+                    const transformedValues = Object.keys(data_i)
+                        .filter(key => data_i[key] === 'o')
+                        .map(key => conversionDictionary[key] || key)
+                        .join(', ');
+
+                    const listItem = `
+                        <div class="contents_block tweet-container">
+                            <p><span class="local">${data_i.row}</span>${transformedValues}</p>
+                            <a class="twitter-tweet-data" href="${data_i.url}"></a>
+                            <a href="${data_i.url}">${data_i.url}</a>
+                        </div>
+                    `;
+                    $('#xposts').append(listItem);
+                });
+            }
+
+            renderPagination(totalPages, page);
+            renderVideoRange(startIndex, endIndex, totalItems);
+
+            $('#xposts-loading').hide();
+        });
+    });
+</script>

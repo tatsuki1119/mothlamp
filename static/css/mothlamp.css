@@ -1,3 +1,7 @@
+/*==================================================
+version 25.08.29
+==================================================*/
+
 :root {
     --color-main: #600E0E;
     --color-mona: #E56FAA;
@@ -49,11 +53,6 @@ img:not([class]) {
 
 .protected-img {
     pointer-events: none;
-}
-
-.anchor-list a:link,
-.anchor-list a:visited {
-    color: #FFFFFF;
 }
 
 
@@ -116,19 +115,7 @@ local
     color: #fff;
 }
 
-/* ##############################
-twitter
-############################## */
 
-.tweet-container>div {
-    margin: 0 auto;
-    /* 中央 */
-}
-
-a.twitter-tweet-data {
-    display: block;
-    min-height: 55vh;
-}
 
 /* ##############################
 youtube

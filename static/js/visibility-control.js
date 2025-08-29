@@ -18,7 +18,7 @@ $(document).ready(function () {
             $('.public').show();
             // $('.local').hide();
             $('.local').remove();
-        } else if (domain === '192.168.3.81' || domain === '140.83.54.211') {
+        } else if (domain === '192.168.3.82' || domain === '140.83.54.211') {
             $('.local').show();
             if (isLocalMode) {
                 $('.public').hide();

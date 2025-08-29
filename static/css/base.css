@@ -1,5 +1,5 @@
 /*==================================================
-tatsu css update 25.02.11
+tatsu css update 25.08.29
 
 〇 目次
     - height コンテンツ全体の高さ関連
@@ -320,6 +320,11 @@ contents
     right: 0;
 }
 
+.anchor-list a:link,
+.anchor-list a:visited {
+    color: #FFFFFF;
+}
+
 
 /* ##############################
 indent
@@ -428,6 +433,7 @@ menu
     width: 100%;
     width: calc(100% - env(safe-area-inset-left) - env(safe-area-inset-right));
     z-index: 98;
+    pointer-events: none;
 
     @media screen and (min-width: 767px) {
         /* メニュー用エリア PC用 上部 */
@@ -466,6 +472,7 @@ menu
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+    pointer-events: all;
 
     @media screen and (min-width: 767px) {
         /* メニュー PC横 */
@@ -793,4 +800,18 @@ Diary
     top: 0;
     right: 0;
     margin: 5%;
+}
+
+/*--------------------
+twitter
+--------------------*/
+
+.tweet-container>div {
+    margin: 0 auto;
+    /* 中央 */
+}
+
+a.twitter-tweet-data {
+    display: block;
+    min-height: 55vh;
 }

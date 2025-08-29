@@ -1,18 +1,13 @@
 [
     {
-        "private": true,
-        "title": "ファントムシータのこれまで",
-        "p": "0001-general"
-    },
-    {
         "show_index": true,
         "title": "セットリスト",
-        "p": "0002-setlist"
+        "p": "setlist"
     },
     {
         "show_index": true,
         "title": "ハイネ謎解き",
-        "p": "0003-hainenazo"
+        "p": "hainenazo"
     },
     {
         "show_index": true,
@@ -20,34 +15,24 @@
         "p": "1001-otomodachi"
     },
     {
-        "private": true,
-        "title": "HANAGATAMI",
-        "p": "1007-hanagatami"
-    },
-    {
         "show_index": true,
         "title": "チケット抽選結果集計",
-        "p": "2000-ticket-results"
-    },
-    {
-        "private": true,
-        "title": "ハイネ",
-        "p": "2006-haine"
+        "p": "ticket-results"
     },
     {
         "title": "悪魔 Nigit Duel Buster 投稿まとめ",
-        "p": "2007-akuma-night-video"
+        "p": "live-akuma-night-video"
     },
     {
-        "title": "Moth to a flame 公式の投稿まとめ",
-        "p": "2008-moth-to-a-flame-vlog"
+        "title": "Moth to a flame 公式VLOGまとめ",
+        "p": "vlog-moth-to-a-flame"
     },
     {
         "title": "Moth to a flame ハイネの投稿まとめ",
-        "p": "2008-moth-to-a-flame-video"
+        "p": "live-moth-to-a-flame-video"
     },
     {
         "title": "yosugala presents -DREAMSCAPE-\"AICHI\" ハイネの投稿まとめ",
-        "p": "2009-dreamscape-video"
+        "p": "live-dreamscape-video"
     }
 ]
