@@ -11,11 +11,6 @@
     },
     {
         "show_index": true,
-        "title": "おともだち",
-        "p": "1001-otomodachi"
-    },
-    {
-        "show_index": true,
         "title": "チケット抽選結果集計",
         "p": "ticket-results"
     },
