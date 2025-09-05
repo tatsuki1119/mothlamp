@@ -1,0 +1,120 @@
+<div class="contents_block">
+    <h1>透かし加工ツール</h1>
+</div>
+
+<div class="contents_block">
+    <input type="file" id="uploader" accept="image/*"><br>
+    <input type="text" id="wmText" placeholder="透かし文字を入力" value="SAMPLE">
+</div>
+
+<div class="contents_block">
+    <!-- canvasは非表示にして、imgに最終結果を表示 -->
+    <canvas id="preview" style="display:none;"></canvas>
+    <img id="result" class="" alt="加工後画像">
+</div>
+
+
+<div class="contents_block">
+    <h3>本ページでの透かし処理について</h3>
+    <p>
+        このページでは、透かしの追加処理をすべてお使いのブラウザ上で行います。
+        元の画像はサーバーにアップロードされることはなく、デバイス内で完結するため、
+        管理者や第三者が元画像を閲覧することは一切ありません。
+    </p>
+    <p>
+        そのため、プライバシーを保護したまま安全に画像に透かしを追加することができます。
+        また、処理結果はブラウザ上で即座にプレビューされ、ダウンロードも可能です。
+        元画像の解像度や画質も保持されますので、安心してご利用ください。
+    </p>
+</div>
+
+
+<script>
+    const uploader = document.getElementById("uploader");
+    const wmInput = document.getElementById("wmText");
+    const canvas = document.getElementById("preview");
+    const ctx = canvas.getContext("2d");
+    const resultImg = document.getElementById("result");
+
+    let originalImg = null; // 元画像保持
+
+    // ページロード時に localStorage からテキストを復元
+    window.addEventListener("load", () => {
+        const savedText = localStorage.getItem("watermarkText");
+        if (savedText) {
+            wmInput.value = savedText;
+        }
+    });
+
+    uploader.addEventListener("change", e => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = ev => {
+            const img = new Image();
+            img.onload = () => {
+                originalImg = img;
+                drawWithWatermark(img, wmInput.value);
+            };
+            img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // input のフォーカスが外れたときに透かしを更新
+    wmInput.addEventListener("blur", () => {
+        // 入力内容を localStorage に保存
+        localStorage.setItem("watermarkText", wmInput.value);
+
+        if (originalImg) {
+            drawWithWatermark(originalImg, wmInput.value);
+        }
+    });
+
+    function drawWithWatermark(img, text) {
+        // キャンバスを画像サイズに合わせる
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        // 1. 元画像を描画
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0);
+
+        // 2. ステップを計算（長辺を10分割）
+        const longSide = Math.max(img.width, img.height);
+        const step = longSide / 10;
+
+        // 3. フォントサイズを決定（文字列が1マスに収まるように調整）
+        let fontSize = step * 0.8;
+        ctx.font = `${fontSize}px "PixelMplus12 Regular", "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "MS Pゴシック", "MS PGothic", sans-serif`;
+        let textWidth = ctx.measureText(text).width;
+
+        if (textWidth > step * 0.9) {
+            fontSize = (step * 0.9 / textWidth) * fontSize;
+            ctx.font = `${fontSize}px "PixelMplus12 Regular", "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "MS Pゴシック", "MS PGothic", sans-serif`;
+        }
+
+        // 4. 文字色をグレー50%、透明度50%に設定
+        ctx.fillStyle = "rgba(128,128,128,0.5)";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        // 5. 中央基準で敷き詰める
+        const centerX = img.width / 2;
+        const centerY = img.height / 2;
+
+        for (let y = centerY - step * 10; y <= centerY + step * 10; y += step) {
+            for (let x = centerX - step * 10; x <= centerX + step * 10; x += step) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(-Math.PI / 4); // -45度回転
+                ctx.fillText(text, 0, 0);
+                ctx.restore();
+            }
+        }
+
+        // 6. canvas → img に変換して表示
+        resultImg.src = canvas.toDataURL("image/png");
+    }
+</script>
