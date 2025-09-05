@@ -38,11 +38,15 @@
 
     let originalImg = null; // 元画像保持
 
-    // ページロード時に localStorage からテキストを復元
+    // ページロード時に Cookie から透かし文字を復元
     window.addEventListener("load", () => {
-        const savedText = localStorage.getItem("watermarkText");
-        if (savedText) {
-            wmInput.value = savedText;
+        const cookies = document.cookie.split("; ").reduce((acc, cur) => {
+            const [k, v] = cur.split("=");
+            acc[k] = decodeURIComponent(v);
+            return acc;
+        }, {});
+        if (cookies["watermarkText"]) {
+            wmInput.value = cookies["watermarkText"];
         }
     });
 
@@ -64,11 +68,15 @@
 
     // input のフォーカスが外れたときに透かしを更新
     wmInput.addEventListener("blur", () => {
-        // 入力内容を localStorage に保存
-        localStorage.setItem("watermarkText", wmInput.value);
+        const text = wmInput.value;
+
+        // Cookie に保存（1年）
+        const expireDate = new Date();
+        expireDate.setFullYear(expireDate.getFullYear() + 1);
+        document.cookie = `watermarkText=${encodeURIComponent(text)}; expires=${expireDate.toUTCString()}; path=/`;
 
         if (originalImg) {
-            drawWithWatermark(originalImg, wmInput.value);
+            drawWithWatermark(originalImg, text);
         }
     });
 
