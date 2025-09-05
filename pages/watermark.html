@@ -66,6 +66,14 @@
         reader.readAsDataURL(file);
     });
 
+    // input の変更時にcookieに保存
+    wmInput.addEventListener("input", () => {
+        const text = wmInput.value;
+        const expireDate = new Date();
+        expireDate.setFullYear(expireDate.getFullYear() + 1);
+        document.cookie = `watermarkText=${encodeURIComponent(text)}; expires=${expireDate.toUTCString()}; path=/`;
+    });
+
     // input のフォーカスが外れたときに透かしを更新
     wmInput.addEventListener("blur", () => {
         const text = wmInput.value;
