@@ -1,5 +1,5 @@
 /*==================================================
-tatsu css update 25.08.29
+tatsu css update 25.09.10
 
 〇 目次
     - height コンテンツ全体の高さ関連
@@ -296,6 +296,7 @@ contents
 }
 
 .contents_block_has_a:hover {
+    animation: none;
     background-color: rgba(100, 100, 100, 0.5) !important;
 }
 
@@ -711,7 +712,8 @@ media-flex
     }
 }
 
-.media-flex-container>div>img {
+.media-flex-container>div>img,
+.media-flex-container>div>video {
     position: absolute;
     top: 50%;
     left: 50%;
