@@ -1,3 +1,71 @@
+<style>
+    /* 赤スライダー */
+    #colorRRange {
+        background: linear-gradient(to right, rgb(0, 0, 0), rgb(255, 0, 0));
+    }
+
+    /* 緑スライダー */
+    #colorGRange {
+        background: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 255, 0));
+    }
+
+    /* 青スライダー */
+    #colorBRange {
+        background: linear-gradient(to right, rgb(0, 0, 0), rgb(0, 0, 255));
+    }
+
+    /* アルファスライダー（透明度） */
+    #colorARange {
+        background: linear-gradient(to right, rgb(0, 0, 0), rgb(255, 255, 255));
+    }
+
+    /* 各行を横並び */
+    .input-row {
+        display: flex;
+        align-items: center;
+        margin: 4px 0;
+    }
+
+    /* ラベルは右寄せして幅を揃える */
+    .input-row label {
+        display: inline-block;
+        width: 40px;
+        /* 「透明度」に合わせて固定幅 */
+        text-align: right;
+        margin-right: 8px;
+    }
+
+    /* スライダーは伸びて使える幅を取る */
+    .input-row input[type="range"] {
+        flex: 1;
+        margin: 0 8px;
+        height: 24px;
+        /* 少し太めに */
+    }
+
+    /* RGB / A の数値入力 */
+    .num-input {
+        width: 3em;
+        /* 3文字分 */
+        text-align: right;
+    }
+
+    /* HEX入力 */
+    .hex-input {
+        width: 8em;
+        min-width: 0 !important;
+    }
+
+    #colorPreview {
+        width: 100%;
+        height: 50px;
+        border: 1px solid #ccc;
+        margin-top: 4px;
+        background: rgb(128, 128, 128);
+        /* 初期色 */
+    }
+</style>
+
 <div class="contents_block">
     <h1>透かし加工ツール</h1>
 </div>
@@ -12,9 +80,46 @@
 </div>
 
 <div class="contents_block">
-    <!-- canvasは非表示にして、imgに最終結果を表示 -->
+    <p style="font-size: small;">文字色・透明度を変更できます</p>
+
+    <!-- HEX入力 -->
+    <div class="input-row">
+        <label for="colorHex">HEX:</label>
+        <input type="text" id="colorHex" value="#808080" class="hex-input">
+    </div>
+
+    <!-- RGB入力 + スライダー -->
+    <div class="input-row">
+        <label for="colorRRange">R:</label>
+        <input type="range" id="colorRRange" min="0" max="255" value="128">
+        <input type="number" id="colorR" min="0" max="255" value="128" class="num-input">
+    </div>
+    <div class="input-row">
+        <label for="colorGRange">G:</label>
+        <input type="range" id="colorGRange" min="0" max="255" value="128">
+        <input type="number" id="colorG" min="0" max="255" value="128" class="num-input">
+    </div>
+    <div class="input-row">
+        <label for="colorBRange">B:</label>
+        <input type="range" id="colorBRange" min="0" max="255" value="128">
+        <input type="number" id="colorB" min="0" max="255" value="128" class="num-input">
+    </div>
+
+    <!-- 透明度 (A値) -->
+    <div class="input-row">
+        <label for="colorARange">A:</label>
+        <input type="range" id="colorARange" min="0" max="100" value="50">
+        <input type="number" id="colorA" min="0" max="100" value="50" class="num-input">
+    </div>
+
+
+    <div id="colorPreview"></div>
+</div>
+
+<div class="contents_block" id="resultBlock" style="display:none;">
     <canvas id="preview" style="display:none;"></canvas>
     <img id="result" class="" alt="加工後画像">
+    <a id="downloadLink" href="#" download="watermarked.png">画像を保存</a>
 </div>
 
 
@@ -34,37 +139,179 @@
 
 
 <script>
+
     const uploader = document.getElementById("uploader");
     const wmInput = document.getElementById("wmText");
     const canvas = document.getElementById("preview");
     const ctx = canvas.getContext("2d");
     const resultImg = document.getElementById("result");
 
-    let originalImg = null; // 元画像保持
+    // RGB関連
+    const colorR = document.getElementById("colorR");
+    const colorG = document.getElementById("colorG");
+    const colorB = document.getElementById("colorB");
 
-    // Cookie に保存する関数（1年有効）
-    function saveCookie(text) {
+    const colorRRange = document.getElementById("colorRRange");
+    const colorGRange = document.getElementById("colorGRange");
+    const colorBRange = document.getElementById("colorBRange");
+
+    // A値関連
+    const colorA = document.getElementById("colorA");
+    const colorARange = document.getElementById("colorARange");
+
+    let originalImg = null; // 元画像保持
+    let wmColor = { r: 128, g: 128, b: 128, a: 0.5 }; // デフォルト色
+
+    // ------------------------------
+    // Cookie 保存／読み出し
+    // ------------------------------
+    function saveCookie(key, value) {
         const expireDate = new Date();
         expireDate.setFullYear(expireDate.getFullYear() + 1);
-        document.cookie = `watermarkText=${encodeURIComponent(text)}; expires=${expireDate.toUTCString()}; path=/`;
+        document.cookie = `${key}=${encodeURIComponent(value)}; expires=${expireDate.toUTCString()}; path=/`;
     }
 
-    // ページロード時に Cookie から透かし文字を復元
-    window.addEventListener("load", () => {
-        const cookies = document.cookie.split("; ").reduce((acc, cur) => {
+    function loadCookies() {
+        return document.cookie.split("; ").reduce((acc, cur) => {
             const index = cur.indexOf("=");
             const k = cur.slice(0, index).trim();
             const v = cur.slice(index + 1);
             acc[k] = decodeURIComponent(v);
             return acc;
         }, {});
+    }
+
+    // ------------------------------
+    // ページロード時：Cookieから復元
+    // ------------------------------
+    window.addEventListener("load", () => {
+        const cookies = loadCookies();
+
+        // 透かし文字復元
         if (cookies["watermarkText"]) {
             wmInput.value = cookies["watermarkText"];
-            // 復元した際にも再度 Cookie に書き込み、期限を更新
-            saveCookie(cookies["watermarkText"]);
+            saveCookie("watermarkText", cookies["watermarkText"]); // 期限更新
         }
+
+        // 色設定復元
+        if (cookies["watermarkColor"]) {
+            try {
+                const c = JSON.parse(cookies["watermarkColor"]);
+                wmColor = {
+                    r: c.r ?? 128,
+                    g: c.g ?? 128,
+                    b: c.b ?? 128,
+                    a: c.a ?? 0.5
+                };
+            } catch (e) {
+                console.warn("Cookie復元エラー:", e);
+            }
+        }
+        updateUIFromColor();
     });
 
+    // ------------------------------
+    // HEX / RGB / Alpha 変換関数
+    // ------------------------------
+    function hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
+
+    function rgbToHex(r, g, b) {
+        return "#" + [r, g, b].map(x =>
+            x.toString(16).padStart(2, "0")
+        ).join("");
+    }
+
+    function updateUIFromColor() {
+        colorHex.value = rgbToHex(wmColor.r, wmColor.g, wmColor.b);
+
+        colorR.value = wmColor.r;
+        colorG.value = wmColor.g;
+        colorB.value = wmColor.b;
+
+        colorRRange.value = wmColor.r;
+        colorGRange.value = wmColor.g;
+        colorBRange.value = wmColor.b;
+
+        const aPercent = Math.round(wmColor.a * 100);
+        colorA.value = aPercent;
+        colorARange.value = aPercent;
+
+        // プレビュー更新
+        updateColorPreview();
+    }
+
+    // ------------------------------
+    // 色UIイベント
+    // ------------------------------
+    let drawTimeout = null;
+
+    // 色UIイベントの共通処理（デバウンス版）
+    function scheduleDrawWithWatermark() {
+        if (drawTimeout) clearTimeout(drawTimeout);
+        drawTimeout = setTimeout(() => {
+            if (originalImg) drawWithWatermark(originalImg, wmInput.value);
+        }, 300); // 間隔（ミリ秒）
+    }
+
+    // 共通処理：Cookie保存 + UI更新 + 透かし描画スケジュール
+    function updateColorAndRedraw() {
+        saveCookie("watermarkColor", JSON.stringify(wmColor));
+        updateUIFromColor(); // プレビューや数値入力は即時更新
+        scheduleDrawWithWatermark(); // 透かし画像描画は一定時間後
+    }
+
+    // 数値入力イベント (RGB)
+    [colorR, colorG, colorB].forEach((input, i) => {
+        input.addEventListener("input", () => {
+            const val = Math.min(255, Math.max(0, parseInt(input.value) || 0));
+            input.value = val;
+            if (i === 0) wmColor.r = val;
+            if (i === 1) wmColor.g = val;
+            if (i === 2) wmColor.b = val;
+            updateColorAndRedraw();
+        });
+    });
+
+    // スライダーイベント (RGB)
+    [colorRRange, colorGRange, colorBRange].forEach((input, i) => {
+        input.addEventListener("input", () => {
+            const val = parseInt(input.value);
+            if (i === 0) wmColor.r = val;
+            if (i === 1) wmColor.g = val;
+            if (i === 2) wmColor.b = val;
+            updateColorAndRedraw();
+        });
+    });
+
+    // 数値入力イベント (A値)
+    colorA.addEventListener("input", () => {
+        const val = Math.min(100, Math.max(0, parseInt(colorA.value) || 0));
+        wmColor.a = val / 100;
+        updateColorAndRedraw();
+    });
+
+    // スライダーイベント (A値)
+    colorARange.addEventListener("input", () => {
+        wmColor.a = parseInt(colorARange.value) / 100;
+        updateColorAndRedraw();
+    });
+
+    // カラープレビュー
+    function updateColorPreview() {
+        const preview = document.getElementById("colorPreview");
+        preview.style.backgroundColor = `rgb(${wmColor.r}, ${wmColor.g}, ${wmColor.b})`;
+    }
+
+    // ------------------------------
+    // ファイルアップロード
+    // ------------------------------
     uploader.addEventListener("change", e => {
         const file = e.target.files[0];
         if (!file) return;
@@ -81,46 +328,43 @@
         reader.readAsDataURL(file);
     });
 
-    // input の変更時に Cookie に保存
+    // ------------------------------
+    // 透かし文字入力イベント
+    // ------------------------------
     wmInput.addEventListener("input", () => {
-        saveCookie(wmInput.value);
+        saveCookie("watermarkText", wmInput.value);
     });
 
-    // input のフォーカスが外れたときに透かしを更新
     wmInput.addEventListener("blur", () => {
         if (originalImg) {
             drawWithWatermark(originalImg, wmInput.value);
         }
     });
 
+    // ------------------------------
+    // 描画関数（色反映済み）
+    // ------------------------------
     function drawWithWatermark(img, text) {
-        // キャンバスを画像サイズに合わせる
         canvas.width = img.width;
         canvas.height = img.height;
 
-        // 元画像描画
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0);
 
-        // 長辺を10分割
         const longSide = Math.max(img.width, img.height);
         const step = longSide / 10;
 
-        // フォントサイズ決定
         let fontSize = step * 0.8;
-        ctx.font = `${fontSize}px "PixelMplus12 Regular", "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "MS Pゴシック", "MS PGothic", sans-serif`;
+        ctx.font = `${fontSize}px sans-serif`;
         let textWidth = ctx.measureText(text).width;
         if (textWidth > step * 0.9) {
             fontSize = (step * 0.9 / textWidth) * fontSize;
             ctx.font = `${fontSize}px "PixelMplus12 Regular", "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "MS Pゴシック", "MS PGothic", sans-serif`;
         }
-
-        // 文字色と透明度
-        ctx.fillStyle = "rgba(128,128,128,0.5)";
+        ctx.fillStyle = `rgba(${wmColor.r},${wmColor.g},${wmColor.b},${wmColor.a})`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
-        // 中央基準で敷き詰め
         const centerX = img.width / 2;
         const centerY = img.height / 2;
         for (let y = centerY - step * 10; y <= centerY + step * 10; y += step) {
@@ -133,7 +377,39 @@
             }
         }
 
-        // canvas → img に変換して表示
-        resultImg.src = canvas.toDataURL("image/png");
+        // 画像更新
+        const dataURL = canvas.toDataURL("image/png");
+        resultImg.src = dataURL;
+
+        // 日付＋時刻文字列（YYYYMMDD_HHMMSS）
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, "0");
+        const dd = String(now.getDate()).padStart(2, "0");
+        const hh = String(now.getHours()).padStart(2, "0");
+        const min = String(now.getMinutes()).padStart(2, "0");
+        const ss = String(now.getSeconds()).padStart(2, "0");
+        const dateTimeStr = `${yyyy}${mm}${dd}_${hh}${min}${ss}`;
+
+        // RGBA情報（RGBはHEX、Aは0-100%）
+        function rgbToHex(r, g, b) {
+            return [r, g, b].map(x => x.toString(16).padStart(2, "0").toUpperCase()).join('');
+        }
+        const rgbHex = rgbToHex(wmColor.r, wmColor.g, wmColor.b);
+        const aPercent = Math.round(wmColor.a * 100);
+
+        // ウォーターマーク文字列（空白は_に置換）
+        const watermarkInfo = wmInput.value.replace(/\s+/g, "_");
+
+        // ダウンロード用ファイル名
+        const downloadFileName = `mothlamp_${dateTimeStr}_${watermarkInfo}_${rgbHex}_${aPercent}.png`;
+
+        // ダウンロードリンク更新
+        const downloadLink = document.getElementById("downloadLink");
+        downloadLink.href = dataURL;
+        downloadLink.download = downloadFileName;
+
+        // 画像ブロック表示
+        document.getElementById("resultBlock").style.display = "block";
     }
 </script>
