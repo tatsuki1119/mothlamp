@@ -163,50 +163,59 @@
     let wmColor = { r: 128, g: 128, b: 128, a: 0.5 }; // デフォルト色
 
     // ------------------------------
-    // Cookie 保存／読み出し
+    // localStorage + Cookie 両方対応 保存／読み込み
     // ------------------------------
-    function saveCookie(key, value) {
+    function saveSetting(key, value) {
+        // localStorage 保存
+        try {
+            localStorage.setItem(key, JSON.stringify(value));
+        } catch (e) {
+            console.warn("localStorage 保存失敗:", e);
+        }
+
+        // Cookie 保存（1年有効）
         const expireDate = new Date();
         expireDate.setFullYear(expireDate.getFullYear() + 1);
-        document.cookie = `${key}=${encodeURIComponent(value)}; expires=${expireDate.toUTCString()}; path=/`;
+        document.cookie = `${key}=${encodeURIComponent(JSON.stringify(value))}; expires=${expireDate.toUTCString()}; path=/`;
     }
 
-    function loadCookies() {
-        return document.cookie.split("; ").reduce((acc, cur) => {
-            const index = cur.indexOf("=");
-            const k = cur.slice(0, index).trim();
-            const v = cur.slice(index + 1);
-            acc[k] = decodeURIComponent(v);
+    function loadSetting(key, defaultValue) {
+        // localStorage から
+        try {
+            const val = localStorage.getItem(key);
+            if (val !== null) return JSON.parse(val);
+        } catch (e) {
+            console.warn("localStorage 読み込み失敗:", e);
+        }
+
+        // cookie から
+        const cookies = document.cookie.split("; ").reduce((acc, cur) => {
+            const idx = cur.indexOf("=");
+            if (idx < 0) return acc;
+            acc[cur.slice(0, idx)] = decodeURIComponent(cur.slice(idx + 1));
             return acc;
         }, {});
+        if (cookies[key]) {
+            try {
+                return JSON.parse(cookies[key]);
+            } catch (e) { }
+        }
+
+        return defaultValue;
     }
 
     // ------------------------------
-    // ページロード時：Cookieから復元
+    // ページロード時：保存設定を復元
     // ------------------------------
     window.addEventListener("load", () => {
-        const cookies = loadCookies();
+        // 透かし文字
+        const savedText = loadSetting("watermarkText", "SAMPLE");
+        wmInput.value = savedText;
 
-        // 透かし文字復元
-        if (cookies["watermarkText"]) {
-            wmInput.value = cookies["watermarkText"];
-            saveCookie("watermarkText", cookies["watermarkText"]); // 期限更新
-        }
+        // 色設定
+        const savedColor = loadSetting("watermarkColor", { r: 128, g: 128, b: 128, a: 0.5 });
+        wmColor = savedColor;
 
-        // 色設定復元
-        if (cookies["watermarkColor"]) {
-            try {
-                const c = JSON.parse(cookies["watermarkColor"]);
-                wmColor = {
-                    r: c.r ?? 128,
-                    g: c.g ?? 128,
-                    b: c.b ?? 128,
-                    a: c.a ?? 0.5
-                };
-            } catch (e) {
-                console.warn("Cookie復元エラー:", e);
-            }
-        }
         updateUIFromColor();
     });
 
@@ -262,7 +271,7 @@
 
     // 共通処理：Cookie保存 + UI更新 + 透かし描画スケジュール
     function updateColorAndRedraw() {
-        saveCookie("watermarkColor", JSON.stringify(wmColor));
+        saveSetting("watermarkColor", wmColor);
         updateUIFromColor(); // プレビューや数値入力は即時更新
         scheduleDrawWithWatermark(); // 透かし画像描画は一定時間後
     }
@@ -332,7 +341,7 @@
     // 透かし文字入力イベント
     // ------------------------------
     wmInput.addEventListener("input", () => {
-        saveCookie("watermarkText", wmInput.value);
+        saveSetting("watermarkText", wmInput.value);
     });
 
     wmInput.addEventListener("blur", () => {
