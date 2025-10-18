@@ -1,5 +1,5 @@
 /*==================================================
-tatsu css update 25.09.10
+tatsu css update 25.10.16
 
 〇 目次
     - height コンテンツ全体の高さ関連
@@ -256,7 +256,9 @@ contents
 .contents_block_has_a {
     /* 以下のaタグ用クラスを持つブロック用 */
     border: 1px solid;
-    animation: contents_block_has_a_anim 3s infinite;
+    /* animation: contents_block_has_a_anim 3s infinite; */
+    position: relative;
+    overflow: hidden;
 }
 
 .contents_block_a {
@@ -277,21 +279,32 @@ contents
     text-decoration: none;
 }
 
+.contents_block_has_a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    animation: contents_block_has_a_anim 3s infinite;
+}
 
 
 @keyframes contents_block_has_a_anim {
 
     /* aタグのブロックのアニメーション */
     0% {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(255, 255, 255, 0);
     }
 
     50% {
-        background-color: rgba(50, 50, 50, 0.5);
+        background-color: rgba(255, 255, 255, 0.25);
     }
 
     100% {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(255, 255, 255, 0);
     }
 }
 
@@ -639,6 +652,12 @@ modal
     border: 1px solid #888888;
     overflow-y: scroll;
     z-index: 50;
+
+    @media screen and (min-width: 767px) {
+        top: calc(75px + 5% + env(safe-area-inset-top));
+        height: calc(90% - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 75px);
+
+    }
 }
 
 

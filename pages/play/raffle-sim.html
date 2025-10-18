@@ -1,0 +1,448 @@
+<style>
+    h1 {
+        font-size: 1.4rem;
+        margin-bottom: 0.2rem;
+        color: #ffffff;
+    }
+
+    .controls {
+        display: flex;
+        gap: 8px;
+        margin: 10px 0 16px 0;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    button {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid #444;
+        background: #1e1e1e;
+        color: #eee;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+    }
+
+    button:hover {
+        background: #2a2a2a;
+    }
+
+    button.primary {
+        background: #2b8cff;
+        color: #fff;
+        border-color: #1f6fd6;
+    }
+
+    button.primary:hover {
+        background: #1f6fd6;
+    }
+
+    button.danger {
+        background: #ff5f5f;
+        color: #fff;
+        border-color: #d64c4c;
+    }
+
+    button.danger:hover {
+        background: #d64c4c;
+    }
+
+    .panel {
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 6px 8px;
+        text-align: left;
+        border-bottom: 1px solid #333;
+    }
+
+    th {
+        color: #aaa;
+    }
+
+    .progress {
+        height: 12px;
+        border-radius: 999px;
+        overflow: hidden;
+    }
+
+    .bar {
+        height: 100%;
+        background: #2b8cff;
+        width: 0;
+        transition: width 0.3s ease;
+    }
+
+    .history {
+        overflow: auto;
+        padding: 6px;
+        border-radius: 6px;
+        border: 1px solid #2a2a2a;
+    }
+
+    .result-item {
+        padding: 8px 10px;
+        border-radius: 6px;
+        margin: 6px 0;
+        border: 1px solid #2a2a2a;
+        color: #f0f0f0;
+    }
+
+    .flex {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .right {
+        margin-left: auto;
+    }
+
+    small {
+        color: #999;
+    }
+
+    strong {
+        color: #fff;
+    }
+
+    a {
+        color: #2b8cff;
+    }
+</style>
+
+<div class="contents_block">
+    <h1>🎲 ランダムくじ（ガチャ）シミュレーター</h1>
+</div>
+
+
+<div class="panel contents_block">
+    <strong>操作</strong>
+    <div class="controls">
+        <div>
+            <button class="draw-btn primary" data-count="1">購入 ×1</button>
+            <button class="draw-btn primary" data-count="5">購入 ×5</button>
+            <button class="draw-btn primary" data-count="10">購入 ×10</button>
+            <button class="draw-btn primary" data-count="30">購入 ×30</button>
+        </div>
+        <div class="right">
+            <button id="show-config">確率・景品を表示</button>
+            <button id="reset" class="danger">リセット</button>
+        </div>
+    </div>
+
+    <div id="last-results"></div>
+</div>
+
+<div class="panel contents_block" id="config-panel" style="display:none">
+    <strong>🎯 設定</strong>
+    <div id="config-list" style="margin-top:8px;"></div>
+</div>
+
+<div class="panel contents_block">
+    <strong>📊 集計</strong>
+    <div id="summary"></div>
+</div>
+
+<div class="panel contents_block">
+    <strong>🧾 履歴（全件）</strong>
+    <div id="history" class="history"></div>
+</div>
+
+<script>
+    // ===============================
+    // コンフィグ設定部分
+    // ===============================
+    const GACHA_CONFIG = [
+        {
+            name: "A賞 【メンバー全員の直筆サイン入り！】布ポスター",
+            prob: 0.1,
+            items: [
+                { name: "A-布ポスター" }
+            ]
+        },
+        {
+            name: "B賞 【直筆サイン入り！】プリントチェキ",
+            prob: 0.3,
+            items: [
+                { name: "B-もな" },
+                { name: "B-美雨" },
+                { name: "B-凛花" },
+                { name: "B-百花" },
+            ]
+        },
+        {
+            name: "C賞 フレークアクリルキーホルダー",
+            prob: 5.0,
+            items: [
+                { name: "C-もな" },
+                { name: "C-美雨" },
+                { name: "C-凛花" },
+                { name: "C-百花" },
+            ]
+        },
+        {
+            name: "D賞 アクリルスタンド",
+            prob: 14.1,
+            items: [
+                { name: "D-もな1" },
+                { name: "D-もな2" },
+                { name: "D-美雨1" },
+                { name: "D-美雨2" },
+                { name: "D-凛花1" },
+                { name: "D-凛花2" },
+                { name: "D-百花1" },
+                { name: "D-百花2" },
+            ]
+        },
+        {
+            name: "E賞 ステッカー",
+            prob: 16.0,
+            items: [
+                { name: "E-もな" },
+                { name: "E-美雨" },
+                { name: "E-凛花" },
+                { name: "E-百花" },
+            ]
+        },
+        {
+            name: "F賞 ブロマイド2枚セット",
+            prob: 29.5,
+            items: [
+                { name: "F-もな1" },
+                { name: "F-もな2" },
+                { name: "F-美雨1" },
+                { name: "F-美雨2" },
+                { name: "F-凛花1" },
+                { name: "F-凛花2" },
+                { name: "F-百花1" },
+                { name: "F-百花2" },
+            ]
+        },
+        {
+            name: "G賞 クリアカード",
+            prob: 35.0,
+            items: [
+                { name: "G-もな1" },
+                { name: "G-もな2" },
+                { name: "G-美雨1" },
+                { name: "G-美雨2" },
+                { name: "G-凛花1" },
+                { name: "G-凛花2" },
+                { name: "G-百花1" },
+                { name: "G-百花2" },
+                { name: "G-ペア1" },
+                { name: "G-ペア2" },
+                { name: "G-ペア3" },
+                { name: "G-ペア4" },
+                { name: "G-ペア5" },
+                { name: "G-ペア6" },
+            ]
+        },
+    ];
+
+    const STORAGE_HISTORY_KEY = 'gacha_history_v2';
+
+    function rnd() { return Math.random(); }
+    function getHistory() {
+        const raw = localStorage.getItem(STORAGE_HISTORY_KEY);
+        if (!raw) return [];
+        try { return JSON.parse(raw) || []; } catch { return []; }
+    }
+    function saveHistory(arr) { localStorage.setItem(STORAGE_HISTORY_KEY, JSON.stringify(arr)); }
+    function pushHistory(entry) { const h = getHistory(); h.push(entry); saveHistory(h); }
+
+    function buildTierCDF(config) {
+        let total = 0;
+        for (const t of config) total += (t.prob || 0);
+        let acc = 0;
+        return config.map(t => {
+            const p = (t.prob || 0) / total;
+            const low = acc; acc += p;
+            return { ...t, probNormalized: p, cdfLow: low, cdfHigh: acc };
+        });
+    }
+
+    function chooseItemFromTier(tier) {
+        const items = tier.items || [];
+        let total = 0;
+        for (const it of items) total += (it.weight || 1);
+        const r = rnd() * total;
+        let acc = 0;
+        for (const it of items) {
+            acc += (it.weight || 1);
+            if (r < acc) return it;
+        }
+        return items[items.length - 1];
+    }
+
+    function drawOnce(cdf) {
+        const r = rnd();
+        for (const t of cdf) {
+            if (r >= t.cdfLow && r < t.cdfHigh) {
+                const it = chooseItemFromTier(t);
+                return { tierName: t.name, prizeName: it.name };
+            }
+        }
+        const last = cdf[cdf.length - 1];
+        const it = chooseItemFromTier(last);
+        return { tierName: last.name, prizeName: it.name };
+    }
+
+    function aggregateCounts(history) {
+        const counts = {};
+        for (const h of history) counts[h.prizeName] = (counts[h.prizeName] || 0) + 1;
+        return counts;
+    }
+
+    // ===============================
+    // UI描画
+    // ===============================
+    function renderConfig() {
+        const cdf = buildTierCDF(GACHA_CONFIG);
+        const $c = $('#config-list').empty();
+        for (const t of cdf) {
+            const pct = (t.probNormalized * 100).toFixed(2) + '%';
+            const $tier = $(`
+                    <div style="margin-bottom:8px;">
+                        <strong>${t.name}</strong> <small>（確率: ${pct}）</small>
+                        <table style="margin-top:6px;">
+                            <thead><tr><th>景品</th><th>重み</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                `);
+            for (const it of t.items) {
+                const w = (it.weight || 1);
+                $tier.find('tbody').append(`<tr><td>${it.name}</td><td>${w}</td></tr>`);
+            }
+            $c.append($tier);
+        }
+    }
+
+    function renderSummary() {
+        const history = getHistory();
+        const counts = aggregateCounts(history);
+        const total = history.length;
+        const $s = $('#summary').empty();
+        $s.append(`<div style="margin-bottom:8px;"><strong>合計ドロー数:</strong> ${total}</div>`);
+        const cdf = buildTierCDF(GACHA_CONFIG);
+
+        for (const tier of cdf) {
+            // ▼ この賞の合計回数を計算
+            let tierTotal = 0;
+            for (const it of tier.items) {
+                tierTotal += counts[it.name] || 0;
+            }
+            const tierRate = total > 0 ? ((tierTotal / total) * 100).toFixed(2) : '0.00';
+
+            // ▼ 見出しに合計を追加表示
+            const tierTitle = $(`
+            <div style="margin-top:10px;">
+                <strong>${tier.name}</strong>
+                <small>（設定確率: ${(tier.probNormalized * 100).toFixed(2)}%）</small><br>
+                <small>→ 出現合計: ${tierTotal}回 / 実測: ${tierRate}%</small>
+            </div>
+        `);
+
+            const $table = $(`<table><thead><tr><th>景品</th><th>回数</th><th>確率</th></tr></thead><tbody></tbody></table>`);
+            for (const it of tier.items) {
+                const name = it.name;
+                const cnt = counts[name] || 0;
+                const pct = total > 0 ? ((cnt / total) * 100).toFixed(2) + '%' : '0%';
+                const barW = total > 0 ? (cnt / total * 100) : 0;
+                const $tr = $(`
+                <tr>
+                    <td>${name}</td>
+                    <td>${cnt}</td>
+                    <td style="width:60%">
+                        <div class="progress"><div class="bar" style="width:${barW}%"></div></div> ${pct}
+                    </td>
+                </tr>
+            `);
+                $table.find('tbody').append($tr);
+            }
+
+            $s.append(tierTitle);
+            $s.append($table);
+        }
+    }
+
+    function renderHistory() {
+        const h = getHistory();
+        const $h = $('#history').empty();
+        if (h.length === 0) { $h.append('<div>履歴は空です。</div>'); return; }
+        for (const e of h.slice().reverse()) {
+            const time = new Date(e.timestamp).toLocaleString();
+            $h.append(`<div class="result-item"><div class="flex"><div><strong>${e.prizeName}</strong> <small>（${e.tierName}）</small></div><div class="right"><small>${time}</small></div></div></div>`);
+        }
+    }
+
+    function renderLastResults(arr) {
+        const $d = $('#last-results').empty();
+        if (!arr || arr.length === 0) return;
+        $d.append('<div><strong>直近の取得</strong></div>');
+        for (const r of arr) {
+            $d.append(`<div style="display:inline-block;margin:2px;"><div style="font-size:12px;padding:2px 3px;border-radius:2px;background:#222;border:1px solid #eef;"><div><strong>${r.prizeName}</strong></div><div style="font-size:8px;color:#bbb">${r.tierName}</div></div></div>`);
+        }
+    }
+
+    function performDraws(count) {
+        const cdf = buildTierCDF(GACHA_CONFIG);
+        const res = [];
+        for (let i = 0; i < count; i++) {
+            const r = drawOnce(cdf);
+            const entry = { timestamp: new Date().toISOString(), tierName: r.tierName, prizeName: r.prizeName };
+            pushHistory(entry);
+            res.push(entry);
+        }
+        return res;
+    }
+
+    function resetAll() {
+        if (!confirm('本当にリセットしますか？')) return;
+        localStorage.removeItem(STORAGE_HISTORY_KEY);
+        renderSummary(); renderHistory(); renderLastResults([]);
+        alert('リセットしました。');
+    }
+
+    // ===============================
+    // 初期化
+    // ===============================
+    $(function () {
+        renderConfig();
+        renderSummary();
+        renderHistory();
+
+        $('.draw-btn').on('click', function () {
+            const n = parseInt($(this).data('count'));
+            const results = performDraws(n);
+            renderSummary();
+            renderHistory();
+            renderLastResults(results.slice(-10).reverse());
+
+            // 🎯 抽選結果をアラート表示
+            const msg = results.map(r => `・${r.prizeName}（${r.tierName}）`).join('\n');
+            alert(`${n}回の抽選結果：\n\n${msg}`);
+        });
+
+        $('#show-config').on('click', function () {
+            $('#config-panel').toggle();
+            $(this).text($('#config-panel').is(':visible') ? '確率を隠す' : '確率・景品を表示');
+        });
+
+        $('#reset').on('click', resetAll);
+    });
+</script>
+</body>
+
+</html>
