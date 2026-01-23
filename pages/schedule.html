@@ -127,33 +127,17 @@
 
 <script>
     $(document).ready(function () {
-        const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
+        // 既に実行済みなら終了
+        if (window.__scheduleLoaded) return;
+        window.__scheduleLoaded = true;
+
+        const apiurl = "https://g-api.mothlamp.info/api";
         const target_sheet = "schedule";
         const url = apiurl + "?target=" + target_sheet;
 
-        // キャッシュ保持時間（ミリ秒）
-        const CACHE_DURATION = 60 * 60 * 1000;
-        const CACHE_KEY = "schedule_cache";
-        const TIMESTAMP_KEY = "schedule_cache_time";
-
-        const cachedData = sessionStorage.getItem(CACHE_KEY);
-        const cachedTime = sessionStorage.getItem(TIMESTAMP_KEY);
-        const now = new Date().getTime();
-
-        if (cachedData && cachedTime && (now - cachedTime < CACHE_DURATION)) {
-            // セッションキャッシュが有効な場合
-            const data = JSON.parse(cachedData);
+        $.getJSON(url, function (data) {
             renderSchedule(data);
-        } else {
-            // キャッシュがない、または期限切れの場合
-            $.getJSON(url, function (data) {
-                // セッションキャッシュ保存
-                sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
-                sessionStorage.setItem(TIMESTAMP_KEY, now.toString());
-
-                renderSchedule(data);
-            });
-        }
+        });
 
         function renderSchedule(data) {
             const youbiArray = ['日', '月', '火', '水', '木', '金', '土'];

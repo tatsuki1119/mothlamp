@@ -5,196 +5,47 @@
     <h1 class="glitch-text">お知らせ</h1>
 </div>
 
-<div class="contents_block" id="20250906">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.09.06
-        <p><a href="/?p=watermark">透かし加工ツール</a> を追加しました。画像へIDなどを重ねる加工にご利用いただけます。</p>
-    </div>
-</div>
 
-<div class="contents_block" id="20250717">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.07.17
-        <p><a href="/?p=schedule">スケジュール</a> 機能を追加しました。</p>
-    </div>
-</div>
+<div id="notice"></div>
 
-<div class="contents_block" id="20250626">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.06.26
-        <p>トップページにメンバーのSNSリンクを追加しました。</p>
-    </div>
-</div>
 
-<div class="contents_block" id="20250619">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.06.19
-        <p>本サイト運営による新アカウント <a href="https://x.com/siita_days">This Day in Phantom Siita</a> が開設されました。</p>
-        <p>「その日にファントムシータに何があったのか」を自動で投稿しています。</p>
-    </div>
-</div>
+<script>
+    const notice_json_path = `./pages/data/notice-data.json?nocache=${new Date().getTime()}`;
 
-<div class="contents_block" id="20250531">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.05.31
-        <p><a href="/?p=phanart.hisui-special">灯翠さん ファンアート</a> まとめページを公開しました。</p>
-    </div>
-</div>
+    // お知らせデータを取得して表示
+    $(document).ready(function () {
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        var pathQuery = urlParams.get('p');
 
-<div class="contents_block" id="20250403">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.04.03
-        <p><a href="/?p=play.haine-test">ハイネ共通テスト</a>
-            を公開しました。</p>
-    </div>
-</div>
+        $.getJSON(notice_json_path, function (data) {
+            data.slice().reverse().forEach(function (data_i) {
 
-<div class="contents_block" id="20250311">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.03.11
-        <p><a href="/?p=articles.vlog-moth-to-a-flame">Phantom Siita 1st WORLD TOUR “Moth to a flame” 公式の投稿まとめ</a>
-            を公開しました。</p>
-    </div>
-</div>
+                // id (YYYYMMDD) → YYYY.MM.DD
+                const dateText =
+                    data_i.id.substring(0, 4) + '.' +
+                    data_i.id.substring(4, 6) + '.' +
+                    data_i.id.substring(6, 8);
 
-<div class="contents_block" id="20250212">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.03.06
-        <p><a href="/?p=phanart">ファンアート集</a> の <a href="/?p=phanart.guoxoua">कㄑ”‎^. .^ ੭</a> さんのページに <a
-                href="/?p=phanart.guoxoua-nametag">名刺用素材</a> を追加しました。「〇〇会」などで素材としてご利用ください。</p>
-    </div>
-</div>
+                // contents 配列を <p> に変換
+                let contentsHtml = '';
+                data_i.contents.forEach(function (content) {
+                    contentsHtml += `<p>${content}</p>`;
+                });
 
-<div class="contents_block" id="20250212">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.02.12
-        <p><a href="/?p=phanart">ファンアート集</a> に <a href="/?p=phanart.oan">おあん</a> さんのページを追加しました。</p>
-    </div>
-</div>
+                const listItem = `
+                    <div class="contents_block" id="${data_i.id}">
+                        <div class="notice-div">
+                            <svg role="img" aria-label="蝶々">
+                                <use href="#butterfly"></use>
+                            </svg>${dateText}
+                            ${contentsHtml}
+                        </div>
+                    </div>
+                `;
 
-<div class="contents_block" id="20250207">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.02.07
-        <p><a href="https://x.com/mothlamp_info">本サイトのX(Twitter)アカウント</a>
-            にて、ファントムシータ公式ホームページ内の会員コンテンツ「ハイネ」の更新通知を、既存の「シータ日記」に加え「質問箱」「お知らせ」も通知するようになりました。</p>
-    </div>
-</div>
-
-<div class="contents_block" id="20250119">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.01.19
-        <p>ファンアートを描かれている絵師さんを紹介する <a href="/?p=phanart">ファンアート集</a> のページを作成しました。</p>
-        <p><a href="/?p=phanart.guoxoua">कㄑ”‎^. .^ ੭</a> さんのページを作成しました。</p>
-    </div>
-</div>
-
-<div class="contents_block" id="20250113">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.01.13
-        <p>本サイト運営による <a href="/?p=discord">Discordサーバー</a> のページを作成しました。</p>
-    </div>
-</div>
-
-<div class="contents_block" id="20250108">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.01.08
-        <p>本サイトのドメイン「mothlamp.info」を取得しました。</p>
-    </div>
-</div>
-
-<div class="contents_block" id="20250105">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.01.05
-        <p>本サイト名「誘蛾灯の導き」を命名しました。サイト名の由来は <a href="/?p=about">本サイトについて</a> に記載しています。</p>
-        <p>ファントムシータ公式ホームページ内の会員コンテンツ「ハイネ」内の一つ、「シータ日記」の更新通知機能を、 <a
-                href="https://x.com/mothlamp_info">本サイトのX(Twitter)アカウント</a> にて実装しました。</p>
-    </div>
-</div>
-
-<div class="contents_block" id="20241229">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2024.12.29
-        <p>公式より、<a
-                href="https://phantomsiita.com/news/detail/74">「ライブにおける注意事項及び禁止事項のご案内」</a>が投稿されました。本サイトのトップページにも、こちらのページへのリンクを追加しました。
-        </p>
-    </div>
-</div>
-
-<div class="contents_block" id="20241218">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2024.12.18
-        <p>新規記事 <a href="/?p=articles.live-akuma-night-video">悪魔 Night Duel Buster 動画まとめ</a>
-            を公開しました。ファンにより撮影された動画の投稿をまとめています。</p>
-        <p>またフィルター機能により、メンバーや曲を絞って検索をすることが可能です。</p>
-    </div>
-</div>
-
-<div class="contents_block" id="20241213">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2024.12.13
-        <p>新規記事 <a href="/?p=articles.setlist">セットリスト</a> を公開しました。ライブの際に更新します。</p>
-    </div>
-</div>
-
-<div class="contents_block" id="20241209">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2024.12.09
-        <p>新規記事 <a href="/?p=articles.hainenazo">ハイネ謎解き</a>
-            を公開しました。「モナリザの横顔」にて配布された謎解きの再現を掲載しています。</p>
-    </div>
-</div>
-
-<!-- <div class="contents_block" id="20241119">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2024.11.19
-        <p>新規記事 <a href="/?p=articles.1001-otomodachi">おともだち</a> を公開しました。</p>
-    </div>
-</div> -->
-
-<div class="contents_block" id="20241113">
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2024.11.13
-        <p>本サイトを公開しました。</p>
-        <p>新規ページ <a href="/?p=web">Web記事一覧</a> を公開しました。</p>
-    </div>
-</div>
+                $('#notice').append(listItem);
+            });
+        });
+    });
+</script>

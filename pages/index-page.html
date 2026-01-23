@@ -193,40 +193,17 @@
     </div>
     <script>
         $(document).ready(function () {
+            // 既に実行済みなら終了
+            if (window.__scheduleLoaded) return;
+            window.__scheduleLoaded = true;
+
             const apiurl = "https://g-api.mothlamp.info/api";
             const target_sheet = "schedule";
             const url = apiurl + "?target=" + target_sheet;
 
-            // キャッシュ保持時間（ミリ秒）
-            const CACHE_DURATION = 5 * 1000;
-            // const CACHE_DURATION = 12 * 60 * 60 * 1000;
-            const CACHE_KEY = "schedule_cache";
-            const TIMESTAMP_KEY = "schedule_cache_time";
-
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const pathQuery = urlParams.get('p');
-
-            if (!pathQuery) { // index のときだけ実行
-                const cachedData = sessionStorage.getItem(CACHE_KEY);
-                const cachedTime = sessionStorage.getItem(TIMESTAMP_KEY);
-                const now = new Date().getTime();
-
-                if (cachedData && cachedTime && (now - cachedTime < CACHE_DURATION)) {
-                    // セッションキャッシュが有効な場合
-                    const data = JSON.parse(cachedData);
-                    renderSchedule(data);
-                } else {
-                    // キャッシュがない、または期限切れの場合
-                    $.getJSON(url, function (data) {
-                        // セッションキャッシュ保存
-                        sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
-                        sessionStorage.setItem(TIMESTAMP_KEY, now.toString());
-
-                        renderSchedule(data);
-                    });
-                }
-            }
+            $.getJSON(url, function (data) {
+                renderSchedule(data);
+            });
 
             // スケジュールを描画する関数（JSTの現在日時以降の3件のみ表示）
             function renderSchedule(data) {
@@ -290,22 +267,26 @@
         <a href="/?p=articles" class="link-btn-a">すべて見る</a>
     </div>
     <script>
-        const articles_json_path = `/pages/articles/articles-data.json?nocache=${new Date().getTime()}`;
+        const articles_json_path = `/pages/data/articles-data.json?nocache=${new Date().getTime()}`;
 
         // 記事データを取得して表示
         $(document).ready(function () {
+            // 既に実行済みなら終了
+            if (window.__articlesLoaded) return;
+            window.__articlesLoaded = true;
+
             var queryString = window.location.search;
             var urlParams = new URLSearchParams(queryString);
             var pathQuery = urlParams.get('p');
 
-            if (!(pathQuery)) { // indexの時だけ
-                $.getJSON(articles_json_path, function (data) {
-                    data.forEach(function (data_i) {
-                        // privateではないデータのみ
-                        if (!data_i.private) {
-                            // show-index が true のデータのみ処理
-                            if (data_i.show_index) {
-                                const listItem = `
+
+            $.getJSON(articles_json_path, function (data) {
+                data.forEach(function (data_i) {
+                    // privateではないデータのみ
+                    if (!data_i.private) {
+                        // show-index が true のデータのみ処理
+                        if (data_i.show_index) {
+                            const listItem = `
                                 <a href="/?p=articles.${data_i.p}" class="link-list-a">
                                     <li>
                                         <p>
@@ -316,12 +297,11 @@
                                     </li>
                                 </a>
                             `;
-                                $('#articles').append(listItem);
-                            }
+                            $('#articles').append(listItem);
                         }
-                    });
+                    }
                 });
-            }
+            });
         });
     </script>
 </div>
@@ -345,39 +325,17 @@
     </div>
     <script>
         $(document).ready(function () {
-            const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
+            // 既に実行済みなら終了
+            if (window.__webArticlesLoaded) return;
+            window.__webArticlesLoaded = true;
+
+            const apiurl = "https://g-api.mothlamp.info/api";
             const target_sheet = "web-articles";
             const url = apiurl + "?target=" + target_sheet;
 
-            // キャッシュ保持時間（ミリ秒）
-            const CACHE_DURATION = 12 * 60 * 60 * 1000;
-            const CACHE_KEY = "web_articles_cache";
-            const TIMESTAMP_KEY = "web_articles_cache_time";
-
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const pathQuery = urlParams.get('p');
-
-            if (!pathQuery) { // index のときだけ実行
-                const cachedData = sessionStorage.getItem(CACHE_KEY);
-                const cachedTime = sessionStorage.getItem(TIMESTAMP_KEY);
-                const now = new Date().getTime();
-
-                if (cachedData && cachedTime && (now - cachedTime < CACHE_DURATION)) {
-                    // セッションキャッシュが有効な場合
-                    const data = JSON.parse(cachedData);
-                    renderArticles(data);
-                } else {
-                    // キャッシュがない、または期限切れの場合
-                    $.getJSON(url, function (data) {
-                        // セッションキャッシュ保存
-                        sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
-                        sessionStorage.setItem(TIMESTAMP_KEY, now.toString());
-
-                        renderArticles(data);
-                    });
-                }
-            }
+            $.getJSON(url, function (data) {
+                renderArticles(data);
+            });
 
             // 記事を描画する関数
             function renderArticles(data) {
@@ -416,38 +374,45 @@
         }
     </style>
 
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.09.06
-        <p><a href="/?p=watermark">透かし加工ツール</a> を追加しました。画像へIDなどを重ねる加工にご利用いただけます。</p>
-    </div>
-    <hr>
+    <div id="notice"></div>
 
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.07.17
-        <p><a href="/?p=schedule">スケジュール</a> 機能を追加しました。</p>
-    </div>
-    <hr>
 
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.06.26
-        <p>トップページにメンバーのSNSリンクを追加しました。</p>
-    </div>
-    <hr>
+    <script>
+        const notice_json_path = `./pages/data/notice-data.json?nocache=${new Date().getTime()}`;
 
-    <div class="notice-div">
-        <svg role="img" aria-label="蝶々">
-            <use href="#butterfly"></use>
-        </svg>2025.06.19
-        <p>本サイト運営による新アカウント <a href="https://x.com/siita_days">This Day in Phantom Siita</a> が開設されました。</p>
-        <p>「その日にファントムシータに何があったのか」を自動で投稿しています。</p>
-    </div>
-    <hr>
+        $(document).ready(function () {
+
+            $.getJSON(notice_json_path, function (data) {
+                data
+                    .slice() // 元配列を壊さない
+                    .sort(function (a, b) {
+                        return b.id - a.id; // 新しい順
+                    })
+                    .slice(0, 3) // 上位3件
+                    .forEach(function (data_i) {
+                        const dateText =
+                            data_i.id.substring(0, 4) + '.' +
+                            data_i.id.substring(4, 6) + '.' +
+                            data_i.id.substring(6, 8);
+                        let contentsHtml = '';
+                        data_i.contents.forEach(function (content) {
+                            contentsHtml += `<p>${content}</p>`;
+                        });
+                        const html = `
+                        <div class="notice-div">
+                            <svg role="img" aria-label="蝶々">
+                                <use href="#butterfly"></use>
+                            </svg>${dateText}
+                            ${contentsHtml}
+                        </div>
+                        <hr>
+                    `;
+                        $('#notice').append(html);
+                    });
+            });
+        });
+    </script>
+
 
     <div class="link-btn-div">
         <a href="/?p=notice" class="link-btn-a">すべて見る</a>

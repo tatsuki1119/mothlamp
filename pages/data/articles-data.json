@@ -29,5 +29,10 @@
     {
         "title": "yosugala presents -DREAMSCAPE-\"AICHI\" ハイネの投稿まとめ",
         "p": "live-dreamscape-video"
+    },
+    {
+        "private": true,
+        "title": "private-data",
+        "p": "private"
     }
 ]

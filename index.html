@@ -34,14 +34,70 @@
     <meta name="twitter:image" content="https://mothlamp.info/static/ogimg.png">
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
+
+
     <!-- css reset -->
-    <link rel="stylesheet" type="text/css" href="/static/reset_css/modern-css-reset.css" />
-    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="https://assets.mothlamp.info/reset_css/modern-css-reset.css" />
+    <!-- ===== CSS ===== -->
+    <asset type="css" src="/css/base-20260119.css"></asset>
+    <asset type="css" src="/css/mothlamp-20251202.css"></asset>
+    <asset type="css" src="/css/glitch-animation-20250829.css"></asset>
+    <!-- ===== JavaScript ===== -->
+    <asset type="js" src="/js/loading-20250223.js"></asset>
+    <asset type="js" src="/js/load-contents-20250119.js"></asset>
+    <asset type="js" src="/js/menu-20240924.js"></asset>
+    <asset type="js" src="/js/para-20240209.js"></asset>
+    <asset type="js" src="/js/pwabuttons-20240209.js"></asset>
+    <asset type="js" src="/js/reload-20240326.js"></asset>
+    <asset type="js" src="/js/async-load-twitter-20250531.js"></asset>
+    <asset type="js" src="/js/async-load-youtube-20251202.js"></asset>
+    <asset type="js" src="/js/butterfly-list-20250531.js"></asset>
+    <asset type="js" src="/js/glitch-animation-20250531.js"></asset>
+    <asset type="js" src="/js/protected-img-20250531.js"></asset>
+    <asset type="js" src="/js/visibility-control-20250829.js"></asset>
+
     <script>
-        $('head').append('<link rel="stylesheet" type="text/css" href="/static/css/base.css?nocache=' + new Date().getTime() + '" />');
-        $('head').append('<link rel="stylesheet" type="text/css" href="/static/css/mothlamp.css?nocache=' + new Date().getTime() + '" />');
-        $('head').append('<link rel="stylesheet" type="text/css" href="/static/css/glitch-animation.css?nocache=' + new Date().getTime() + '" />');
+        // assetを本番とローカルで切り替える
+        (function () {
+            const isLocal =
+                location.hostname === 'localhost' ||
+                location.hostname.startsWith('192.168.');
+            const PROD_DOMAIN = 'https://assets.mothlamp.info';
+            const LOCAL_PREFIX = '/assets';
+            function buildUrl(path) {
+                const clean = path.startsWith('/') ? path : '/' + path;
+                return isLocal
+                    ? LOCAL_PREFIX + clean
+                    : PROD_DOMAIN + clean;
+            }
+            function createCss(url) {
+                const el = document.createElement('link');
+                el.rel = 'stylesheet';
+                el.href = url;
+                document.head.appendChild(el);
+            }
+            function createJs(url) { // キャッシュ破壊されるためJQueryを使わない
+                const el = document.createElement('script');
+                el.src = url;
+                el.async = false;   // 順序保証
+                document.head.appendChild(el);
+            }
+            // ===== メイン =====
+            $('asset').each(function () {
+                const $def = $(this);
+                const type = $def.attr('type');
+                const path = $def.attr('src');
+                const url = buildUrl(path);
+                if (type === 'css') {
+                    createCss(url);
+                } else if (type === 'js') {
+                    createJs(url);
+                }
+            });
+        })();
     </script>
+
+
     <!-- favicon -->
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -59,24 +115,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-    <!-- js -->
-    <script src="/static/js/loading.js" data-load_page="true"></script>
-    <script src="/static/js/load-contents.js"></script>
-    <script src="/static/js/menu.js"></script>
-    <script src="/static/js/para.js"></script>
-    <script src="/static/js/pwabuttons.js"></script>
-    <script src="/static/js/reload.js"></script>
-
-    <script>
-        $('head').append('<script src="/static/js/async-load-twitter.js?nocache=' + new Date().getTime() + '" />');
-    </script>
-    <script>
-        $('head').append('<script src="/static/js/async-load-youtube.js?nocache=' + new Date().getTime() + '" />');
-    </script>
-    <script src="/static/js/butterfly-list.js"></script>
-    <script src="/static/js/glitch-animation.js"></script>
-    <script src="/static/js/protected-img.js"></script>
-    <script src="/static/js/visibility-control.js"></script>
 
 
     <style>

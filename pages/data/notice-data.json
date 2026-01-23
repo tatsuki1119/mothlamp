@@ -1,0 +1,121 @@
+[
+    {
+        "id": "20241113",
+        "contents": [
+            "本サイトを公開しました。",
+            "新規ページ <a href=\"/?p=web\">Web記事一覧</a> を公開しました。"
+        ]
+    },
+    {
+        "id": "20241209",
+        "contents": [
+            "新規記事 <a href=\"/?p=articles.hainenazo\">ハイネ謎解き</a> を公開しました。「モナリザの横顔」にて配布された謎解きの再現を掲載しています。"
+        ]
+    },
+    {
+        "id": "20241213",
+        "contents": [
+            "新規記事 <a href=\"/?p=articles.setlist\">セットリスト</a> を公開しました。ライブの際に更新します。"
+        ]
+    },
+    {
+        "id": "20241218",
+        "contents": [
+            "新規記事 <a href=\"/?p=articles.live-akuma-night-video\">悪魔 Night Duel Buster 動画まとめ</a> を公開しました。ファンにより撮影された動画の投稿をまとめています。",
+            "またフィルター機能により、メンバーや曲を絞って検索をすることが可能です。"
+        ]
+    },
+    {
+        "id": "20241229",
+        "contents": [
+            "公式より、<a href=\"https://phantomsiita.com/news/detail/74\">「ライブにおける注意事項及び禁止事項のご案内」</a>が投稿されました。本サイトのトップページにも、こちらのページへのリンクを追加しました。"
+        ]
+    },
+    {
+        "id": "20250105",
+        "contents": [
+            "本サイト名「誘蛾灯の導き」を命名しました。サイト名の由来は <a href=\"/?p=about\">本サイトについて</a> に記載しています。",
+            "ファントムシータ公式ホームページ内の会員コンテンツ「ハイネ」内の一つ、「シータ日記」の更新通知機能を、 <a href=\"https://x.com/mothlamp_info\">本サイトのX(Twitter)アカウント</a> にて実装しました。"
+        ]
+    },
+    {
+        "id": "20250108",
+        "contents": [
+            "本サイトのドメイン「mothlamp.info」を取得しました。"
+        ]
+    },
+    {
+        "id": "20250113",
+        "contents": [
+            "本サイト運営による <a href=\"/?p=discord\">Discordサーバー</a> のページを作成しました。"
+        ]
+    },
+    {
+        "id": "20250119",
+        "contents": [
+            "ファンアートを描かれている絵師さんを紹介する <a href=\"/?p=phanart\">ファンアート集</a> のページを作成しました。",
+            "<a href=\"/?p=phanart.guoxoua\">कㄑ”‎^. .^ ੭</a> さんのページを作成しました。"
+        ]
+    },
+    {
+        "id": "20250207",
+        "contents": [
+            "<a href=\"https://x.com/mothlamp_info\">本サイトのX(Twitter)アカウント</a> にて、ファントムシータ公式ホームページ内の会員コンテンツ「ハイネ」の更新通知を、既存の「シータ日記」に加え「質問箱」「お知らせ」も通知するようになりました。"
+        ]
+    },
+    {
+        "id": "20250212",
+        "contents": [
+            "<a href=\"/?p=phanart\">ファンアート集</a> に <a href=\"/?p=phanart.oan\">おあん</a> さんのページを追加しました。"
+        ]
+    },
+    {
+        "id": "20250306",
+        "contents": [
+            "<a href=\"/?p=phanart\">ファンアート集</a> の <a href=\"/?p=phanart.guoxoua\">कㄑ”‎^. .^ ੭</a> さんのページに <a href=\"/?p=phanart.guoxoua-nametag\">名刺用素材</a> を追加しました。「〇〇会」などで素材としてご利用ください。"
+        ]
+    },
+    {
+        "id": "20250311",
+        "contents": [
+            "<a href=\"/?p=articles.vlog-moth-to-a-flame\">Phantom Siita 1st WORLD TOUR “Moth to a flame” 公式の投稿まとめ</a> を公開しました。"
+        ]
+    },
+    {
+        "id": "20250403",
+        "contents": [
+            "<a href=\"/?p=play.haine-test\">ハイネ共通テスト</a> を公開しました。"
+        ]
+    },
+    {
+        "id": "20250531",
+        "contents": [
+            "<a href=\"/?p=phanart.hisui-special\">灯翠さん ファンアート</a> まとめページを公開しました。"
+        ]
+    },
+    {
+        "id": "20250619",
+        "contents": [
+            "本サイト運営による新アカウント <a href=\"https://x.com/siita_days\">This Day in Phantom Siita</a> が開設されました。",
+            "「その日にファントムシータに何があったのか」を自動で投稿しています。"
+        ]
+    },
+    {
+        "id": "20250626",
+        "contents": [
+            "トップページにメンバーのSNSリンクを追加しました。"
+        ]
+    },
+    {
+        "id": "20250717",
+        "contents": [
+            "<a href=\"/?p=schedule\">スケジュール</a> 機能を追加しました。"
+        ]
+    },
+    {
+        "id": "20250906",
+        "contents": [
+            "<a href=\"/?p=watermark\">透かし加工ツール</a> を追加しました。画像へIDなどを重ねる加工にご利用いただけます。"
+        ]
+    }
+]
