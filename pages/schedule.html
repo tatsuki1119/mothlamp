@@ -82,7 +82,6 @@
         // フィルター適用関数（key: all, live, other など）
         function applyFilter(key) {
             const $containers = $('#schedule, #schedule-past');
-
             // まずアイテム自体の表示切替
             $containers.find('[class^="schedule_"]').each(function () {
                 const $item = $(this);
@@ -92,19 +91,15 @@
                     $item.hide();
                 }
             });
-
             // ★ 月セパレータの表示制御
             $containers.each(function () {
                 const $container = $(this);
-
                 $container.find('.month-separator').each(function () {
                     const $separator = $(this);
-
                     // この月セパレータから次のセパレータまで
                     const $itemsInMonth = $separator
                         .nextUntil('.month-separator')
                         .find('[class^="schedule_"]:visible');
-
                     if ($itemsInMonth.length === 0) {
                         $separator.hide();
                     } else {
@@ -115,14 +110,11 @@
             // ★ 表示中の最初の月セパレータを特定
             $('#schedule, #schedule-past').each(function () {
                 const $container = $(this);
-
                 // まず「全部」から除去（visible 条件なし）
                 $container.find('.month-separator')
                     .removeClass('is-first-visible');
-
                 // ★ 表示中の最初の月セパレータを1つだけ決める
                 $('.month-separator').removeClass('is-first-visible');
-
                 $('.month-separator:visible')
                     .first()
                     .addClass('is-first-visible');
@@ -182,21 +174,16 @@
 
         function renderSchedule(data) {
             const youbiArray = ['日', '月', '火', '水', '木', '金', '土'];
-
             // JST 今日
             const jstNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
             const jstToday = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
             let nextMarked = false;
-
             // 日付順にソート（昇順）
             data.sort((a, b) => new Date(a.date) - new Date(b.date));
-
             let lastFutureMonth = '';
             let lastPastMonth = '';
-
             for (let i = 0; i < data.length; i++) {
                 const schedule = data[i];
-
                 const scheduleDate = new Date(
                     new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" })
                 );
@@ -205,17 +192,14 @@
                     scheduleDate.getMonth(),
                     scheduleDate.getDate()
                 );
-
                 const year = scheduleDate.getFullYear();
                 const month = String(scheduleDate.getMonth() + 1).padStart(2, '0');
                 const day = String(scheduleDate.getDate()).padStart(2, '0');
                 const formattedDate = `${year}.${month}.${day}`;
                 const dayOfWeek = youbiArray[scheduleDate.getDay()];
                 const ymKey = `${year}.${month}`;
-
                 const tagClass = `schedule_${String(schedule.tag).toLowerCase()}`;
                 const tagText = String(schedule.tag).toUpperCase();
-
                 const listItem = `
                         <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
                             <li class="${tagClass}">
@@ -227,7 +211,6 @@
                                 <p class="title">${schedule.title}</p>
                             </li>
                         </a>`;
-
                 // ==========
                 // 未来
                 // ==========
@@ -241,14 +224,12 @@
                             `);
                         lastFutureMonth = ymKey;
                     }
-
                     // ★ 最初の未来イベントだけ #next を付与
                     let $item = $(listItem);
                     if (!nextMarked) {
                         $item.find('li').attr('id', 'next');
                         nextMarked = true;
                     }
-
                     $('#schedule').append($item);
                 }
                 // ==========
@@ -267,9 +248,7 @@
                     $('#schedule-past').append(listItem);
                 }
             }
-
             $('#schedule-loading').hide();
-
             applyFilter($('.filter-toggle.active').data('key'));
         }
     });
@@ -279,7 +258,6 @@
         $('#show-past-link').on('click', function () {
             const $past = $('#schedule-past');
             const isVisible = $past.is(':visible');
-
             if (isVisible) {
                 $past.hide();
                 $('body').removeClass('showing-past'); // ★
@@ -289,9 +267,7 @@
                 $past.show();
                 $('body').addClass('showing-past');
                 $('#show-past-link p').text('過去のスケジュールを非表示');
-
                 applyFilter($('.filter-toggle.active').data('key'));
-
                 // ★ レイアウト確定後にスクロール
                 requestAnimationFrame(() => {
                     const $next = $('#next');
