@@ -2,9 +2,43 @@
 <div id="page-description" style="display: none;">ファントムシータのイベント等のスケジュールです。</div>
 
 <style>
-    #next {
-        background-color: #ffffff33;
+    .month-separator {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin: 2% 0 0;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ffffff33;
+    }
+
+    /* デフォルト：大きい余白 */
+    .month-separator {
+        margin-top: 80px;
+    }
+
+    /* ★ 表示中の先頭だけ余白を小さく */
+    .month-separator.is-first-visible {
+        margin-top: 16px;
+    }
+
+    .month-separator .month {
+        font-size: 2.4em;
         font-weight: bold;
+        line-height: 1;
+    }
+
+    .month-separator .year {
+        font-size: 0.9em;
+    }
+
+    /* 過去側トーン */
+    #schedule-past .month-separator {
+        border-color: #77777755;
+    }
+
+    #schedule-past .month-separator .month,
+    #schedule-past .month-separator .year {
+        color: #777;
     }
 </style>
 
@@ -35,46 +69,73 @@
         </div>
     </div>
     <script>
-        $(document).ready(function () {
-            // フィルター切り替えイベント
-            $('#filters').on('click', '.filter-toggle', function () {
-                // ラジオボタン風に .active を切り替える
-                $('.filter-toggle').removeClass('active');
-                $(this).addClass('active');
 
-                // 選択されたキーを使ってフィルターを適用
-                const key = $(this).data('key');
-                applyFilter(key);
+        // フィルター切り替えイベント
+        $('#filters').on('click', '.filter-toggle', function () {
+            // ラジオボタン風に .active を切り替える
+            $('.filter-toggle').removeClass('active');
+            $(this).addClass('active');
+            // 選択されたキーを使ってフィルターを適用
+            const key = $(this).data('key');
+            applyFilter(key);
+        });
+        // フィルター適用関数（key: all, live, other など）
+        function applyFilter(key) {
+            const $containers = $('#schedule, #schedule-past');
+
+            // まずアイテム自体の表示切替
+            $containers.find('[class^="schedule_"]').each(function () {
+                const $item = $(this);
+                if (key === 'all' || $item.hasClass(`schedule_${key}`)) {
+                    $item.show();
+                } else {
+                    $item.hide();
+                }
             });
 
-            // フィルター適用関数（key: all, live, other など）
-            function applyFilter(key) {
-                $('#schedule, #schedule-past')
-                    .find('[class^="schedule_"]') // schedule_ で始まるクラスを持つ要素すべて
-                    .each(function () {
-                        const $item = $(this);
-                        if (key === 'all') {
-                            $item.show();
-                        } else {
-                            if ($item.hasClass(`schedule_${key}`)) {
-                                $item.show();
-                            } else {
-                                $item.hide();
-                            }
-                        }
-                    });
-            }
+            // ★ 月セパレータの表示制御
+            $containers.each(function () {
+                const $container = $(this);
 
-            // 動的にコンテンツを追加した後もフィルターを再適用する場合に呼び出す
-            function refreshFilter() {
-                const activeKey = $('.filter-toggle.active').data('key');
-                applyFilter(activeKey);
-            }
+                $container.find('.month-separator').each(function () {
+                    const $separator = $(this);
 
-            // 例：renderSchedule などの最後でこれを呼べばOK
-            // renderSchedule の末尾に追加：
-            // refreshFilter();
-        });
+                    // この月セパレータから次のセパレータまで
+                    const $itemsInMonth = $separator
+                        .nextUntil('.month-separator')
+                        .find('[class^="schedule_"]:visible');
+
+                    if ($itemsInMonth.length === 0) {
+                        $separator.hide();
+                    } else {
+                        $separator.show();
+                    }
+                });
+            });
+            // ★ 表示中の最初の月セパレータを特定
+            $('#schedule, #schedule-past').each(function () {
+                const $container = $(this);
+
+                // まず「全部」から除去（visible 条件なし）
+                $container.find('.month-separator')
+                    .removeClass('is-first-visible');
+
+                // ★ 表示中の最初の月セパレータを1つだけ決める
+                $('.month-separator').removeClass('is-first-visible');
+
+                $('.month-separator:visible')
+                    .first()
+                    .addClass('is-first-visible');
+            });
+        }
+        // 動的にコンテンツを追加した後もフィルターを再適用する場合に呼び出す
+        function refreshFilter() {
+            const activeKey = $('.filter-toggle.active').data('key');
+            applyFilter(activeKey);
+        }
+        // 例：renderSchedule などの最後でこれを呼べばOK
+        // renderSchedule の末尾に追加：
+        // refreshFilter();
 
     </script>
 </div>
@@ -108,26 +169,6 @@
 
 <script>
     $(document).ready(function () {
-        $('#show-past-link').on('click', function () {
-            const $past = $('#schedule-past');
-            const isVisible = $past.is(':visible');
-
-            if (isVisible) {
-                // 非表示にする
-                $past.hide();
-                $('#show-past-link p').text('過去のスケジュールを表示');
-            } else {
-                // 表示する
-                $past.show();
-                $('#show-past-link p').text('過去のスケジュールを非表示');
-            }
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function () {
-        // 既に実行済みなら終了
         if (window.__scheduleLoaded) return;
         window.__scheduleLoaded = true;
 
@@ -142,50 +183,125 @@
         function renderSchedule(data) {
             const youbiArray = ['日', '月', '火', '水', '木', '金', '土'];
 
-            // JSTの現在日時（日付部分のみ）
+            // JST 今日
             const jstNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
             const jstToday = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
+            let nextMarked = false;
+
+            // 日付順にソート（昇順）
+            data.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            let lastFutureMonth = '';
+            let lastPastMonth = '';
 
             for (let i = 0; i < data.length; i++) {
                 const schedule = data[i];
 
-                // JSTに変換
-                const scheduleDate = new Date(new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
-                const scheduleDay = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate());
+                const scheduleDate = new Date(
+                    new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" })
+                );
+                const scheduleDay = new Date(
+                    scheduleDate.getFullYear(),
+                    scheduleDate.getMonth(),
+                    scheduleDate.getDate()
+                );
 
-                // 日付のフォーマット
                 const year = scheduleDate.getFullYear();
                 const month = String(scheduleDate.getMonth() + 1).padStart(2, '0');
                 const day = String(scheduleDate.getDate()).padStart(2, '0');
                 const formattedDate = `${year}.${month}.${day}`;
                 const dayOfWeek = youbiArray[scheduleDate.getDay()];
+                const ymKey = `${year}.${month}`;
 
                 const tagClass = `schedule_${String(schedule.tag).toLowerCase()}`;
                 const tagText = String(schedule.tag).toUpperCase();
 
                 const listItem = `
-            <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
-                <li class="${tagClass}">
-                    <p class="date">
-                        <svg role="img" aria-label="蝶々">
-                            <use href="#butterfly"></use>
-                        </svg>${formattedDate}（${dayOfWeek}）【${tagText}】
-                    </p>
-                    <p class="title">${schedule.title}</p>
-                </li>
-            </a>
-        `;
+                        <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
+                            <li class="${tagClass}">
+                                <p class="date">
+                                    <svg role="img" aria-label="蝶々">
+                                        <use href="#butterfly"></use>
+                                    </svg>${formattedDate}（${dayOfWeek}）【${tagText}】
+                                </p>
+                                <p class="title">${schedule.title}</p>
+                            </li>
+                        </a>`;
 
-                // 日付によって表示先を分ける
+                // ==========
+                // 未来
+                // ==========
                 if (scheduleDay >= jstToday) {
-                    $('#schedule').append(listItem); // 本日以降
-                } else {
-                    $('#schedule-past').append(listItem); // 過去
+                    if (lastFutureMonth !== ymKey) {
+                        $('#schedule').append(`
+                                <div class="month-separator">
+                                    <span class="month">${month}</span>
+                                    <span class="year">${year}</span>
+                                </div>
+                            `);
+                        lastFutureMonth = ymKey;
+                    }
+
+                    // ★ 最初の未来イベントだけ #next を付与
+                    let $item = $(listItem);
+                    if (!nextMarked) {
+                        $item.find('li').attr('id', 'next');
+                        nextMarked = true;
+                    }
+
+                    $('#schedule').append($item);
+                }
+                // ==========
+                // 過去
+                // ==========
+                else {
+                    if (lastPastMonth !== ymKey) {
+                        $('#schedule-past').append(`
+                                <div class="month-separator">
+                                    <span class="month">${month}</span>
+                                    <span class="year">${year}</span>
+                                </div>
+                            `);
+                        lastPastMonth = ymKey;
+                    }
+                    $('#schedule-past').append(listItem);
                 }
             }
 
             $('#schedule-loading').hide();
-        }
 
+            applyFilter($('.filter-toggle.active').data('key'));
+        }
+    });
+
+
+    $(document).ready(function () {
+        $('#show-past-link').on('click', function () {
+            const $past = $('#schedule-past');
+            const isVisible = $past.is(':visible');
+
+            if (isVisible) {
+                $past.hide();
+                $('body').removeClass('showing-past'); // ★
+                $('#show-past-link p').text('過去のスケジュールを表示');
+                applyFilter($('.filter-toggle.active').data('key'));
+            } else {
+                $past.show();
+                $('body').addClass('showing-past');
+                $('#show-past-link p').text('過去のスケジュールを非表示');
+
+                applyFilter($('.filter-toggle.active').data('key'));
+
+                // ★ レイアウト確定後にスクロール
+                requestAnimationFrame(() => {
+                    const $next = $('#next');
+                    if ($next.length) {
+                        $('html, body').animate({
+                            scrollTop: $next.offset().top - 80
+                        }, 10);
+                    }
+                });
+            }
+        });
     });
 </script>

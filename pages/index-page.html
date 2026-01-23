@@ -208,25 +208,18 @@
             // スケジュールを描画する関数（JSTの現在日時以降の3件のみ表示）
             function renderSchedule(data) {
                 const youbiArray = ['日', '月', '火', '水', '木', '金', '土'];
-
                 // JSTの現在日時を取得
                 const now = new Date();
                 const jstNow = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
-
                 let count = 0;
-
                 for (let i = 0; i < data.length; i++) {
                     if (count >= 3) break;
-
                     const schedule = data[i];
-
                     // 日時をJSTとして変換
                     const scheduleDate = new Date(new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
-
                     // 当日以降か判定（時刻は無視して日付だけで比較）
                     const jstToday = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
                     const scheduleDay = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate());
-
                     if (scheduleDay >= jstToday) {
                         // フォーマット（例：2025.07.20）
                         const year = scheduleDate.getFullYear();
@@ -234,7 +227,6 @@
                         const day = String(scheduleDate.getDate()).padStart(2, '0');
                         const formattedDate = `${year}.${month}.${day}`;
                         const dayOfWeek = youbiArray[scheduleDate.getDay()];
-
                         const listItem = `
                             <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
                                 <li>
@@ -251,7 +243,6 @@
                         count++;
                     }
                 }
-
                 $('#schedule-loading').hide();
             }
         });
