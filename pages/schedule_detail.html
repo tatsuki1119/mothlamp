@@ -32,78 +32,41 @@
 
 <script>
     $(document).ready(function () {
-        const apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
+        const apiurl = "https://g-api.mothlamp.info/api";
         const target_sheet = "schedule";
         const url = apiurl + "?target=" + target_sheet;
-
-        // キャッシュ保持時間（ミリ秒）
-        const CACHE_DURATION = 60 * 60 * 1000;
-        const CACHE_KEY = "schedule_cache";
-        const TIMESTAMP_KEY = "schedule_cache_time";
-
-        const cachedData = sessionStorage.getItem(CACHE_KEY);
-        const cachedTime = sessionStorage.getItem(TIMESTAMP_KEY);
-        const now = new Date().getTime();
 
         // URLからクエリパラメータを取得
         const urlParams = new URLSearchParams(window.location.search);
         const scParam = urlParams.get("sc"); // 例: "1"（なければ null）
 
-        if (cachedData && cachedTime && (now - cachedTime < CACHE_DURATION)) {
-            // セッションキャッシュが有効な場合
-            const data = JSON.parse(cachedData);
+        $.getJSON(url, function (data) {
             renderSchedule(data, scParam);
-        } else {
-            // キャッシュがない、または期限切れの場合
-            $.getJSON(url, function (data) {
-                // セッションキャッシュ保存
-                sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
-                sessionStorage.setItem(TIMESTAMP_KEY, now.toString());
-
-                renderSchedule(data, scParam);
-            });
-        }
+        });
 
         function renderSchedule(data, sc) {
             const youbiArray = ['日', '月', '火', '水', '木', '金', '土'];
-
-            // JSTの現在日時（日付部分のみ）
-            const jstNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
-            const jstToday = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
-
-            let foundNext = false; // 最初の1件だけに #next を付けるためのフラグ
-
             for (let i = 0; i < data.length; i++) {
                 const schedule = data[i];
-
                 // sc（index）が指定されている場合は一致するものだけ表示
                 if (sc !== null && String(schedule.index) !== sc) {
                     continue;
                 }
-
                 // JSTに変換
                 const scheduleDate = new Date(new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
                 const scheduleDay = new Date(scheduleDate.getFullYear(), scheduleDate.getMonth(), scheduleDate.getDate());
-
                 // フォーマット（例：2025.07.20）
                 const year = scheduleDate.getFullYear();
                 const month = String(scheduleDate.getMonth() + 1).padStart(2, '0');
                 const day = String(scheduleDate.getDate()).padStart(2, '0');
                 const formattedDate = `${year}.${month}.${day}`;
                 const dayOfWeek = youbiArray[scheduleDate.getDay()];
-
-                // 最初の「本日以降」のデータにだけ id="next" を付ける
-                const liId = (!foundNext && scheduleDay >= jstToday) ? 'id="next"' : '';
-                if (liId) foundNext = true;
-
                 // detailが空なら「詳細はありません」と表示
                 let detailText = schedule.detail?.trim() ? schedule.detail : "詳細はありません";
-
                 // HTMLに整形（エスケープ→改行→URLリンク化）
                 let detailHtml = escapeHtml(detailText)
                     .replace(/\n/g, "<br>")
                     .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
-
                 const listItem = `
                     <div class="contents_block">
                         <p>${formattedDate}（${dayOfWeek}）【${String(schedule.tag).toUpperCase()}】</p>
@@ -115,7 +78,6 @@
                 `;
                 $('#schedule').append(listItem);
             }
-
             $('#schedule-loading').hide();
         }
         // HTMLエスケープ関数（XSS対策）

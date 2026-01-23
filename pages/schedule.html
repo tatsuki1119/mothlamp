@@ -1,6 +1,271 @@
 <div id="page-title" style="display: none;">スケジュール [誘蛾灯の導き]</div>
 <div id="page-description" style="display: none;">ファントムシータのイベント等のスケジュールです。</div>
 
+
+<div class="contents_block">
+    <h1 class="glitch-text">スケジュール</h1>
+    <p style="font-size: small;">
+        <span class="word-chunk">
+            ※ 公式ではないため、間違いがある可能性があります。
+        </span>
+        <span class="word-chunk">
+            あらかじめご了承ください。
+        </span>
+    </p>
+</div>
+
+<!-- 
+########## ########## ########## ########## ##########
+########## ########## ########## ########## ##########
+########## ########## ########## ########## ##########
+########## ########## ########## ########## ##########
+########## ########## ########## ########## ##########
+-->
+
+
+<style>
+    .calendar-wrapper {
+        margin: auto;
+    }
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .calendar-nav {
+        padding: 10px 5%;
+        border: 1px solid #757575;
+        border-radius: 5px;
+        background-color: #391515;
+        color: #999999;
+        cursor: pointer;
+        user-select: none;
+        line-height: 1;
+    }
+
+    .dow {
+        text-align: center;
+        font-weight: bold;
+        padding: 6px 0;
+        border-bottom: 1px solid #ffffff22;
+    }
+
+    .day {
+        border: 1px solid #ffffff22;
+        min-height: 60px;
+        font-size: 0.7em;
+
+        @media screen and (min-width: 767px) {
+            min-height: 100px;
+            font-size: 1.0em;
+        }
+    }
+
+    .day.empty {
+        border: none;
+        background: transparent;
+    }
+
+    .day-number {
+        font-weight: bold;
+        margin: 0 0 2px 6px;
+    }
+
+    .event {
+        font-size: 0.75em;
+        margin-bottom: 4px;
+        line-height: 1.3;
+    }
+
+    .event a {
+        color: inherit;
+        text-decoration: none;
+        opacity: 0.9;
+    }
+
+    .event a:hover {
+        text-decoration: underline;
+        opacity: 1;
+    }
+
+    .event a:not(:visited),
+    .event a:visited {
+        color: #ffffff;
+    }
+
+    /* 日曜（Sun） */
+    .calendar-grid .dow:nth-child(1),
+    .day.sunday .day-number {
+        color: #ff5555;
+    }
+
+    /* 土曜（Sat） */
+    .calendar-grid .dow:nth-child(7),
+    .day.saturday .day-number {
+        color: #4da6ff;
+    }
+
+    .day.today {
+        background: #890c0c55;
+    }
+</style>
+
+<div class="calendar-wrapper">
+    <div class="contents_block" style="padding: 0;">
+        <div class="calendar-header">
+            <div id="prev-month" class="calendar-nav">◀</div>
+            <h4 id="calendar-title"></h4>
+            <div id="next-month" class="calendar-nav">▶</div>
+        </div>
+
+        <div class="calendar-grid">
+            <div class="dow">Sun</div>
+            <div class="dow">Mon</div>
+            <div class="dow">Tue</div>
+            <div class="dow">Wed</div>
+            <div class="dow">Thu</div>
+            <div class="dow">Fri</div>
+            <div class="dow">Sat</div>
+        </div>
+
+        <div id="calendar-days" class="calendar-grid"></div>
+    </div>
+
+</div>
+
+<script>
+    $(function () {
+        let scheduleData = [];
+        let currentYear;
+        let currentMonth;
+
+        const apiurl = "https://g-api.mothlamp.info/api?target=schedule";
+
+        function isSameDay(dateStr, year, month, day) {
+            const d = new Date(dateStr);
+            return (
+                d.getFullYear() === year &&
+                d.getMonth() === month &&
+                d.getDate() === day
+            );
+        }
+
+
+        // =========================
+        // データ取得
+        // =========================
+        $.getJSON(apiurl, function (data) {
+            scheduleData = data;
+
+            const today = new Date();
+            currentYear = today.getFullYear();
+            currentMonth = today.getMonth(); // 0始まり
+
+            renderCalendar(currentYear, currentMonth);
+            bindNav();
+        });
+
+        // =========================
+        // カレンダー描画
+        // =========================
+        function renderCalendar(year, month) {
+            const nowJST = new Date(
+                new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" })
+            );
+            const todayY = nowJST.getFullYear();
+            const todayM = nowJST.getMonth();
+            const todayD = nowJST.getDate();
+            $('#calendar-days').empty();
+            $('#calendar-title').text(`${year}.${String(month + 1).padStart(2, '0')}`);
+
+            const firstDay = new Date(year, month, 1).getDay(); // 日曜始まり
+            const totalDays = new Date(year, month + 1, 0).getDate();
+
+            // 空白セル
+            for (let i = 0; i < firstDay; i++) {
+                $('#calendar-days').append('<div class="day empty"></div>');
+            }
+
+            for (let d = 1; d <= totalDays; d++) {
+                const dayOfWeek = new Date(year, month, d).getDay(); // 0=日,6=土
+
+                const dayEvents = scheduleData.filter(e =>
+                    isSameDay(e.date, year, month, d)
+                );
+
+                let dayClass = '';
+                if (dayOfWeek === 0) dayClass += ' sunday';
+                if (dayOfWeek === 6) dayClass += ' saturday';
+
+                if (
+                    year === todayY &&
+                    month === todayM &&
+                    d === todayD
+                ) {
+                    dayClass += ' today';
+                }
+
+                let html = `
+                    <div class="day ${dayClass}">
+                        <div class="day-number">${d}</div>
+                `;
+
+                dayEvents.forEach(e => {
+                    html += `
+                        <div class="event">
+                            <a href="/?p=schedule_detail&sc=${e.index}">
+                                【${String(e.tag).toUpperCase()}】${e.title}
+                            </a>
+                        </div>
+                    `;
+                });
+
+                html += '</div>';
+                $('#calendar-days').append(html);
+            }
+        }
+
+        // =========================
+        // 月切り替え
+        // =========================
+        function bindNav() {
+            $('#prev-month').on('click', function () {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                renderCalendar(currentYear, currentMonth);
+            });
+
+            $('#next-month').on('click', function () {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                renderCalendar(currentYear, currentMonth);
+            });
+        }
+    });
+</script>
+
+
+<!-- 
+########## ########## ########## ########## ##########
+########## ########## ########## ########## ##########
+########## ########## ########## ########## ##########
+########## ########## ########## ########## ##########
+########## ########## ########## ########## ##########
+-->
+
 <style>
     .month-separator {
         display: flex;
@@ -43,16 +308,6 @@
 </style>
 
 <div class="contents_block">
-    <h1 class="glitch-text">スケジュール</h1>
-    <p style="font-size: small;">
-        <span class="word-chunk">
-            ※ 公式ではないため、間違いがある可能性があります。
-        </span>
-        <span class="word-chunk">
-            あらかじめご了承ください。
-        </span>
-    </p>
-    <hr>
     <div id="filters">
         <div class="filter-group" style="margin-bottom: 0;">
             <div class="filter-toggle active" data-key="all">ALL</div>
@@ -129,7 +384,7 @@
 
             if (!hasVisibleItem) {
                 $('#schedule').prepend(`
-            <div class="no-schedule-message" style="padding: 24px; text-align: center; opacity: 0.7;">
+            <div class="no-schedule-message" style="padding: 10px 0; text-align: center; opacity: 0.7;">
                 <svg role="img" aria-label="リボン">
                     <use href="#butterfly"></use>
                 </svg>
