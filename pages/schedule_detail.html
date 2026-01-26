@@ -32,7 +32,13 @@
 
 <script>
     $(document).ready(function () {
-        const apiurl = "https://g-api.mothlamp.info/api";
+        let apiurl;
+        // ホスト名で切り替え
+        if (location.hostname.startsWith("192.168.")) {
+            apiurl = "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
+        } else {
+            apiurl = "https://g-api.mothlamp.info/api";
+        }
         const target_sheet = "schedule";
         const url = apiurl + "?target=" + target_sheet;
 

@@ -1,29 +1,98 @@
 <div id="page-title" style="display: none;">スケジュール [誘蛾灯の導き]</div>
 <div id="page-description" style="display: none;">ファントムシータのイベント等のスケジュールです。</div>
 
-
 <div class="contents_block">
     <h1 class="glitch-text">スケジュール</h1>
-    <p style="font-size: small;">
+    <span style="position: absolute; left: 3px; bottom: 3px; font-size: 0.6rem; opacity: 0.8; line-height: 1.2;">
         <span class="word-chunk">
             ※ 公式ではないため、間違いがある可能性があります。
         </span>
         <span class="word-chunk">
             あらかじめご了承ください。
         </span>
-    </p>
+    </span>
 </div>
 
-<!-- 
-########## ########## ########## ########## ##########
-########## ########## ########## ########## ##########
-########## ########## ########## ########## ##########
-########## ########## ########## ########## ##########
-########## ########## ########## ########## ##########
--->
+
+<div class="calendar-wrapper">
+    <div class="contents_block" style="padding: 0;">
+        <div class="calendar-header">
+            <div id="prev-month" class="calendar-nav">◀</div>
+            <h4 id="calendar-title"></h4>
+            <div id="next-month" class="calendar-nav">▶</div>
+        </div>
+        <div class="calendar-grid">
+            <div class="dow">Sun</div>
+            <div class="dow">Mon</div>
+            <div class="dow">Tue</div>
+            <div class="dow">Wed</div>
+            <div class="dow">Thu</div>
+            <div class="dow">Fri</div>
+            <div class="dow">Sat</div>
+        </div>
+        <div id="calendar-loading" class="list-loading">
+            <svg role="img" aria-label="リボン">
+                <use href="#butterfly"></use>
+            </svg>
+            Loading...
+            <svg role="img" aria-label="リボン">
+                <use href="#butterfly"></use>
+            </svg>
+        </div>
+        <div id="calendar-days" class="calendar-grid"></div>
+    </div>
+</div>
+
+<div class="contents_block">
+    <div id="filters">
+        <div class="filter-group" style="margin-bottom: 0;">
+            <div class="filter-toggle active" data-key="all">ALL</div>
+            <div class="filter-toggle" data-key="release">RELEASE</div>
+            <div class="filter-toggle" data-key="live">LIVE</div>
+            <div class="filter-toggle" data-key="event">EVENT</div>
+            <div class="filter-toggle" data-key="tv">TV</div>
+            <div class="filter-toggle" data-key="youtube">YOUTUBE</div>
+            <div class="filter-toggle" data-key="radio">RADIO</div>
+            <div class="filter-toggle" data-key="magazine">MAGAZINE</div>
+            <div class="filter-toggle" data-key="web">WEB</div>
+            <div class="filter-toggle" data-key="ticket">TICKET</div>
+            <div class="filter-toggle" data-key="goods">GOODS</div>
+            <div class="filter-toggle" data-key="other">OTHER</div>
+        </div>
+    </div>
+
+</div>
+
+<div id="show-past-link" class="contents_block contents_block_has_a">
+    <a class="contents_block_a" href="javascript:void(0);"></a>
+    <p>過去のスケジュールを表示</p>
+</div>
+
+<div class="contents_block">
+    <div id="schedule-loading" class="list-loading">
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+        Loading...
+        <svg role="img" aria-label="リボン">
+            <use href="#butterfly"></use>
+        </svg>
+    </div>
+    <ul class="link-list">
+        <div id="schedule-past" style="display: none;"></div>
+        <div id="schedule"></div>
+    </ul>
+</div>
+
+<div class="contents_block">
+
+</div>
 
 
 <style>
+    /* ==================================================
+    カレンダー
+    ================================================== */
     .calendar-wrapper {
         margin: auto;
     }
@@ -50,12 +119,16 @@
         line-height: 1;
     }
 
+    /* 曜日ヘッダ */
+
     .dow {
         text-align: center;
         font-weight: bold;
         padding: 6px 0;
         border-bottom: 1px solid #ffffff22;
     }
+
+    /* 日付セル */
 
     .day {
         border: 1px solid #ffffff22;
@@ -64,7 +137,7 @@
 
         @media screen and (min-width: 767px) {
             min-height: 100px;
-            font-size: 1.0em;
+            font-size: 1em;
         }
     }
 
@@ -78,6 +151,28 @@
         margin: 0 0 2px 6px;
     }
 
+    /* 今日 */
+
+    .day.today {
+        background: #890c0c55;
+    }
+
+    /* 土日 */
+
+    .calendar-grid .dow:nth-child(1),
+    .day.sunday .day-number {
+        color: #ff5555;
+    }
+
+    .calendar-grid .dow:nth-child(7),
+    .day.saturday .day-number {
+        color: #4da6ff;
+    }
+
+    /* ==================================================
+    カレンダー内イベント
+    ================================================== */
+
     .event {
         font-size: 0.75em;
         margin-bottom: 4px;
@@ -85,14 +180,9 @@
     }
 
     .event a {
-        color: inherit;
+        color: #ffffff;
         text-decoration: none;
         opacity: 0.9;
-    }
-
-    .event a:hover {
-        text-decoration: underline;
-        opacity: 1;
     }
 
     .event a:not(:visited),
@@ -100,188 +190,24 @@
         color: #ffffff;
     }
 
-    /* 日曜（Sun） */
-    .calendar-grid .dow:nth-child(1),
-    .day.sunday .day-number {
-        color: #ff5555;
+    .event a:hover {
+        text-decoration: underline;
+        opacity: 1;
     }
 
-    /* 土曜（Sat） */
-    .calendar-grid .dow:nth-child(7),
-    .day.saturday .day-number {
-        color: #4da6ff;
-    }
+    /* ==================================================
+    月セパレータ
+    ================================================== */
 
-    .day.today {
-        background: #890c0c55;
-    }
-</style>
-
-<div class="calendar-wrapper">
-    <div class="contents_block" style="padding: 0;">
-        <div class="calendar-header">
-            <div id="prev-month" class="calendar-nav">◀</div>
-            <h4 id="calendar-title"></h4>
-            <div id="next-month" class="calendar-nav">▶</div>
-        </div>
-
-        <div class="calendar-grid">
-            <div class="dow">Sun</div>
-            <div class="dow">Mon</div>
-            <div class="dow">Tue</div>
-            <div class="dow">Wed</div>
-            <div class="dow">Thu</div>
-            <div class="dow">Fri</div>
-            <div class="dow">Sat</div>
-        </div>
-
-        <div id="calendar-days" class="calendar-grid"></div>
-    </div>
-
-</div>
-
-<script>
-    $(function () {
-        let scheduleData = [];
-        let currentYear;
-        let currentMonth;
-
-        const apiurl = "https://g-api.mothlamp.info/api?target=schedule";
-
-        function isSameDay(dateStr, year, month, day) {
-            const d = new Date(dateStr);
-            return (
-                d.getFullYear() === year &&
-                d.getMonth() === month &&
-                d.getDate() === day
-            );
-        }
-
-
-        // =========================
-        // データ取得
-        // =========================
-        $.getJSON(apiurl, function (data) {
-            scheduleData = data;
-
-            const today = new Date();
-            currentYear = today.getFullYear();
-            currentMonth = today.getMonth(); // 0始まり
-
-            renderCalendar(currentYear, currentMonth);
-            bindNav();
-        });
-
-        // =========================
-        // カレンダー描画
-        // =========================
-        function renderCalendar(year, month) {
-            const nowJST = new Date(
-                new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" })
-            );
-            const todayY = nowJST.getFullYear();
-            const todayM = nowJST.getMonth();
-            const todayD = nowJST.getDate();
-            $('#calendar-days').empty();
-            $('#calendar-title').text(`${year}.${String(month + 1).padStart(2, '0')}`);
-
-            const firstDay = new Date(year, month, 1).getDay(); // 日曜始まり
-            const totalDays = new Date(year, month + 1, 0).getDate();
-
-            // 空白セル
-            for (let i = 0; i < firstDay; i++) {
-                $('#calendar-days').append('<div class="day empty"></div>');
-            }
-
-            for (let d = 1; d <= totalDays; d++) {
-                const dayOfWeek = new Date(year, month, d).getDay(); // 0=日,6=土
-
-                const dayEvents = scheduleData.filter(e =>
-                    isSameDay(e.date, year, month, d)
-                );
-
-                let dayClass = '';
-                if (dayOfWeek === 0) dayClass += ' sunday';
-                if (dayOfWeek === 6) dayClass += ' saturday';
-
-                if (
-                    year === todayY &&
-                    month === todayM &&
-                    d === todayD
-                ) {
-                    dayClass += ' today';
-                }
-
-                let html = `
-                    <div class="day ${dayClass}">
-                        <div class="day-number">${d}</div>
-                `;
-
-                dayEvents.forEach(e => {
-                    html += `
-                        <div class="event">
-                            <a href="/?p=schedule_detail&sc=${e.index}">
-                                【${String(e.tag).toUpperCase()}】${e.title}
-                            </a>
-                        </div>
-                    `;
-                });
-
-                html += '</div>';
-                $('#calendar-days').append(html);
-            }
-        }
-
-        // =========================
-        // 月切り替え
-        // =========================
-        function bindNav() {
-            $('#prev-month').on('click', function () {
-                currentMonth--;
-                if (currentMonth < 0) {
-                    currentMonth = 11;
-                    currentYear--;
-                }
-                renderCalendar(currentYear, currentMonth);
-            });
-
-            $('#next-month').on('click', function () {
-                currentMonth++;
-                if (currentMonth > 11) {
-                    currentMonth = 0;
-                    currentYear++;
-                }
-                renderCalendar(currentYear, currentMonth);
-            });
-        }
-    });
-</script>
-
-
-<!-- 
-########## ########## ########## ########## ##########
-########## ########## ########## ########## ##########
-########## ########## ########## ########## ##########
-########## ########## ########## ########## ##########
-########## ########## ########## ########## ##########
--->
-
-<style>
     .month-separator {
         display: flex;
         align-items: baseline;
         gap: 8px;
-        margin: 2% 0 0;
         padding-bottom: 4px;
         border-bottom: 1px solid #ffffff33;
-    }
-
-    /* デフォルト：大きい余白 */
-    .month-separator {
         margin-top: 80px;
     }
 
-    /* ★ 表示中の先頭だけ余白を小さく */
     .month-separator.is-first-visible {
         margin-top: 16px;
     }
@@ -296,9 +222,22 @@
         font-size: 0.9em;
     }
 
-    /* 過去側トーン */
+    /* ==================================================
+    過去スケジュール表示
+    ================================================== */
+
+    #schedule-past * {
+        color: #777777;
+        fill: #777777;
+    }
+
     #schedule-past .month-separator {
         border-color: #77777755;
+    }
+
+    #schedule-past .month,
+    #schedule-past .year {
+        color: #777777;
     }
 
     #schedule-past .month-separator .month,
@@ -307,83 +246,182 @@
     }
 </style>
 
-<div class="contents_block">
-    <div id="filters">
-        <div class="filter-group" style="margin-bottom: 0;">
-            <div class="filter-toggle active" data-key="all">ALL</div>
-            <div class="filter-toggle" data-key="release">RELEASE</div>
-            <div class="filter-toggle" data-key="live">LIVE</div>
-            <div class="filter-toggle" data-key="event">EVENT</div>
-            <div class="filter-toggle" data-key="tv">TV</div>
-            <div class="filter-toggle" data-key="radio">RADIO</div>
-            <div class="filter-toggle" data-key="magazine">MAGAZINE</div>
-            <div class="filter-toggle" data-key="web">WEB</div>
-            <div class="filter-toggle" data-key="ticket">TICKET</div>
-            <div class="filter-toggle" data-key="goods">GOODS</div>
-            <div class="filter-toggle" data-key="other">OTHER</div>
-        </div>
-    </div>
-    <script>
 
-        // フィルター切り替えイベント
-        $('#filters').on('click', '.filter-toggle', function () {
-            // ラジオボタン風に .active を切り替える
-            $('.filter-toggle').removeClass('active');
-            $(this).addClass('active');
-            // 選択されたキーを使ってフィルターを適用
-            const key = $(this).data('key');
-            applyFilter(key);
+<script>
+    // =========================
+    // API 設定 & データ取得（共通）
+    // =========================
+    let scheduleData = [];
+    let scheduleLoadedPromise;
+
+    function getApiUrl() {
+        if (location.hostname.startsWith("192.168.")) {
+            return "https://script.google.com/macros/s/AKfycbzVQzDXTeXn9TbXnWo5t41PaviWk5ui7gIGGC3pKdPOE4TaSYBZvlBCS23FpDaaUhmB/exec";
+        }
+        return "https://g-api.mothlamp.info/api";
+    }
+
+    function loadScheduleData() {
+        if (scheduleLoadedPromise) return scheduleLoadedPromise;
+
+        const url = getApiUrl() + "?target=schedule";
+        scheduleLoadedPromise = $.getJSON(url).then(function (data) {
+            scheduleData = data;
+            return data;
         });
-        // フィルター適用関数（key: all, live, other など）
-        function applyFilter(key) {
-            const $containers = $('#schedule, #schedule-past');
-            // まずアイテム自体の表示切替
-            $containers.find('[class^="schedule_"]').each(function () {
-                const $item = $(this);
-                if (key === 'all' || $item.hasClass(`schedule_${key}`)) {
-                    $item.show();
+
+        return scheduleLoadedPromise;
+    }
+
+
+
+
+    // =========================
+    // カレンダー描画
+    // =========================
+    function renderCalendar(year, month) {
+        const nowJST = new Date(
+            new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" })
+        );
+        const todayY = nowJST.getFullYear();
+        const todayM = nowJST.getMonth();
+        const todayD = nowJST.getDate();
+        $('#calendar-days').empty();
+        $('#calendar-title').text(`${year}.${String(month + 1).padStart(2, '0')}`);
+        const firstDay = new Date(year, month, 1).getDay(); // 日曜始まり
+        const totalDays = new Date(year, month + 1, 0).getDate();
+        // 空白セル
+        for (let i = 0; i < firstDay; i++) {
+            $('#calendar-days').append('<div class="day empty"></div>');
+        }
+        for (let d = 1; d <= totalDays; d++) {
+            const dayOfWeek = new Date(year, month, d).getDay(); // 0=日,6=土
+            const dayEvents = scheduleData.filter(e =>
+                isSameDay(e.date, year, month, d)
+            );
+            let dayClass = '';
+            if (dayOfWeek === 0) dayClass += ' sunday';
+            if (dayOfWeek === 6) dayClass += ' saturday';
+            if (
+                year === todayY &&
+                month === todayM &&
+                d === todayD
+            ) {
+                dayClass += ' today';
+            }
+            let html = `
+                    <div class="day ${dayClass}">
+                        <div class="day-number">${d}</div>
+                `;
+            dayEvents.forEach(e => {
+                html += `
+                        <div class="event ${`schedule_${String(e.tag).toLowerCase()}`}">
+                            <a href="/?p=schedule_detail&sc=${e.index}">
+                                【${String(e.tag).toUpperCase()}】${e.title}
+                            </a>
+                        </div>
+                    `;
+            });
+            html += '</div>';
+            $('#calendar-days').append(html);
+            // フィルタ適用
+            applyFilter($('.filter-toggle.active').data('key'));
+        }
+
+        function isSameDay(dateStr, year, month, day) {
+            const d = new Date(dateStr);
+            return (
+                d.getFullYear() === year &&
+                d.getMonth() === month &&
+                d.getDate() === day
+            );
+        }
+    }
+
+    // =========================
+    // 月切り替え
+    // =========================
+    $('#prev-month').on('click', function () {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        renderCalendar(currentYear, currentMonth);
+    });
+    $('#next-month').on('click', function () {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        renderCalendar(currentYear, currentMonth);
+    });
+
+    // =========================
+    // フィルター切り替え
+    // =========================
+    $('#filters').on('click', '.filter-toggle', function () {
+        $('.filter-toggle').removeClass('active');
+        $(this).addClass('active');
+        const key = $(this).data('key');
+        applyFilter(key);
+    });
+    // フィルター適用関数（key: all, live, other など）
+    function applyFilter(key) {
+        const $containers = $('#schedule, #schedule-past');
+        $containers.find('[class^="schedule_"]').each(function () {
+            const $item = $(this);
+            if (key === 'all' || $item.hasClass(`schedule_${key}`)) {
+                $item.show();
+            } else {
+                $item.hide();
+            }
+        });
+        const $calendarEvents = $('#calendar-days .event');
+        $calendarEvents.each(function () {
+            const $event = $(this);
+            if (key === 'all' || $event.hasClass(`schedule_${key}`)) {
+                $event.show();
+            } else {
+                $event.hide();
+            }
+        });
+        // ★ 月セパレータの表示制御
+        $containers.each(function () {
+            const $container = $(this);
+            $container.find('.month-separator').each(function () {
+                const $separator = $(this);
+                // この月セパレータから次のセパレータまで
+                const $itemsInMonth = $separator
+                    .nextUntil('.month-separator')
+                    .find('[class^="schedule_"]:visible');
+                if ($itemsInMonth.length === 0) {
+                    $separator.hide();
                 } else {
-                    $item.hide();
+                    $separator.show();
                 }
             });
-            // ★ 月セパレータの表示制御
-            $containers.each(function () {
-                const $container = $(this);
-                $container.find('.month-separator').each(function () {
-                    const $separator = $(this);
-                    // この月セパレータから次のセパレータまで
-                    const $itemsInMonth = $separator
-                        .nextUntil('.month-separator')
-                        .find('[class^="schedule_"]:visible');
-                    if ($itemsInMonth.length === 0) {
-                        $separator.hide();
-                    } else {
-                        $separator.show();
-                    }
-                });
-            });
-            // ★ 表示中の最初の月セパレータを特定
-            $('#schedule, #schedule-past').each(function () {
-                const $container = $(this);
-                // まず「全部」から除去（visible 条件なし）
-                $container.find('.month-separator')
-                    .removeClass('is-first-visible');
-                // ★ 表示中の最初の月セパレータを1つだけ決める
-                $('.month-separator').removeClass('is-first-visible');
-                $('.month-separator:visible')
-                    .first()
-                    .addClass('is-first-visible');
-            });
-
-            $('.no-schedule-message').remove();
-
-            const hasVisibleItem =
-                $('#schedule [class^="schedule_"]:visible').length > 0 ||
-                ($('#schedule-past').is(':visible') &&
-                    $('#schedule-past [class^="schedule_"]:visible').length > 0);
-
-            if (!hasVisibleItem) {
-                $('#schedule').prepend(`
+        });
+        // ★ 表示中の最初の月セパレータを特定
+        $('#schedule, #schedule-past').each(function () {
+            const $container = $(this);
+            // まず「全部」から除去（visible 条件なし）
+            $container.find('.month-separator')
+                .removeClass('is-first-visible');
+            // ★ 表示中の最初の月セパレータを1つだけ決める
+            $('.month-separator').removeClass('is-first-visible');
+            $('.month-separator:visible')
+                .first()
+                .addClass('is-first-visible');
+        });
+        $('.no-schedule-message').remove();
+        const hasVisibleItem =
+            $('#schedule [class^="schedule_"]:visible').length > 0 ||
+            ($('#schedule-past').is(':visible') &&
+                $('#schedule-past [class^="schedule_"]:visible').length > 0);
+        if (!hasVisibleItem) {
+            $('#schedule').prepend(`
             <div class="no-schedule-message" style="padding: 10px 0; text-align: center; opacity: 0.7;">
                 <svg role="img" aria-label="リボン">
                     <use href="#butterfly"></use>
@@ -394,90 +432,40 @@
                 </svg>
             </div>
         `);
-            }
-
         }
-        // 動的にコンテンツを追加した後もフィルターを再適用する場合に呼び出す
-        function refreshFilter() {
-            const activeKey = $('.filter-toggle.active').data('key');
-            applyFilter(activeKey);
-        }
-        // 例：renderSchedule などの最後でこれを呼べばOK
-        // renderSchedule の末尾に追加：
-        // refreshFilter();
+    }
 
-    </script>
-</div>
-
-<div id="show-past-link" class="contents_block contents_block_has_a">
-    <a class="contents_block_a" href="javascript:void(0);"></a>
-    <p>過去のスケジュールを表示</p>
-</div>
-
-<div class="contents_block">
-    <div id="schedule-loading" class="list-loading">
-        <svg role="img" aria-label="リボン">
-            <use href="#butterfly"></use>
-        </svg>
-        Loading...
-        <svg role="img" aria-label="リボン">
-            <use href="#butterfly"></use>
-        </svg>
-    </div>
-    <ul class="link-list">
-        <div id="schedule-past" style="display: none;"></div>
-        <div id="schedule"></div>
-    </ul>
-    <style>
-        #schedule-past * {
-            color: #777777;
-            fill: #777777;
-        }
-    </style>
-</div>
-
-<script>
-    $(document).ready(function () {
-        if (window.__scheduleLoaded) return;
-        window.__scheduleLoaded = true;
-
-        const apiurl = "https://g-api.mothlamp.info/api";
-        const target_sheet = "schedule";
-        const url = apiurl + "?target=" + target_sheet;
-
-        $.getJSON(url, function (data) {
-            renderSchedule(data);
-        });
-
-        function renderSchedule(data) {
-            const youbiArray = ['日', '月', '火', '水', '木', '金', '土'];
-            // JST 今日
-            const jstNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
-            const jstToday = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
-            let nextMarked = false;
-            // 日付順にソート（昇順）
-            data.sort((a, b) => new Date(a.date) - new Date(b.date));
-            let lastFutureMonth = '';
-            let lastPastMonth = '';
-            for (let i = 0; i < data.length; i++) {
-                const schedule = data[i];
-                const scheduleDate = new Date(
-                    new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" })
-                );
-                const scheduleDay = new Date(
-                    scheduleDate.getFullYear(),
-                    scheduleDate.getMonth(),
-                    scheduleDate.getDate()
-                );
-                const year = scheduleDate.getFullYear();
-                const month = String(scheduleDate.getMonth() + 1).padStart(2, '0');
-                const day = String(scheduleDate.getDate()).padStart(2, '0');
-                const formattedDate = `${year}.${month}.${day}`;
-                const dayOfWeek = youbiArray[scheduleDate.getDay()];
-                const ymKey = `${year}.${month}`;
-                const tagClass = `schedule_${String(schedule.tag).toLowerCase()}`;
-                const tagText = String(schedule.tag).toUpperCase();
-                const listItem = `
+    // =========================
+    // スケジュール一覧描画
+    // =========================
+    function renderSchedule(data) {
+        const youbiArray = ['日', '月', '火', '水', '木', '金', '土'];
+        const jstNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+        const jstToday = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
+        let nextMarked = false;
+        // 日付順にソート（昇順）
+        data.sort((a, b) => new Date(a.date) - new Date(b.date));
+        let lastFutureMonth = '';
+        let lastPastMonth = '';
+        for (let i = 0; i < data.length; i++) {
+            const schedule = data[i];
+            const scheduleDate = new Date(
+                new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" })
+            );
+            const scheduleDay = new Date(
+                scheduleDate.getFullYear(),
+                scheduleDate.getMonth(),
+                scheduleDate.getDate()
+            );
+            const year = scheduleDate.getFullYear();
+            const month = String(scheduleDate.getMonth() + 1).padStart(2, '0');
+            const day = String(scheduleDate.getDate()).padStart(2, '0');
+            const formattedDate = `${year}.${month}.${day}`;
+            const dayOfWeek = youbiArray[scheduleDate.getDay()];
+            const ymKey = `${year}.${month}`;
+            const tagClass = `schedule_${String(schedule.tag).toLowerCase()}`;
+            const tagText = String(schedule.tag).toUpperCase();
+            const listItem = `
                         <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
                             <li class="${tagClass}">
                                 <p class="date">
@@ -488,73 +476,85 @@
                                 <p class="title">${schedule.title}</p>
                             </li>
                         </a>`;
-                // ==========
-                // 未来
-                // ==========
-                if (scheduleDay >= jstToday) {
-                    if (lastFutureMonth !== ymKey) {
-                        $('#schedule').append(`
+            // ==========
+            // 未来
+            // ==========
+            if (scheduleDay >= jstToday) {
+                if (lastFutureMonth !== ymKey) {
+                    $('#schedule').append(`
                                 <div class="month-separator">
                                     <span class="month">${month}</span>
                                     <span class="year">${year}</span>
                                 </div>
                             `);
-                        lastFutureMonth = ymKey;
-                    }
-                    // ★ 最初の未来イベントだけ #next を付与
-                    let $item = $(listItem);
-                    if (!nextMarked) {
-                        $item.find('li').attr('id', 'next');
-                        nextMarked = true;
-                    }
-                    $('#schedule').append($item);
+                    lastFutureMonth = ymKey;
                 }
-                // ==========
-                // 過去
-                // ==========
-                else {
-                    if (lastPastMonth !== ymKey) {
-                        $('#schedule-past').append(`
-                                <div class="month-separator">
-                                    <span class="month">${month}</span>
-                                    <span class="year">${year}</span>
-                                </div>
-                            `);
-                        lastPastMonth = ymKey;
-                    }
-                    $('#schedule-past').append(listItem);
+                // ★ 最初の未来イベントだけ #next を付与
+                let $item = $(listItem);
+                if (!nextMarked) {
+                    $('#schedule').append(`<div id="next-anchor"></div>`);
+                    nextMarked = true;
                 }
+                $('#schedule').append(listItem);
             }
-            $('#schedule-loading').hide();
+            // ==========
+            // 過去
+            // ==========
+            else {
+                if (lastPastMonth !== ymKey) {
+                    $('#schedule-past').append(`
+                                <div class="month-separator">
+                                    <span class="month">${month}</span>
+                                    <span class="year">${year}</span>
+                                </div>
+                            `);
+                    lastPastMonth = ymKey;
+                }
+                $('#schedule-past').append(listItem);
+            }
+        }
+        $('#schedule-loading').hide();
+        applyFilter($('.filter-toggle.active').data('key'));
+    }
+
+    // 過去を表示
+    $('#show-past-link').on('click', function () {
+        const $past = $('#schedule-past');
+        const isVisible = $past.is(':visible');
+        if (isVisible) {
+            $past.hide();
+            $('body').removeClass('showing-past'); // ★
+            $('#show-past-link p').text('過去のスケジュールを表示');
             applyFilter($('.filter-toggle.active').data('key'));
+        } else {
+            $past.show();
+            $('body').addClass('showing-past');
+            $('#show-past-link p').text('過去のスケジュールを非表示');
+            applyFilter($('.filter-toggle.active').data('key'));
+            // ★ レイアウト確定後にスクロール
+            requestAnimationFrame(() => {
+                const $next = $('#next-anchor');
+                if ($next.length) {
+                    $('html, body').animate({
+                        scrollTop: $next.offset().top - 80
+                    }, 10);
+                }
+            });
         }
     });
 
-
-    $(document).ready(function () {
-        $('#show-past-link').on('click', function () {
-            const $past = $('#schedule-past');
-            const isVisible = $past.is(':visible');
-            if (isVisible) {
-                $past.hide();
-                $('body').removeClass('showing-past'); // ★
-                $('#show-past-link p').text('過去のスケジュールを表示');
-                applyFilter($('.filter-toggle.active').data('key'));
-            } else {
-                $past.show();
-                $('body').addClass('showing-past');
-                $('#show-past-link p').text('過去のスケジュールを非表示');
-                applyFilter($('.filter-toggle.active').data('key'));
-                // ★ レイアウト確定後にスクロール
-                requestAnimationFrame(() => {
-                    const $next = $('#next');
-                    if ($next.length) {
-                        $('html, body').animate({
-                            scrollTop: $next.offset().top - 80
-                        }, 10);
-                    }
-                });
-            }
+    $(function () {
+        // =========================
+        // メイン処理
+        // =========================
+        loadScheduleData().then(function (data) {
+            scheduleData = data;
+            const today = new Date();
+            currentYear = today.getFullYear();
+            currentMonth = today.getMonth();
+            renderCalendar(currentYear, currentMonth);
+            $('#calendar-loading').hide();
+            renderSchedule(data);
         });
     });
 </script>
