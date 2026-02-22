@@ -1,0 +1,114 @@
+<div id="page-title" style="display: none;">Discography [誘蛾灯の導き]</div>
+<div id="page-description" style="display: none;">Discography
+</div>
+
+<div class="contents_block">
+    <h1 class="glitch-text">
+        Discography
+    </h1>
+</div>
+
+<style>
+    .discography-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 10px;
+    }
+
+    .discography-container {
+        position: relative;
+        width: calc((100% - 20px) / 2);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        padding: 0;
+        animation: none;
+
+        @media screen and (min-width: 767px) {
+            width: calc((100% - 20px) / 3);
+        }
+    }
+
+    .discography-container:hover {
+        background-color: #ffffff00 !important;
+    }
+
+    .discography-container p {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        pointer-events: none;
+        width: 100%;
+        text-align: center;
+    }
+
+    .discography-container:hover p {
+        display: none;
+    }
+
+    .discography-container .discography-img {
+        filter: sepia(50%) brightness(0.5) saturate(50%) contrast(90%);
+    }
+
+    .discography-container:hover .discography-img {
+        filter: none
+    }
+
+    .discography-container::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #ffffff99;
+        mix-blend-mode: screen;
+        top: 0;
+        left: 0;
+        transform: scale(0, 1);
+        transform-origin: right top;
+        transition: transform 0.3s;
+        opacity: 0.3;
+        z-index: 2;
+    }
+
+    .discography-container:hover:before {
+        transform: scale(1, 1);
+        transform-origin: left top;
+        pointer-events: none;
+    }
+
+    .discography-a {
+        color: #ffffff;
+    }
+
+    .discography-name {
+        margin: 0;
+    }
+</style>
+
+<div class="contents_block discography-wrapper">
+    <div class="discography-container">
+        <a href="/?p=discography.devilish-girl" class="discography-a">
+            <p class="discography-name">魔性少女</p>
+            <img src="/static/img/discography/devilish-girl.jpeg" alt="" class="discography-img">
+        </a>
+    </div>
+    <div class="discography-container">
+        <a href="/?p=discography.just-wanna-xxxx-with-you" class="discography-a">
+            <p class="discography-name">キミと××××したいだけ</p>
+            <img src="/static/img/discography/just-wanna-xxxx-with-you.jpeg" alt="" class="discography-img">
+        </a>
+    </div>
+    <div class="discography-container">
+        <a href="/?p=discography.otomodachi" class="discography-a">
+            <p class="discography-name">おともだち</p>
+            <img src="/static/img/discography/otomodachi.jpeg" alt="" class="discography-img">
+        </a>
+    </div>
+</div>
+
+<div class="load-content" data-loadfile="/pages/parts/official-copyright"></div>
