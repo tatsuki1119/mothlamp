@@ -81,6 +81,17 @@ Phantom Siita 1st WORLD TOUR “Moth to a flame”
 
                         } else {
 
+                            if (song.id && !songsMaster[song.id]) {
+                                console.error(
+                                    `setlist-data.json: 未定義の曲ID "${song.id}"`,
+                                    {
+                                        live: live.id,
+                                        title: live.title,
+                                        song: song
+                                    }
+                                );
+                            }
+
                             name =
                                 song.display ??
                                 songsMaster[song.id] ??
