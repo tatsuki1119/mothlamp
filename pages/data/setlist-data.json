@@ -1,0 +1,1203 @@
+{
+    "songs": {
+        "otomodachi": "おともだち",
+        "kimixxxx": "キミと××××したいだけ",
+        "mashou": "魔性少女",
+        "hanabami": "花喰み",
+        "otome": "乙女心中",
+        "zokuzoku": "ゾクゾク",
+        "hanagatami": "HANAGATAMI",
+        "sukikirai": "すき、きらい",
+        "sokkuri": "そっくりさん",
+        "noah": "ノア",
+        "botbakka": "botばっか",
+        "barairo": "薔薇色の月"
+    },
+    "lives": [
+        {
+            "id": "ado-monayoko",
+            "title": "Ado JAPAN TOUR 2024「モナ・リザの横顔」オープニングアクト",
+            "sections": [
+                {
+                    "schedule": [
+                        "2024.07.14,15 大阪",
+                        "2024.07.20,21 新潟",
+                        "2024.07.27,28 広島",
+                        "2024.08.17,18 北海道",
+                        "2024.08.31,09.01 千葉"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "otomodachi"
+                        }
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2024.09.07,08 宮城",
+                        "2024.09.15,16 福岡"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "mashou"
+                        }
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2024.10.12 神奈川"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "hanabami"
+                        }
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2024.10.13 神奈川"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2024.12.27,28 愛知"
+                    ],
+                    "songs": [
+                        {
+                            "id": "zokuzoku"
+                        },
+                        {
+                            "id": "kimixxxx"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "boukenou2024",
+            "title": "お台場冒険王2024",
+            "sections": [
+                {
+                    "schedule": [
+                        "2024.08.19"
+                    ],
+                    "songs": [
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "kimixxxx"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "atjamexpo2024",
+            "title": "@JAM EXPO 2024 supported by UP-T",
+            "sections": [
+                {
+                    "schedule": [
+                        "2024.09.14"
+                    ],
+                    "songs": [
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "otome"
+                        },
+                        "好き好き大好き（戸川純）",
+                        {
+                            "id": "kimixxxx"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "nstfes2024",
+            "title": "NSTまつり2024アイドルスペシャルライブ",
+            "sections": [
+                {
+                    "schedule": [
+                        "2024.09.28"
+                    ],
+                    "songs": [
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "kimixxxx"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "larmefes1",
+            "title": "LARME fes vol.1",
+            "sections": [
+                {
+                    "schedule": [
+                        "2024.10.06"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "heine",
+            "title": "ファントムシータ 1st LIVE 2024「ハイネ」2024年11月1日 日本武道館",
+            "sections": [
+                {
+                    "schedule": [
+                        "2024.11.03"
+                    ],
+                    "songs": [
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        "好き好き大好き（戸川純）",
+                        "[MC(自己紹介)]",
+                        {
+                            "id": "otome"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        "ラムのラブソング（松谷祐子）",
+                        "SWEET MEMORIES / <span style=\"color: var(--color-mona);\">もな</span>（松田聖子）",
+                        "少女A / <span style=\"color: var(--color-rinka);\">凛花</span>（中森明菜）",
+                        "歌舞伎町の女王 / <span style=\"color: var(--color-moka);\">百花</span>（椎名林檎）",
+                        "ジャックポットサッドガール / <span style=\"color: var(--color-miu);\">美雨</span>（syudou feat. 初音ミク）",
+                        "ちゅ、多様性。 / <span style=\"color: var(--color-hisui);\">灯翠</span>（ano）",
+                        "asphyxia（Cö shu Nie）",
+                        {
+                            "id": "hanagatami"
+                        },
+                        "サイレントマジョリティー（欅坂46）",
+                        "[MC]",
+                        {
+                            "id": "kimixxxx"
+                        },
+                        "[アンコール]",
+                        "なんてったってアイドル（小泉今日子）",
+                        "Tot Musica（Ado）",
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "akumanight",
+            "title": "悪魔のキッスpresents「悪魔Night Duel Buster」",
+            "sections": [
+                {
+                    "schedule": [
+                        "2024.12.17"
+                    ],
+                    "songs": [
+                        {
+                            "id": "zokuzoku"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        "[MC]",
+                        {
+                            "id": "otome"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        "好き好き大好き（戸川純）",
+                        "[MC]",
+                        {
+                            "id": "kimixxxx"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cdj2425",
+            "title": "COUNTDOWN JAPAN 24/25",
+            "sections": [
+                {
+                    "schedule": [
+                        "2024.12.30"
+                    ],
+                    "songs": [
+                        {
+                            "id": "otomodachi",
+                            "display": "[リハ]おともだち（ダンスなし、ワンコーラス）"
+                        },
+                        "[リハ]Tot Musica（Ado）（演出リハ別、フル）",
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "otome"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        "好き好き大好き（戸川純）",
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "mothtoaflame",
+            "title": "Phantom Siita 1st WORLD TOUR “Moth to a flame”",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.01.16 台北 Legacy Taipei",
+                        "2025.01.18 マニラ Samsung Hall",
+                        "2025.01.21 シンガポール Shingtel Waterfront Theatre",
+                        "2025.01.28 サンノゼ San Jose Civic",
+                        "2025.01.30 アナハイム House of Blues",
+                        "2025.02.02 ダラス The Factory in Deep Ellum",
+                        "2025.02.04 ヒューストン White Oak Music Hall Downstairs",
+                        "2025.02.06 シカゴ The Vic",
+                        "2025.02.08 ニューヨーク Palladium Times Square",
+                        "2025.02.10 トロント Rebel",
+                        "2025.02.13 ユトレヒト Tivoli",
+                        "2025.02.15 パリ Bataclan",
+                        "2025.02.17 ベルリン Metropol",
+                        "2025.02.19 ロンドン Electric Ballroom"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "otome"
+                        },
+                        "[MC]",
+                        "好き好き大好き（戸川純）",
+                        "青い珊瑚礁 / <span style=\"color: var(--color-mona);\">もな</span>（松田聖子）",
+                        "Fantasy / <span style=\"color: var(--color-rinka);\">凛花</span>（中原めいこ）",
+                        "KICK BACK / <span style=\"color: var(--color-miu);\">美雨</span>（米津玄師）",
+                        "One Last Kiss / <span style=\"color: var(--color-hisui);\">灯翠</span>（宇多田ヒカル）",
+                        "フライディ・チャイナタウン / <span style=\"color: var(--color-moka);\">百花</span>（泰葉）",
+                        "4:00 A.M.（大貫妙子）",
+                        {
+                            "id": "hanagatami"
+                        },
+                        "真夜中のドア〜Stay With Me（松原みき）",
+                        "[MC]",
+                        {
+                            "id": "otomodachi"
+                        },
+                        "[アンコール]",
+                        "Tot Musica（Ado）",
+                        "ムーンライト伝説（DALI）",
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "dreamscape",
+            "title": "yosugala presents -DREAMSCAPE-\"AICHI\"",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.03.23"
+                    ],
+                    "songs": [
+                        {
+                            "id": "zokuzoku"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        "[MC]",
+                        "ラムのラブソング（松谷祐子）",
+                        "好き好き大好き（戸川純）",
+                        {
+                            "id": "otome"
+                        },
+                        {
+                            "id": "hanagatami"
+                        },
+                        "ムーンライト伝説（DALI）",
+                        "[MC]",
+                        {
+                            "id": "kimixxxx"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ladysteadypremium",
+            "title": "Lady Steady Premium",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.04.05"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        "[MC]",
+                        "ムーンライト伝説（DALI）",
+                        "好き好き大好き（戸川純）",
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "yoimatsuri",
+            "title": "OCEAN MARKET FES 2025『ファントムシータ シータの宵祭り』",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.05.01"
+                    ],
+                    "songs": [
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "kimixxxx"
+                        },
+                        "ラムのラブソング（松谷祐子）",
+                        "好き好き大好き（戸川純）",
+                        "[MC(自己紹介)]",
+                        {
+                            "id": "otome"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        "青い珊瑚礁 / もな（松田聖子）",
+                        "少女A / 凛花（中森明菜）",
+                        "KICK BACK / 美雨（米津玄師）",
+                        "フライディ・チャイナタウン / 百花（泰葉）",
+                        "ちゅ、多様性。 / 灯翠（ano）",
+                        "ムーンライト伝説（DALI）",
+                        "Tot Musica（Ado）",
+                        "asphyxia（Cö shu Nie）",
+                        "[MC]",
+                        {
+                            "id": "hanagatami"
+                        },
+                        "[アンコール]",
+                        "夏祭り（JITTERIN'JINN）",
+                        "[MC（HAPPY BIRTHDAY to 灯翠,凛花）]",
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "なんてったってアイドル（小泉今日子）"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "atjam2025",
+            "title": "@JAM 2025 Day2 ～SUPER LIVE～ <1部>",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.05.25"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        "[MC]",
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "[MC]",
+                        {
+                            "id": "sukikirai"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cloudninepark",
+            "title": "クラウドナインパーク オープニングイベント @ナガシマスパーランド",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.06.05"
+                    ],
+                    "songs": [
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "[MC]",
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "kimixxxx",
+                            "display": "キミと××××したいだけ with タマ（教育番組）"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "majordebutevent",
+            "title": "メジャーデビューイベント",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.07.09"
+                    ],
+                    "songs": [
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "sokkuri"
+                        },
+                        "[MC]",
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "sukikirai"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "flamemedusa",
+            "title": "ファントムシータ 1st JAPAN TOUR 「フレイム・メドゥーサ」",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.07.21 東京",
+                        "2025.08.02 大阪",
+                        "2025.08.03 愛知",
+                        "2025.08.24 東京"
+                    ],
+                    "songs": [
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "kimixxxx"
+                        },
+                        "好き好き大好き（戸川純）",
+                        "[MC]",
+                        {
+                            "id": "sokkuri"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "otome"
+                        },
+                        "夏祭り（JITTERIN'JINN）",
+                        "タッチ（岩崎良美）",
+                        "女の子は誰でも / <span style=\"color: var(--color-mona);\">もな</span>（東京事変）",
+                        "Loveit? / <span style=\"color: var(--color-miu);\">美雨</span>（biz×ZERA feat LOLUET）",
+                        "私は猫の目 / <span style=\"color: var(--color-rinka);\">凛花</span>（椎名林檎）",
+                        "華奢なリップ / <span style=\"color: var(--color-moka);\">百花</span>（ジェニーハイ feat.ちゃんみな）",
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "noah",
+                            "display": "ノア【新曲】"
+                        },
+                        "（最終日のみ）[MC ノアMV鑑賞]",
+                        "asphyxia（Cö shu Nie）",
+                        "[MC]",
+                        {
+                            "id": "hanagatami"
+                        },
+                        "サラバ、愛しき悲しみたちよ（ももいろクローバーZ）",
+                        "チョコレートメランコリー（≠ME）",
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "tif2025",
+            "title": "TOKYO IDOL FESTIVAL 2025",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.08.01"
+                    ],
+                    "songs": [
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        },
+                        {
+                            "id": "otome"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "sokkuri"
+                        },
+                        "[MC]",
+                        {
+                            "id": "kimixxxx"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "atjamexpo2025",
+            "title": "@JAM EXPO 2025 supported by UP-T",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.08.30"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "sokkuri"
+                        },
+                        "[MC]",
+                        "夏祭り（JITTERIN'JINN）",
+                        {
+                            "id": "noah"
+                        },
+                        "[MC]",
+                        {
+                            "id": "sukikirai"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "rijf2025",
+            "title": "ROCK IN JAPAN FESTIVAL 2025",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.09.14"
+                    ],
+                    "songs": [
+                        "[リハ]Tot Musica（Ado）",
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "[MC]",
+                        {
+                            "id": "hanabami"
+                        },
+                        "ルル（Ado）",
+                        {
+                            "id": "noah"
+                        },
+                        "[MC]",
+                        {
+                            "id": "kimixxxx"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "utsufes2025",
+            "title": "アーバンギャルド presents 鬱フェス 2025",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.09.15"
+                    ],
+                    "songs": [
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        "[MC]",
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        "[MC]",
+                        {
+                            "id": "noah"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "kyururinclinic",
+            "title": "Kyururin♡Clinic ～No.3ファントムシータ～",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.09.25"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "sokkuri"
+                        },
+                        "[MC]",
+                        {
+                            "id": "noah"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "otome"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "<br>",
+                        "カルテNo.2222 きゅるりんってしてみて×ファントムシータ コラボ"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "kyoyocollectionvol8",
+            "title": "KYOTO COLLECTION vol.8 後夜祭",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.10.05"
+                    ],
+                    "songs": [
+                        {
+                            "id": "zokuzoku"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "otome"
+                        },
+                        "[MC]",
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        "[MC]",
+                        {
+                            "id": "kimixxxx"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "gigagigasonic",
+            "title": "GIGA•GIGA SONIC presented by UtaTen / チェキチャ 〜推ししか勝たん！君と僕とのギガ推し祭🏮〜",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.10.18"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "sokkuri"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "idolfilefes2025",
+            "title": "IDOL FILE FESTIVAL 2025",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.10.22"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "otome"
+                        },
+                        {
+                            "id": "sokkuri"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "larmefes25",
+            "title": "LARME FES’ 25",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.10.26"
+                    ],
+                    "songs": [
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        },
+                        {
+                            "id": "botbakka",
+                            "display": "botばっか【新曲】"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "mousepeacefes2025",
+            "title": "MOUSE PEACE FES. 2025 2nd Bite",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.10.29,30"
+                    ],
+                    "songs": [
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ado-yodaka",
+            "title": "Ado DOME TOUR 2025「よだか」オープニングアクト",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.11.11,12 東京ドーム"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "[MC]",
+                        {
+                            "id": "botbakka"
+                        }
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2025.11.22,23 京セラドーム"
+                    ],
+                    "songs": [
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "botbakka"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cionslovecall2025",
+            "title": "CiON’s Love Call TOUR 2025",
+            "sections": [
+                {
+                    "schedule": [
+                        "2025.11.25"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "otome"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "hbcidolfes",
+            "title": "Pococha presents HBCアイドル祭り2026 なまらめんこいアイドルWinter！",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.02.08"
+                    ],
+                    "songs": [
+                        {
+                            "id": "kimixxxx"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "[MC]",
+                        {
+                            "id": "barairo",
+                            "display": "薔薇色の月【新曲】"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "kimito-izon",
+            "title": "AVAM×ファントムシータ 『キミとx依存xしたいだけ♡』",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.02.28"
+                    ],
+                    "songs": [
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        "[MC]",
+                        {
+                            "id": "otome"
+                        },
+                        {
+                            "id": "sokkuri"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "[MC]",
+                        {
+                            "id": "barairo"
+                        },
+                        "<br>",
+                        {
+                            "id": "kimixxxx",
+                            "display": "キミと××××したいだけ AVAM×ファントムシータ コラボ"
+                        },
+                        "めいく♡まーきんぐ AVAM×ファントムシータ コラボ"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "oshiviewfes",
+            "title": "OSHIVIEW Music Wave～Girls Pop Collective～",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.03.04"
+                    ],
+                    "songs": [
+                        {
+                            "id": "barairo"
+                        },
+                        {
+                            "id": "mashou"
+                        },
+                        {
+                            "id": "kimixxxx"
+                        },
+                        "[MC]",
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        "[MC]",
+                        {
+                            "id": "hanabami"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "songs-template": [
+        [
+            "[MC]",
+            {
+                "id": "otomodachi"
+            },
+            {
+                "id": "kimixxxx"
+            },
+            {
+                "id": "mashou"
+            },
+            {
+                "id": "hanabami"
+            },
+            {
+                "id": "otome"
+            },
+            {
+                "id": "zokuzoku"
+            },
+            {
+                "id": "hanagatami"
+            },
+            {
+                "id": "sukikirai"
+            },
+            {
+                "id": "sokkuri"
+            },
+            {
+                "id": "noah"
+            },
+            {
+                "id": "botbakka"
+            },
+            {
+                "id": "barairo"
+            }
+        ]
+    ]
+}
