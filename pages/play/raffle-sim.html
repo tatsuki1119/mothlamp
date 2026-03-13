@@ -119,6 +119,149 @@
     a {
         color: #2b8cff;
     }
+
+    .gacha-modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        backdrop-filter: blur(6px);
+    }
+
+    .gacha-modal-content {
+        position: relative;
+        background: #1a1a1a;
+        border-radius: 12px;
+        padding: 30px;
+        text-align: center;
+        border: 1px solid #444;
+    }
+
+    #gacha-tier {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    #gacha-prize {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .gacha-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .flash-layer {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        border-radius: 12px;
+    }
+
+    /* 共通アニメーション */
+
+    .flash {
+        animation: flashAnim 0.6s ease;
+    }
+
+    @keyframes flashAnim {
+        0% {
+            opacity: 1
+        }
+
+        100% {
+            opacity: 0
+        }
+    }
+
+    /* A賞 レインボー */
+
+    .flash-a {
+        animation:
+            rainbowFade 1s linear infinite,
+            flashAnim 2s ease-out;
+    }
+
+    @keyframes rainbowFade {
+
+        0% {
+            background: rgb(255, 0, 0);
+        }
+
+        /* red */
+        16% {
+            background: rgb(255, 165, 0);
+        }
+
+        /* orange */
+        33% {
+            background: rgb(255, 255, 0);
+        }
+
+        /* yellow */
+        50% {
+            background: rgb(0, 255, 0);
+        }
+
+        /* lime */
+        66% {
+            background: rgb(0, 255, 255);
+        }
+
+        /* cyan */
+        83% {
+            background: rgb(0, 0, 255);
+        }
+
+        /* blue */
+        100% {
+            background: rgb(255, 0, 0);
+        }
+
+        /* red */
+    }
+
+    /* B賞 金 */
+
+    .flash-b {
+        background: radial-gradient(circle, #ffd700, #ff8c00);
+    }
+
+    /* C賞 白 */
+
+    .flash-c {
+        background: white;
+    }
+
+    /* D以下 弱い */
+
+    .flash-d {
+        background: rgba(255, 255, 255, 0.4);
+    }
+
+    .result-card {
+        padding: 10px;
+        border-radius: 8px;
+        margin: 6px 0;
+        color: #000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+    }
+
+    #result-list {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding-right: 4px;
+    }
 </style>
 
 <div class="contents_block">
@@ -160,21 +303,54 @@
     <div id="history" class="history"></div>
 </div>
 
+<div id="result-modal" class="gacha-modal" style="display:none;">
+    <div class="gacha-modal-content">
+
+        <div class="flash-layer"></div>
+        <div class="shine-layer"></div>
+
+        <div id="gacha-tier"></div>
+        <div id="gacha-prize"></div>
+
+        <div class="gacha-buttons">
+            <button id="skip-results">全部スキップ</button>
+            <button id="next-result" class="primary">次へ</button>
+        </div>
+
+    </div>
+</div>
+
+<div id="result-list-modal" class="gacha-modal" style="display:none;">
+    <div class="gacha-modal-content">
+
+        <div style="display:flex; align-items:center; margin-bottom:10px;">
+            <strong style="font-size:20px;">結果一覧</strong>
+            <button id="close-result-list" class="right danger">×</button>
+        </div>
+
+        <div id="result-list"></div>
+
+    </div>
+</div>
+
 <script>
     // ===============================
     // コンフィグ設定部分
     // ===============================
     const GACHA_CONFIG = [
         {
-            name: "A賞 【メンバー全員の直筆サイン入り！】布ポスター",
-            prob: 0.1,
+            name: "A賞【直筆宛名＆サイン入り！】写真帖",
+            prob: 0.3,
             items: [
-                { name: "A-布ポスター" }
+                { name: "A-もな" },
+                { name: "A-美雨" },
+                { name: "A-凛花" },
+                { name: "A-百花" },
             ]
         },
         {
-            name: "B賞 【直筆サイン入り！】プリントチェキ",
-            prob: 0.3,
+            name: "B賞 【直筆サイン入り！】ファントムシータのプリントチェキ",
+            prob: 0.5,
             items: [
                 { name: "B-もな" },
                 { name: "B-美雨" },
@@ -183,42 +359,39 @@
             ]
         },
         {
-            name: "C賞 フレークアクリルキーホルダー",
-            prob: 5.0,
+            name: "C賞 【選べる！】回転アクリルスタンド",
+            prob: 8.0,
             items: [
-                { name: "C-もな" },
-                { name: "C-美雨" },
-                { name: "C-凛花" },
-                { name: "C-百花" },
+                { name: "C-選べる回転アクスタ" },
             ]
         },
         {
-            name: "D賞 アクリルスタンド",
-            prob: 14.1,
+            name: "D賞 カードケース",
+            prob: 12.0,
             items: [
-                { name: "D-もな1" },
-                { name: "D-もな2" },
-                { name: "D-美雨1" },
-                { name: "D-美雨2" },
-                { name: "D-凛花1" },
-                { name: "D-凛花2" },
-                { name: "D-百花1" },
-                { name: "D-百花2" },
+                { name: "D-もな" },
+                { name: "D-美雨" },
+                { name: "D-凛花" },
+                { name: "D-百花" },
             ]
         },
         {
-            name: "E賞 ステッカー",
-            prob: 16.0,
+            name: "E賞 和紙缶バッジ",
+            prob: 19.2,
             items: [
-                { name: "E-もな" },
-                { name: "E-美雨" },
-                { name: "E-凛花" },
-                { name: "E-百花" },
+                { name: "E-もな1" },
+                { name: "E-もな2" },
+                { name: "E-美雨1" },
+                { name: "E-美雨2" },
+                { name: "E-凛花1" },
+                { name: "E-凛花2" },
+                { name: "E-百花1" },
+                { name: "E-百花2" },
             ]
         },
         {
-            name: "F賞 ブロマイド2枚セット",
-            prob: 29.5,
+            name: "F賞 キラキラカード",
+            prob: 25.0,
             items: [
                 { name: "F-もな1" },
                 { name: "F-もな2" },
@@ -231,7 +404,7 @@
             ]
         },
         {
-            name: "G賞 クリアカード",
+            name: "G賞 ミニブロマイド",
             prob: 35.0,
             items: [
                 { name: "G-もな1" },
@@ -242,15 +415,21 @@
                 { name: "G-凛花2" },
                 { name: "G-百花1" },
                 { name: "G-百花2" },
-                { name: "G-ペア1" },
-                { name: "G-ペア2" },
-                { name: "G-ペア3" },
-                { name: "G-ペア4" },
-                { name: "G-ペア5" },
-                { name: "G-ペア6" },
+                { name: "G-集合1" },
+                { name: "G-集合2" },
             ]
         },
     ];
+
+    const TIER_COLORS = {
+        "A賞【直筆宛名＆サイン入り！】写真帖": "#ff3333",
+        "B賞 【直筆サイン入り！】ファントムシータのプリントチェキ": "#ffaa00",
+        "C賞 【選べる！】回転アクリルスタンド": "#ffff00",
+        "D賞 カードケース": "#c9ceb3",
+        "E賞 和紙缶バッジ": "#b9ceb3",
+        "F賞 キラキラカード": "#afc9c3",
+        "G賞 ミニブロマイド": "#cccccc"
+    };
 
     const STORAGE_HISTORY_KEY = 'gacha_history_v2';
 
@@ -335,8 +514,27 @@
         const history = getHistory();
         const counts = aggregateCounts(history);
         const total = history.length;
+
+        const pricePerDraw = 770;
+        const shippingPerBatch = 660;
+
+        const drawCost = total * pricePerDraw;
+        const shippingCost = total > 0 ? Math.ceil(total / 10) * shippingPerBatch : 0;
+        const totalCost = drawCost + shippingCost;
+
         const $s = $('#summary').empty();
-        $s.append(`<div style="margin-bottom:8px;"><strong>合計ドロー数:</strong> ${total}</div>`);
+        $s.append(`
+        <div style="margin-bottom:8px;">
+            <strong>合計ドロー数:</strong> ${total}
+            <br>
+            <strong>合計金額:</strong> ¥${totalCost.toLocaleString()}
+            <small>
+                （ガチャ: ¥${drawCost.toLocaleString()} + 送料: ¥${shippingCost.toLocaleString()}）
+            </small>
+        </div>
+    `);
+
+
         const cdf = buildTierCDF(GACHA_CONFIG);
 
         for (const tier of cdf) {
@@ -417,6 +615,109 @@
         alert('リセットしました。');
     }
 
+    // 結果演出
+    let currentResults = [];
+    let currentIndex = 0;
+
+    function showResultModal(results) {
+        currentResults = results;
+        currentIndex = 0;
+
+        $('#result-modal').show();
+        showSingleResult();
+    }
+
+    function showSingleResult() {
+
+        const r = currentResults[currentIndex];
+
+        $('#gacha-tier').text(r.tierName);
+        $('#gacha-prize').text(r.prizeName);
+
+        const color = TIER_COLORS[r.tierName] || "#fff";
+        $('#gacha-tier').css("color", color);
+
+        playEffect(r.tierName);
+    }
+
+    $('#next-result').on('click', function () {
+
+        currentIndex++;
+
+        if (currentIndex >= currentResults.length) {
+            $('#result-modal').hide();
+            showResultList(currentResults);
+            return;
+        }
+
+        showSingleResult();
+
+    });
+
+    $('#skip-results').on('click', function () {
+
+        $('#result-modal').hide();
+        showResultList(currentResults);
+
+    });
+
+    function playEffect(tierName) {
+
+        const flash = $('.flash-layer');
+
+        // クラス削除
+        flash.removeClass('flash flash-a flash-b flash-c flash-d');
+
+        // アニメーションリセット（重要）
+        flash[0].offsetWidth;
+
+        // クラス追加
+        if (tierName.startsWith("A賞")) {
+            flash.addClass('flash flash-a');
+        }
+        else if (tierName.startsWith("B賞")) {
+            flash.addClass('flash flash-b');
+        }
+        else if (tierName.startsWith("C賞")) {
+            flash.addClass('flash flash-c');
+        }
+        else {
+            flash.addClass('flash flash-d');
+        }
+
+    }
+
+    // 結果表示
+    function showResultList(results) {
+
+        const list = $('#result-list');
+        list.empty();
+
+        for (const r of results) {
+
+            const color = TIER_COLORS[r.tierName] || "#666";
+
+            list.append(`
+            <div class="result-card" style="background:${color}">
+                <div>${r.tierName}</div>
+                <div>${r.prizeName}</div>
+            </div>
+        `);
+
+        }
+
+        $('#result-list-modal').show();
+
+    }
+
+    $('#close-result-list').on('click', function () {
+
+        $('#result-list-modal').hide();
+
+    });
+
+
+
     // ===============================
     // 初期化
     // ===============================
@@ -434,7 +735,7 @@
 
             // 🎯 抽選結果をアラート表示
             const msg = results.map(r => `・${r.prizeName}（${r.tierName}）`).join('\n');
-            alert(`${n}回の抽選結果：\n\n${msg}`);
+            showResultModal(results);
         });
 
         $('#show-config').on('click', function () {
