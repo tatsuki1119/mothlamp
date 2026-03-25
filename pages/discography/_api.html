@@ -1,0 +1,63 @@
+<div id="page-title" style="display: none;">Artwork API</div>
+<div id="page-description" style="display: none;">Artwork API
+</div>
+
+<div class="contents_block">
+    <input type="text" id="searchWord" value="ファントムシータ">
+    <button id="searchBtn">検索</button>
+    <br><br>
+    <div id="results"></div>
+</div>
+
+<div class="contents_block">
+    <img src="" alt="" id="artwork"><br>
+    <input type="text" id="artworkUrlBox" readonly style="width:100%;">
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(function () {
+        function search() {
+            const term = $("#searchWord").val();
+            const apiUrl = "https://itunes.apple.com/search?lang=ja_jp&country=jp&limit=10&media=music&entity=album&term=" + encodeURIComponent(term) + "&callback=?";
+            $.ajax({
+                url: apiUrl,
+                dataType: "jsonp",
+                success: function (data) {
+                    if (data.resultCount > 0) {
+                        let html = "<table border='1'><tr><th>画像</th><th>artistId</th><th>collectionId</th><th>アーティスト</th><th>アルバム名</th><th>発売日</th></tr>";
+                        data.results.forEach(function (item) {
+                            let img = item.artworkUrl100 ? item.artworkUrl100.replace(/\/\d+x\d+.*\.jpg/, "/100x100.jpg") : "";
+                            let date = item.releaseDate ? item.releaseDate.split("T")[0] : "";
+                            html += "<tr data-id='" + (item.collectionId || "") + "'><td><img src='" + img + "'></td><td>" + (item.artistId || "") + "</td><td>" + (item.collectionId || "") + "</td><td>" + (item.artistName || "") + "</td><td>" + (item.collectionName || "") + "</td><td>" + date + "</td></tr>";
+                        });
+                        html += "</table>";
+                        $("#results").html(html);
+                    }
+                }
+            });
+        }
+        function loadArtwork(id) {
+            const apiUrl = "https://itunes.apple.com/lookup?lang=ja_jp&country=jp&limit=1&media=music&entity=song&id=" + id + "&callback=?";
+            $.ajax({
+                url: apiUrl,
+                dataType: "jsonp",
+                success: function (data) {
+                    if (data.resultCount > 0) {
+                        const track = data.results.find(item => item.wrapperType === "track");
+                        if (track && track.artworkUrl100) {
+                            let artworkUrl = track.artworkUrl100.replace(/\/\d+x\d+.*\.jpg/, "/1024x1024.jpg");
+                            $("#artwork").attr("src", artworkUrl);
+                            $("#artworkUrlBox").val(artworkUrl);
+                        }
+                    }
+                }
+            });
+        }
+        $("#searchBtn").on("click", search);
+        $("#searchWord").on("keypress", function (e) { if (e.which === 13) search(); });
+        $(document).on("click", "#results tr[data-id]", function () { loadArtwork($(this).data("id")); });
+        $(document).on("click", "#artworkUrlBox", function () { this.select(); });
+        search();
+    });
+</script>
