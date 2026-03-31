@@ -280,7 +280,7 @@
             <button class="draw-btn primary" data-count="100">100回</button>
         </div>
         <div class="right">
-            <button id="show-config">確率・景品を表示</button>
+            <!-- <button id="show-config">確率・景品を表示</button> -->
             <button id="reset" class="danger">リセット</button>
         </div>
     </div>
@@ -630,13 +630,22 @@
             const tierRate = total > 0 ? ((tierTotal / total) * 100).toFixed(2) : '0.00';
 
             // ▼ 見出しに合計を追加表示
+            // const tierTitle = $(`
+            // <div style="margin-top:10px;">
+            //     <strong>${tier.name}</strong>
+            //     <small>（設定確率: ${(tier.probNormalized * 100).toFixed(2)}%）</small><br>
+            //     <small>→ 出現合計: ${tierTotal}回 / 実測: ${tierRate}%</small>
+            // </div>
+
+            // `);
             const tierTitle = $(`
             <div style="margin-top:10px;">
                 <strong>${tier.name}</strong>
-                <small>（設定確率: ${(tier.probNormalized * 100).toFixed(2)}%）</small><br>
+                <small>（設定確率: ** %）</small><br>
                 <small>→ 出現合計: ${tierTotal}回 / 実測: ${tierRate}%</small>
             </div>
-        `);
+            
+            `);
 
             const $table = $(`<table><thead><tr><th>景品</th><th>回数</th><th>確率</th></tr></thead><tbody></tbody></table>`);
             for (const it of tier.items) {
