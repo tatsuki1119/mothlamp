@@ -599,8 +599,8 @@
         const counts = aggregateCounts(history);
         const total = history.length;
 
-        const pricePerDraw = 770;
-        const shippingPerBatch = 660;
+        const pricePerDraw = 35490;
+        const shippingPerBatch = 59710;
 
         const drawCost = total * pricePerDraw;
         const shippingCost = total > 0 ? Math.ceil(total / 10) * shippingPerBatch : 0;
@@ -609,9 +609,9 @@
         const $s = $('#summary').empty();
         $s.append(`
         <div style="margin-bottom:8px;">
-            <strong>合計ドロー数:</strong> ${total}
+            <strong>合計繝峨Οー数:</strong> ${total}
             <br>
-            <strong>合計金額:</strong> ¥${totalCost.toLocaleString()}
+            <strong>蜷郁ｨ�金額:</strong> ¥${totalCost.toLocaleString()}
             <small>
                 （ガチャ: ¥${drawCost.toLocaleString()} + 送料: ¥${shippingCost.toLocaleString()}）
             </small>
@@ -641,8 +641,8 @@
             const tierTitle = $(`
             <div style="margin-top:10px;">
                 <strong>${tier.name}</strong>
-                <small>（設定確率: ** %）</small><br>
-                <small>→ 出現合計: ${tierTotal}回 / 実測: ${tierRate}%</small>
+                <small>（險ｭ螳�確率: ** %）</small><br>
+                <small>→ 出迴ｾ蜷�計: ?? 回 / 実貂ｬ: ?? %</small>
             </div>
             
             `);
