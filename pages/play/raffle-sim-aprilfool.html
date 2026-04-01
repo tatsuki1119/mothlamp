@@ -265,7 +265,7 @@
 </style>
 
 <div class="contents_block">
-    <h1>🎲 ランダムくじ（ガチャ）シミュレーター</h1>
+    <h1>🎲 ラン繝ｳ%くじ（ガチャ）シ&#$レーター</h1>
 </div>
 
 
@@ -280,7 +280,7 @@
             <button class="draw-btn primary" data-count="100">100回</button>
         </div>
         <div class="right">
-            <button id="show-config">確率・景品を表示</button>
+            <!-- <button id="show-config">確率・景品を表示</button> -->
             <button id="reset" class="danger">リセット</button>
         </div>
     </div>
@@ -294,12 +294,12 @@
 </div>
 
 <div class="panel contents_block">
-    <strong>📊 集計</strong>
+    <strong>📊 *?計</strong>
     <div id="summary"></div>
 </div>
 
 <div class="panel contents_block">
-    <strong>🧾 履歴（全件）</strong>
+    <strong>🧾 履}`"全件）</strong>
     <div id="history" class="history"></div>
 </div>
 
@@ -313,7 +313,7 @@
         <div id="gacha-prize"></div>
 
         <div class="gacha-buttons">
-            <button id="skip-results">全部スキップ</button>
+            <button id="skip-results">全部ス繧ｭ繝�プ</button>
             <button id="next-result" class="primary">次へ</button>
         </div>
 
@@ -324,7 +324,7 @@
     <div class="gacha-modal-content">
 
         <div style="display:flex; align-items:center; margin-bottom:10px;">
-            <strong style="font-size:20px;">結果一覧</strong>
+            <strong style="font-size:20px;">結譫�一覧</strong>
             <button id="close-result-list" class="right danger">×</button>
         </div>
 
@@ -337,47 +337,131 @@
     // ===============================
     // コンフィグ設定部分
     // ===============================
+    // const GACHA_CONFIG = [
+    //     {
+    //         name: "A賞【直筆宛名＆サイン入り！】写真帖",
+    //         prob: 0.3,
+    //         items: [
+    //             { name: "A-もな" },
+    //             { name: "A-美雨" },
+    //             { name: "A-凛花" },
+    //             { name: "A-百花" },
+    //         ]
+    //     },
+    //     {
+    //         name: "B賞 【直筆サイン入り！】ファントムシータのプリントチェキ",
+    //         prob: 0.5,
+    //         items: [
+    //             { name: "B-もな" },
+    //             { name: "B-美雨" },
+    //             { name: "B-凛花" },
+    //             { name: "B-百花" },
+    //         ]
+    //     },
+    //     {
+    //         name: "C賞 【選べる！】回転アクリルスタンド",
+    //         prob: 8.0,
+    //         items: [
+    //             { name: "C-選べる回転アクスタ" },
+    //         ]
+    //     },
+    //     {
+    //         name: "D賞 カードケース",
+    //         prob: 12.0,
+    //         items: [
+    //             { name: "D-もな" },
+    //             { name: "D-美雨" },
+    //             { name: "D-凛花" },
+    //             { name: "D-百花" },
+    //         ]
+    //     },
+    //     {
+    //         name: "E賞 和紙缶バッジ",
+    //         prob: 19.2,
+    //         items: [
+    //             { name: "E-もな1" },
+    //             { name: "E-もな2" },
+    //             { name: "E-美雨1" },
+    //             { name: "E-美雨2" },
+    //             { name: "E-凛花1" },
+    //             { name: "E-凛花2" },
+    //             { name: "E-百花1" },
+    //             { name: "E-百花2" },
+    //         ]
+    //     },
+    //     {
+    //         name: "F賞 キラキラカード",
+    //         prob: 25.0,
+    //         items: [
+    //             { name: "F-もな1" },
+    //             { name: "F-もな2" },
+    //             { name: "F-美雨1" },
+    //             { name: "F-美雨2" },
+    //             { name: "F-凛花1" },
+    //             { name: "F-凛花2" },
+    //             { name: "F-百花1" },
+    //             { name: "F-百花2" },
+    //         ]
+    //     },
+    //     {
+    //         name: "G賞 ミニブロマイド",
+    //         prob: 35.0,
+    //         items: [
+    //             { name: "G-もな1" },
+    //             { name: "G-もな2" },
+    //             { name: "G-美雨1" },
+    //             { name: "G-美雨2" },
+    //             { name: "G-凛花1" },
+    //             { name: "G-凛花2" },
+    //             { name: "G-百花1" },
+    //             { name: "G-百花2" },
+    //             { name: "G-集合1" },
+    //             { name: "G-集合2" },
+    //         ]
+    //     },
+    // ];
+
     const GACHA_CONFIG = [
         {
-            name: "A賞【直筆宛名＆サイン入り！】写真帖",
-            prob: 0.3,
+            name: "A雉槭千峩筆宛名＆サ繧､繝ｳ入り！】写逵�帖",
+            prob: 50,
             items: [
                 { name: "A-もな" },
-                { name: "A-美雨" },
+                { name: "A-鄒�雨" },
                 { name: "A-凛花" },
-                { name: "A-百花" },
+                { name: "A-百闃ｱ" },
             ]
         },
         {
-            name: "B賞 【直筆サイン入り！】ファントムシータのプリントチェキ",
-            prob: 0.5,
+            name: "B賞 【直遲�しイン入り！】ファ繝ｳ繝�ムシータの繝励Μントチェキ",
+            prob: 40,
             items: [
-                { name: "B-もな" },
+                { name: "B-繧�な" },
                 { name: "B-美雨" },
-                { name: "B-凛花" },
+                { name: "B-蜃�花" },
                 { name: "B-百花" },
             ]
         },
         {
-            name: "C賞 【選べる！】回転アクリルスタンド",
-            prob: 8.0,
+            name: "C賞 【選べる！】回霆｢繧｢繧ｯリルスタンド",
+            prob: 5,
             items: [
-                { name: "C-選べる回転アクスタ" },
+                { name: "C-選べ繧句屓転アクスタ" },
             ]
         },
         {
-            name: "D賞 カードケース",
-            prob: 12.0,
+            name: "D賞 カ繝ｼ繝�ケース",
+            prob: 2,
             items: [
-                { name: "D-もな" },
-                { name: "D-美雨" },
-                { name: "D-凛花" },
-                { name: "D-百花" },
+                { name: "D-も縺ｪ" },
+                { name: "D-美髮ｨ" },
+                { name: "D-蜃�花" },
+                { name: "D-逋ｾ花" },
             ]
         },
         {
-            name: "E賞 和紙缶バッジ",
-            prob: 19.2,
+            name: "E雉� 蜥�紙缶バッジ",
+            prob: 1.5,
             items: [
                 { name: "E-もな1" },
                 { name: "E-もな2" },
@@ -391,7 +475,7 @@
         },
         {
             name: "F賞 キラキラカード",
-            prob: 25.0,
+            prob: 1.0,
             items: [
                 { name: "F-もな1" },
                 { name: "F-もな2" },
@@ -405,7 +489,7 @@
         },
         {
             name: "G賞 ミニブロマイド",
-            prob: 35.0,
+            prob: 0.5,
             items: [
                 { name: "G-もな1" },
                 { name: "G-もな2" },
@@ -422,11 +506,11 @@
     ];
 
     const TIER_COLORS = {
-        "A賞【直筆宛名＆サイン入り！】写真帖": "#ff3333",
-        "B賞 【直筆サイン入り！】ファントムシータのプリントチェキ": "#ffaa00",
-        "C賞 【選べる！】回転アクリルスタンド": "#ffff00",
-        "D賞 カードケース": "#c9ceb3",
-        "E賞 和紙缶バッジ": "#b9ceb3",
+        "A雉槭千峩筆宛名＆サ繧､繝ｳ入り！】写逵�帖": "#ff3333",
+        "B賞 【直遲�しイン入り！】ファ繝ｳ繝�ムシータの繝励Μントチェキ": "#ffaa00",
+        "C賞 【選べる！】回霆｢繧｢繧ｯリルスタンド": "#ffff00",
+        "D賞 カ繝ｼ繝�ケース": "#c9ceb3",
+        "E雉� 蜥�紙缶バッジ": "#b9ceb3",
         "F賞 キラキラカード": "#afc9c3",
         "G賞 ミニブロマイド": "#cccccc"
     };
@@ -515,8 +599,8 @@
         const counts = aggregateCounts(history);
         const total = history.length;
 
-        const pricePerDraw = 770;
-        const shippingPerBatch = 660;
+        const pricePerDraw = 35490;
+        const shippingPerBatch = 59710;
 
         const drawCost = total * pricePerDraw;
         const shippingCost = total > 0 ? Math.ceil(total / 10) * shippingPerBatch : 0;
@@ -525,9 +609,9 @@
         const $s = $('#summary').empty();
         $s.append(`
         <div style="margin-bottom:8px;">
-            <strong>合計ドロー数:</strong> ${total}
+            <strong>合計繝峨Οー数:</strong> ${total}
             <br>
-            <strong>合計金額:</strong> ¥${totalCost.toLocaleString()}
+            <strong>蜷郁ｨ�金額:</strong> ¥${totalCost.toLocaleString()}
             <small>
                 （ガチャ: ¥${drawCost.toLocaleString()} + 送料: ¥${shippingCost.toLocaleString()}）
             </small>
@@ -546,13 +630,22 @@
             const tierRate = total > 0 ? ((tierTotal / total) * 100).toFixed(2) : '0.00';
 
             // ▼ 見出しに合計を追加表示
+            // const tierTitle = $(`
+            // <div style="margin-top:10px;">
+            //     <strong>${tier.name}</strong>
+            //     <small>（設定確率: ${(tier.probNormalized * 100).toFixed(2)}%）</small><br>
+            //     <small>→ 出現合計: ${tierTotal}回 / 実測: ${tierRate}%</small>
+            // </div>
+
+            // `);
             const tierTitle = $(`
             <div style="margin-top:10px;">
                 <strong>${tier.name}</strong>
-                <small>（設定確率: ${(tier.probNormalized * 100).toFixed(2)}%）</small><br>
-                <small>→ 出現合計: ${tierTotal}回 / 実測: ${tierRate}%</small>
+                <small>（險ｭ螳�確率: ** %）</small><br>
+                <small>→ 出迴ｾ蜷�計: ?? 回 / 実貂ｬ: ?? %</small>
             </div>
-        `);
+            
+            `);
 
             const $table = $(`<table><thead><tr><th>景品</th><th>回数</th><th>確率</th></tr></thead><tbody></tbody></table>`);
             for (const it of tier.items) {
@@ -672,7 +765,7 @@
         flash[0].offsetWidth;
 
         // クラス追加
-        if (tierName.startsWith("A賞")) {
+        if (tierName.startsWith("A雉槭")) {
             flash.addClass('flash flash-a');
         }
         else if (tierName.startsWith("B賞")) {
