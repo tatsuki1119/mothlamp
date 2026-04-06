@@ -11,7 +11,8 @@
         "sokkuri": "そっくりさん",
         "noah": "ノア",
         "botbakka": "botばっか",
-        "barairo": "薔薇色の月"
+        "barairo": "薔薇色の月",
+        "mo-ii-kai": "もーいーかい？"
     },
     "lives": [
         {
@@ -1157,6 +1158,55 @@
                     ]
                 }
             ]
+        },
+        {
+            "id": "ladysteadypremium-1year-sp",
+            "title": "LadySteady Premium1周年SP",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.03.31"
+                    ],
+                    "songs": [
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "[MC]",
+                        {
+                            "id": "barairo"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "kansaicollection-2026-ss",
+            "title": "KANSAI COLLECTION 2026 SPRING & SUMMER",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.04-05"
+                    ],
+                    "songs": [
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "songs-template": [
@@ -1197,6 +1247,9 @@
             },
             {
                 "id": "barairo"
+            },
+            {
+                "id": "mo-ii-kai"
             }
         ]
     ]
