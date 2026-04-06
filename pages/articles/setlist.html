@@ -114,24 +114,25 @@ Phantom Siita 1st WORLD TOUR “Moth to a flame”
 
                         if (hasId) {
                             html += `
-        <li>
-            <p>
-                ${name}
-                <a href="?p=discography.${songId}">
-                    <img src="/static/img/icon/note.png" alt="note" class="music_link_img">
-                </a>
-            </p>
-        </li>
-        `;
+                                <li>
+                                    <p>
+                                        ${name}
+                                        <a href="?p=discography.${songId}">
+                                            <img src="/static/img/icon/note.png" alt="note" class="music_link_img">
+                                        </a>
+                                    </p>
+                                </li>
+                                `;
                         } else {
                             html += `
-        <li>
-            <p>${name}</p>
-        </li>
-        `;
+                                <li>
+                                    <p>${name}</p>
+                                </li>
+                                `;
                         }
 
                     });
+                    html += `</ul>`;
                 });
 
                 html += `</div>`;
