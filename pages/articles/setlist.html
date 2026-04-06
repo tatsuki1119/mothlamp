@@ -8,6 +8,13 @@
         padding-top: calc(25px + var(--safeareainsettop));
         margin-top: calc(-25px - var(--safeareainsettop));
     }
+
+    .music_link_img {
+        display: inline-block;
+        margin: 0 5px;
+        height: 0.9em;
+        filter: brightness(0) saturate(100%) invert(18%) sepia(100%) saturate(5000%) hue-rotate(350deg) brightness(100%) contrast(100%);
+    }
 </style>
 
 <div class="contents_block">
@@ -74,6 +81,8 @@ Phantom Siita 1st WORLD TOUR “Moth to a flame”
                     sec.songs.forEach(function (song) {
 
                         let name = "";
+                        let hasId = false;
+                        let songId = "";
 
                         if (typeof song === "string") {
 
@@ -97,17 +106,32 @@ Phantom Siita 1st WORLD TOUR “Moth to a flame”
                                 songsMaster[song.id] ??
                                 "";
 
+                            if (song.id) {
+                                hasId = true;
+                                songId = song.id;
+                            }
                         }
 
-                        html += `
-                        <li>
-                            <p>${name}</p>
-                        </li>
-                    `;
+                        if (hasId) {
+                            html += `
+        <li>
+            <p>
+                ${name}
+                <a href="?p=discography.${songId}">
+                    <img src="/static/img/icon/note.png" alt="note" class="music_link_img">
+                </a>
+            </p>
+        </li>
+        `;
+                        } else {
+                            html += `
+        <li>
+            <p>${name}</p>
+        </li>
+        `;
+                        }
 
                     });
-
-                    html += `</ul>`;
                 });
 
                 html += `</div>`;
