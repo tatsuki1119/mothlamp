@@ -1,6 +1,77 @@
 <div id="page-title" style="display: none;">ご寄付について [誘蛾灯の導き]</div>
 <div id="page-description" style="display: none;">「誘蛾灯の導き」へのご寄付について。</div>
 
+<style>
+    #donation-table,
+    #expense-table,
+    #summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+    }
+
+    #donation-table th,
+    #expense-table th {
+        background: #11111188;
+        color: #eee;
+        padding: 10px;
+        border: 1px solid #444;
+    }
+
+    #donation-table td,
+    #expense-table td,
+    #summary-table td {
+        padding: 10px;
+        border: 1px solid #333;
+    }
+
+    /* 全体は中央 */
+    #donation-table th,
+    #expense-table th,
+    #donation-table td,
+    #expense-table td,
+    #summary-table td {
+        text-align: center;
+    }
+
+    /* 金額だけ右寄せ */
+    #donation-table td:nth-child(2),
+    #donation-table td:nth-child(3),
+    #donation-table td:nth-child(4),
+    #expense-table td:nth-child(3),
+    #summary-table td:nth-child(2) {
+        text-align: right;
+    }
+
+    /* 少し余白調整（おすすめ） */
+    #donation-table td,
+    #expense-table td,
+    #summary-table td {
+        padding: 12px 10px;
+    }
+
+    /* 集計 */
+    #summary-table {
+        margin-top: 10px;
+    }
+
+    #summary-table td {
+        padding: 8px 10px;
+    }
+
+    #summary-table tr.balance td {
+        font-weight: bold;
+    }
+
+    #summary-table tr.balance.negative td {
+        color: #ff6b6b;
+    }
+
+    #summary-table tr.balance.positive td {
+        color: #7fffd4;
+    }
+</style>
+
 <div class="contents_block">
     <h1 class="glitch-text">ご寄付について</h1>
 </div>
@@ -41,7 +112,7 @@
 <div class="contents_block">
     <h3>Squareについて</h3>
     <p>
-        当サイトでは、決済サービス「Square」を利用して寄付を受け付けております。Squareは多くの国内店舗で導入されている信頼性の高いサービスで、クレジットカードを使用して100円から寄付が可能です。手数料は3.75%のみで、残りの金額は全て当サイトの運営資金として活用させていただきます。
+        当サイトでは、決済サービス「Square」を利用して寄付を受け付けております。Squareは多くの国内店舗で導入されている信頼性の高いサービスで、クレジットカードを使用して100円から寄付が可能です。手数料は3.6%のみで、残りの金額は全て当サイトの運営資金として活用させていただきます。
     </p>
     <p>
         寄付の際、寄付者様の個人情報が当サイトに伝わることはありません。匿名での寄付が可能で、プライバシーを守りながら支援いただけます。
@@ -50,3 +121,125 @@
         また、寄付完了後に送信される（数分から数十分かかります）電子レシートを通じて、匿名で当サイトへのメッセージをお送りいただけます。ご感想やご意見をお寄せいただけると、大変励みになります。ぜひお気軽にご利用ください。メッセージをお送りいただく先は、管理人または本サイトのX(Twitter)のDMでも問題ありません。
     </p>
 </div>
+
+<div class="contents_block">
+    <h3>ご寄付一覧</h3>
+    <table id="donation-table">
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>ご寄付金額</th>
+                <th>手数料</th>
+                <th>受取額</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h3>支出一覧</h3>
+    <table id="expense-table">
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>内容</th>
+                <th>金額</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <h3>集計</h3>
+    <table id="summary-table">
+        <tbody></tbody>
+    </table>
+
+    <p id="last-updated"></p>
+</div>
+
+
+<script>
+    const financeData = {
+        lastUpdated: "2026-04-07",
+
+        donations: [
+            { date: "2025-01-25", amount: 1000 },
+            { date: "2025-01-25", amount: 1000 },
+            { date: "2025-01-25", amount: 500 },
+            { date: "2025-01-25", amount: 917 },
+            { date: "2025-01-25", amount: 1000 },
+            { date: "2025-01-25", amount: 3000 },
+            { date: "2025-01-26", amount: 1000 },
+            { date: "2025-01-26", amount: 500 },
+            { date: "2025-02-05", amount: 1000 },
+            { date: "2025-03-31", amount: 1000 },
+            { date: "2025-08-11", amount: 1000 },
+            { date: "2025-08-19", amount: 1000 },
+            { date: "2025-11-04", amount: 1000 },
+
+        ],
+
+        expenses: [
+            { date: "2025-01-08", item: "ドメイン契約(～2026.01.08)", amount: 349 },
+            { date: "2025-04-19", item: "サーバー用新機器購入", amount: 34568 },
+            { date: "2025-08-17", item: "ドメイン更新(～2027.01-08)", amount: 1998 },
+            { date: "2026-04-07", item: "X API クレジット", amount: 831 },
+        ]
+    };
+
+    $(function () {
+        const donationData = financeData.donations;
+        const expenseData = financeData.expenses;
+
+        let totalDonation = 0;
+        let totalFee = 0;
+        let totalNet = 0;
+        let totalExpense = 0;
+
+        // 寄付
+        donationData.forEach(d => {
+            const fee = Math.floor(d.amount * 0.036);
+            const net = d.amount - fee;
+
+            totalDonation += d.amount;
+            totalFee += fee;
+            totalNet += net;
+
+            $("#donation-table tbody").append(`
+            <tr>
+                <td>${d.date}</td>
+                <td>${d.amount.toLocaleString()}円</td>
+                <td>${fee.toLocaleString()}円</td>
+                <td>${net.toLocaleString()}円</td>
+            </tr>
+        `);
+        });
+
+        // 支出
+        expenseData.forEach(e => {
+            totalExpense += e.amount;
+
+            $("#expense-table tbody").append(`
+            <tr>
+                <td>${e.date}</td>
+                <td>${e.item}</td>
+                <td>${e.amount.toLocaleString()}円</td>
+            </tr>
+        `);
+        });
+
+        const balance = totalNet - totalExpense;
+
+        const balanceClass = balance < 0 ? "balance negative" : "balance positive";
+
+        $("#summary-table tbody").html(`
+            <tr><td>ご寄付総額</td><td>${totalDonation.toLocaleString()}円</td></tr>
+            <tr><td>手数料合計</td><td>${totalFee.toLocaleString()}円</td></tr>
+            <tr><td>受取総額</td><td>${totalNet.toLocaleString()}円</td></tr>
+            <tr><td>支出総額</td><td>${totalExpense.toLocaleString()}円</td></tr>
+            <tr class="${balanceClass}"><td>残高</td><td>${balance.toLocaleString()}円</td></tr>
+        `);
+
+        $("#last-updated").text("最終更新日：" + financeData.lastUpdated);
+
+    });
+</script>
