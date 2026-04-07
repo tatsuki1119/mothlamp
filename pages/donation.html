@@ -211,7 +211,7 @@
 
         // 寄付
         donationData.forEach(d => {
-            const fee = Math.floor(d.amount * 0.036);
+            const fee = Math.round(d.amount * 0.036);
             const net = d.amount - fee;
 
             totalDonation += d.amount;
