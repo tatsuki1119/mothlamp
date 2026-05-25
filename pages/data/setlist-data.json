@@ -12,7 +12,8 @@
         "noah": "ノア",
         "botbakka": "botばっか",
         "barairo": "薔薇色の月",
-        "mo-ii-kai": "もーいーかい？"
+        "mo-ii-kai": "もーいーかい？",
+        "horror-queen": "ホラークイーン"
     },
     "lives": [
         {
@@ -1207,6 +1208,178 @@
                     ]
                 }
             ]
+        },
+        {
+            "id": "early-summer-festa-2026-hyakkiyako",
+            "title": "EARLY SUMMER FESTA 2026 -Music and Beer- 『百鬼夜行』",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.05.02"
+                    ],
+                    "songs": [
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "夏祭り（JITTERIN'JINN）",
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "devilish-girl"
+                        },
+                        "少女A / <span style=\"color: var(--color-miu);\">美雨</span>（中森明菜）",
+                        "KICK BACK / <span style=\"color: var(--color-moka);\">百花</span>（米津玄師）",
+                        "女の子は誰でも / <span style=\"color: var(--color-rinka);\">凛花</span>（東京事変）",
+                        "華奢なリップ / <span style=\"color: var(--color-mona);\">もな</span>（ジェニーハイ feat.ちゃんみな）",
+                        {
+                            "id": "noah"
+                        },
+                        {
+                            "id": "sokkuri"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        "[MC]",
+                        {
+                            "id": "barairo"
+                        },
+                        "[アンコール]",
+                        "secret base ～君がくれたもの～（ZONE）",
+                        "フライディ・チャイナタウン",
+                        "[MC]",
+                        "長く短い祭（椎名林檎）",
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "iconic-moments-fes",
+            "title": "ICONIC MOMENTS FES！Supported by ZIP-FM",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.05.09"
+                    ],
+                    "songs": [
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        {
+                            "id": "devilish-girl"
+                        },
+                        "[MC]",
+                        {
+                            "id": "barairo"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        },
+                        "[MC 凛花誕生日]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "2nd-single-horror-queen-release-event",
+            "title": "2nd Single『ホラークイーン』 リリースイベント",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.05.24 埼玉県 エミテラス所沢"
+                    ],
+                    "songs": [
+                        {
+                            "id": "mo-ii-kai",
+                            "display": "[リハ]もーいーかい？（ワンコーラス）"
+                        },
+                        "<br>",
+                        "<1部>",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "<br>",
+                        "<2部>",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        {
+                            "id": "devilish-girl"
+                        },
+                        "[MC]",
+                        {
+                            "id": "horror-queen"
+                        }
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2026.05.30 兵庫県 阪急西宮ガーデンズ"
+                    ],
+                    "songs": [
+                        "?????"
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2026.06.13 千葉県 テラスモール松戸"
+                    ],
+                    "songs": [
+                        "?????"
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2026.06.20 東京都 アーバンドック ららぽーと豊洲"
+                    ],
+                    "songs": [
+                        "?????"
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2026.06.21 愛知県 エアポートウォーク名古屋"
+                    ],
+                    "songs": [
+                        "?????"
+                    ]
+                }
+            ]
         }
     ],
     "songs-template": [
@@ -1250,7 +1423,11 @@
             },
             {
                 "id": "mo-ii-kai"
-            }
+            },
+            {
+                "id": "horror-queen"
+            },
+            "新曲"
         ]
     ]
 }
