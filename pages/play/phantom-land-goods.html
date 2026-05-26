@@ -1,0 +1,294 @@
+<style>
+    h1 {
+        margin: 0 0 24px;
+        text-align: center;
+    }
+
+    #items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .item {
+        background: #222;
+        border: 1px solid #444;
+        border-radius: 12px;
+        padding: 12px;
+        box-sizing: border-box;
+
+        width: calc(33.333% - 8px);
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .item-header {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .name {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 1.4;
+    }
+
+    .price {
+        color: #ffb6ff;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: auto;
+    }
+
+    .controls label {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    select {
+        font-size: 15px;
+        padding: 4px 8px;
+        border-radius: 8px;
+        min-width: 70px;
+    }
+
+    .subtotal {
+        margin-left: auto;
+        font-size: 14px;
+        font-weight: bold;
+        color: #8fffa1;
+        white-space: nowrap;
+    }
+
+    .total-box {
+        position: sticky;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.95);
+        border-top: 2px solid #666;
+        padding: 16px 20px;
+        margin-top: 24px;
+        text-align: right;
+        backdrop-filter: blur(8px);
+    }
+
+    .total {
+        font-size: 32px;
+        color: #ffe066;
+        font-weight: bold;
+    }
+
+    .limit {
+        color: #aaa;
+        font-size: 12px;
+    }
+
+    /* タブレット */
+    @media (max-width: 1100px) {
+        .item {
+            width: calc(50% - 6px);
+        }
+    }
+
+    /* スマホ */
+    @media (max-width: 700px) {
+        .item {
+            width: 100%;
+        }
+
+        .controls {
+            flex-wrap: wrap;
+        }
+
+        .subtotal {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+</style>
+
+<div class="contents_block">
+
+    <h1>ふぁんとむ♡らんど グッズ合計計算</h1>
+
+    <div id="items"></div>
+
+    <div class="total-box">
+        <div>合計金額</div>
+        <div class="total">¥<span id="total">0</span></div>
+    </div>
+
+</div>
+
+<script>
+    const items = [
+        {
+            name: "TEE",
+            price: 4500,
+            limit: 99
+        },
+        {
+            name: "マフラータオル",
+            price: 3000,
+            limit: 99
+        },
+        {
+            name: "アニマルしっぽキーホルダー（まーさ）",
+            price: 1700,
+            limit: 2
+        }, {
+            name: "アニマルしっぽキーホルダー（ぐるめ）",
+            price: 1700,
+            limit: 2
+        }, {
+            name: "アニマルしっぽキーホルダー（しおん）",
+            price: 1700,
+            limit: 2
+        }, {
+            name: "アニマルしっぽキーホルダー（もち）",
+            price: 1700,
+            limit: 2
+        },
+        {
+            name: "OFFICIAL LIGHT STICK",
+            price: 4500,
+            limit: 2
+        },
+        {
+            name: "Official Light Stick カスタマイズアクリルスタンドセット",
+            price: 2000,
+            limit: 4
+        },
+        {
+            name: "衣装キーホルダー（キミバツ）",
+            price: 2800,
+            limit: 2
+        }, {
+            name: "衣装キーホルダー（ノア）",
+            price: 2800,
+            limit: 2
+        }, {
+            name: "衣装キーホルダー（魔性少女）",
+            price: 2800,
+            limit: 2
+        }, {
+            name: "衣装キーホルダー（薔薇色の月）",
+            price: 2800,
+            limit: 2
+        },
+        {
+            name: "どこか懐かしいシール帳",
+            price: 3000,
+            limit: 2
+        },
+        {
+            name: "ぷくぷくシール",
+            price: 1200,
+            limit: 4
+        },
+        {
+            name: "アクリルタイルシール",
+            price: 1500,
+            limit: 4
+        },
+        {
+            name: "ボイス付き変身コンパクトキーホルダー",
+            price: 4000,
+            limit: 99
+        },
+        {
+            name: "ランダム目印チャーム",
+            price: 600,
+            limit: 30
+        },
+        {
+            name: "ランダム缶バッジ",
+            price: 500,
+            limit: 30
+        },
+        {
+            name: "ランダムトレカ",
+            price: 400,
+            limit: 50
+        },
+        {
+            name: "ジャンボうちわ",
+            price: 1000,
+            limit: 2
+        }
+    ];
+
+    function createItem(item, index) {
+        let options = "";
+
+        for (let i = 0; i <= item.limit; i++) {
+            options += `<option value="${i}">${i}</option>`;
+        }
+
+        return `
+<div class="item">
+    <div class="item-header">
+        <div class="name">${item.name}</div>
+
+        <div class="price">
+            ¥${item.price.toLocaleString()}
+        </div>
+
+        <div class="limit">
+            上限: ${item.limit} 個
+        </div>
+    </div>
+
+    <div class="controls">
+        <label>数量</label>
+
+        <select class="qty"
+                data-price="${item.price}"
+                data-index="${index}">
+            ${options}
+        </select>
+
+        <div class="subtotal">
+            ¥<span id="subtotal-${index}">0</span>
+        </div>
+    </div>
+</div>
+`;
+    }
+
+    items.forEach((item, index) => {
+        $("#items").append(createItem(item, index));
+    });
+
+    function updateTotal() {
+        let total = 0;
+
+        $(".qty").each(function () {
+            const qty = parseInt($(this).val());
+            const price = parseInt($(this).data("price"));
+            const index = $(this).data("index");
+
+            const subtotal = qty * price;
+
+            total += subtotal;
+
+            $(`#subtotal-${index}`).text(subtotal.toLocaleString());
+        });
+
+        $("#total").text(total.toLocaleString());
+    }
+
+    $(document).on("change", ".qty", function () {
+        updateTotal();
+    });
+
+    updateTotal();
+</script>
