@@ -1352,7 +1352,42 @@
                         "2026.05.30 兵庫県 阪急西宮ガーデンズ"
                     ],
                     "songs": [
-                        "?????"
+                        {
+                            "id": "mo-ii-kai",
+                            "display": "[リハ]もーいーかい？（ワンコーラス）"
+                        },
+                        "<br>",
+                        "<1部>",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        {
+                            "id": "botbakka"
+                        },
+                        "[MC]",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "<br>",
+                        "<2部>",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        {
+                            "id": "devilish-girl"
+                        },
+                        "[MC]",
+                        {
+                            "id": "horror-queen"
+                        }
                     ]
                 },
                 {
@@ -1377,6 +1412,39 @@
                     ],
                     "songs": [
                         "?????"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "atjam2026",
+            "title": "@JAM 2026 Day2 ～SUPER LIVE～ <1部>",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.05.31"
+                    ],
+                    "songs": [
+                        {
+                            "id": "sokkuri"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "barairo"
+                        },
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
                     ]
                 }
             ]
