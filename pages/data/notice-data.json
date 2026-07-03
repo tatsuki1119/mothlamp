@@ -3,32 +3,26 @@
         "id": "20241113",
         "contents": [
             "本サイトを公開しました。",
-            "新規ページ <a href=\"/?p=web\">Web記事一覧</a> を公開しました。"
+            "新規ページ <a href=\"/?p=web\">Web記事一覧</a> を作成しました。"
         ]
     },
     {
         "id": "20241209",
         "contents": [
-            "新規記事 <a href=\"/?p=articles.hainenazo\">ハイネ謎解き</a> を公開しました。「モナリザの横顔」にて配布された謎解きの再現を掲載しています。"
+            "新規記事 <a href=\"/?p=articles.hainenazo\">ハイネ謎解き</a> を作成しました。「モナリザの横顔」にて配布された謎解きの再現を掲載しています。"
         ]
     },
     {
         "id": "20241213",
         "contents": [
-            "新規記事 <a href=\"/?p=articles.setlist\">セットリスト</a> を公開しました。ライブの際に更新します。"
+            "新規記事 <a href=\"/?p=articles.setlist\">セットリスト</a> を作成しました。ライブの際に更新します。"
         ]
     },
     {
         "id": "20241218",
         "contents": [
-            "新規記事 <a href=\"/?p=articles.live-akuma-night-video\">悪魔 Night Duel Buster 動画まとめ</a> を公開しました。ファンにより撮影された動画の投稿をまとめています。",
+            "新規記事 <a href=\"/?p=articles.live-akuma-night-video\">悪魔 Night Duel Buster 動画まとめ</a> を作成しました。ファンにより撮影された動画の投稿をまとめています。",
             "またフィルター機能により、メンバーや曲を絞って検索をすることが可能です。"
-        ]
-    },
-    {
-        "id": "20241229",
-        "contents": [
-            "公式より、<a href=\"https://phantomsiita.com/news/detail/74\">「ライブにおける注意事項及び禁止事項のご案内」</a>が投稿されました。本サイトのトップページにも、こちらのページへのリンクを追加しました。"
         ]
     },
     {
@@ -66,13 +60,13 @@
     {
         "id": "20250212",
         "contents": [
-            "<a href=\"/?p=phanart\">ファンアート集</a> に <a href=\"/?p=phanart.oan\">おあん</a> さんのページを追加しました。"
+            "<a href=\"/?p=phanart\">ファンアート集</a> で <a href=\"/?p=phanart.oan\">おあん</a> さんのページを公開しました。"
         ]
     },
     {
         "id": "20250306",
         "contents": [
-            "<a href=\"/?p=phanart\">ファンアート集</a> の <a href=\"/?p=phanart.guoxoua\">कㄑ”‎^. .^ ੭</a> さんのページに <a href=\"/?p=phanart.guoxoua-nametag\">名刺用素材</a> を追加しました。「〇〇会」などで素材としてご利用ください。"
+            "<a href=\"/?p=phanart\">ファンアート集</a> の <a href=\"/?p=phanart.guoxoua\">कㄑ”‎^. .^ ੭</a> さんのページに <a href=\"/?p=phanart.guoxoua-nametag\">名刺用素材</a> を作成しました。「〇〇会」などで素材としてご利用ください。"
         ]
     },
     {
@@ -109,25 +103,55 @@
     {
         "id": "20250717",
         "contents": [
-            "<a href=\"/?p=schedule\">スケジュール</a> 機能を追加しました。"
+            "<a href=\"/?p=schedule\">スケジュール</a> ページを作成しました。"
         ]
     },
     {
         "id": "20250906",
         "contents": [
-            "<a href=\"/?p=watermark\">透かし加工ツール</a> を追加しました。画像へIDなどを重ねる加工にご利用いただけます。"
+            "<a href=\"/?p=watermark\">透かし加工ツール</a> を作成しました。画像へIDなどを重ねる加工にご利用いただけます。"
         ]
     },
     {
         "id": "20251006",
         "contents": [
-            "<a href=\"/?p=phanart\">ファンアート集</a> に <a href=\"/?p=phanart.sanketsu\">酸欠</a> さんのページを追加しました。"
+            "<a href=\"/?p=phanart\">ファンアート集</a> に <a href=\"/?p=phanart.sanketsu\">酸欠</a> さんのページを作成しました。"
         ]
     },
     {
         "id": "20260117",
         "contents": [
             "<a href=\"/?p=play.haine-test-2\">第２回ハイネ共通テスト</a> を公開しました。"
+        ]
+    },
+    {
+        "id": "20260124",
+        "contents": [
+            "<a href=\"/?p=schedule\">スケジュール</a> ページにカレンダー表示を追加しました。"
+        ]
+    },
+    {
+        "id": "20260325",
+        "contents": [
+            "<a href=\"/?p=discography\">ディスコグラフィ</a> ページを作成しました。楽曲ごとのページは随時更新します。"
+        ]
+    },
+    {
+        "id": "20260407",
+        "contents": [
+            "<a href=\"/?p=donation\">ご寄付について</a> ページ内に、ご寄付いただいた金額と使用した金額の明細を追加しました。内容は随時更新します。"
+        ]
+    },
+    {
+        "id": "20260514",
+        "contents": [
+            "<a href=\"/?p=schedule\">スケジュール</a> にて、Googleカレンダーの公開URLと、iCal配布URLを追加しました。ご自身のカレンダーへ追加してご利用いただくことができるようになりました。"
+        ]
+    },
+    {
+        "id": "20260703",
+        "contents": [
+            "<a href=\"/?p=articles.new-fan-guide\">初めてのファントムシータ</a> ページを作成しました。ファントムシータを好きになった方向けの初心者ガイドです。"
         ]
     }
 ]
