@@ -6,13 +6,18 @@
     },
     {
         "show_index": true,
-        "title": "ハイネ謎解き",
-        "p": "hainenazo"
+        "title": "初めてのファントムシータ",
+        "p": "new-fan-guide"
     },
     {
         "show_index": true,
         "title": "チケット抽選結果集計",
         "p": "ticket-results"
+    },
+    {
+        "show_index": true,
+        "title": "ハイネ謎解き",
+        "p": "hainenazo"
     },
     {
         "title": "悪魔 Nigit Duel Buster 投稿まとめ",
