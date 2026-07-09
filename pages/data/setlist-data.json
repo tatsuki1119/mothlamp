@@ -192,7 +192,7 @@
         },
         {
             "id": "heine",
-            "title": "ファントムシータ 1st LIVE 2024「ハイネ」2024年11月1日 日本武道館",
+            "title": "ファントムシータ 1st LIVE 2024「ハイネ」",
             "sections": [
                 {
                     "schedule": [
@@ -1520,6 +1520,55 @@
                             "id": "horror-queen"
                         }
                     ]
+                },
+                {
+                    "schedule": [
+                        "2026.06.27 大阪府 セブンパーク天美"
+                    ],
+                    "songs": [
+                        "台風のため中止"
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2026.06.28 千葉県 セブンパークアリオ柏"
+                    ],
+                    "songs": [
+                        {
+                            "id": "mo-ii-kai",
+                            "display": "[リハ]もーいーかい？（ワンコーラス）"
+                        },
+                        "<br>",
+                        "<1部>",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        "ルル（Ado）",
+                        "[MC]",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "<br>",
+                        "<2部>",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        {
+                            "id": "botbakka"
+                        },
+                        "[MC]",
+                        {
+                            "id": "horror-queen"
+                        }
+                    ]
                 }
             ]
         },
@@ -1552,6 +1601,175 @@
                         {
                             "id": "zokuzoku"
                         }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ado-ao",
+            "title": "Ado STADIUM LIVE 2026「Ao」オープニングアクト",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.07.04"
+                    ],
+                    "songs": [
+                        {
+                            "id": "horror-queen"
+                        },
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        "[MC]",
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "devilish-girl"
+                        },
+                        {
+                            "id": "barairo"
+                        },
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                },
+                {
+                    "schedule": [
+                        "2026.07.05"
+                    ],
+                    "songs": [
+                        {
+                            "id": "horror-queen"
+                        },
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        "[MC]",
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        {
+                            "id": "barairo"
+                        },
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "phantomland",
+            "title": "ファントムシータ Zepp Tour 2026「ふぁんとむ♥らんど」",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.07.11 福岡",
+                        "2026.07.19 札幌",
+                        "2026.07.25 大阪",
+                        "2026.07.26 名古屋",
+                        "2026.08.01 羽田（東京）",
+                        "2026.08.13 横浜（追加公演）"
+                    ],
+                    "songs": [
+                        "?????",
+                        "?????",
+                        "?????",
+                        "?????",
+                        "?????"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "tif2026",
+            "title": "TOKYO IDOL FESTIVAL 2026",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.08.02"
+                    ],
+                    "songs": [
+                        "?????",
+                        "?????",
+                        "?????"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "tvasahi-summerfes",
+            "title": "テレビ朝日・六本木ヒルズ SUMMER FES",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.08.04"
+                    ],
+                    "songs": [
+                        "?????",
+                        "?????",
+                        "?????"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "luckyfes26",
+            "title": "LuckyFes’26",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.08.09"
+                    ],
+                    "songs": [
+                        "?????",
+                        "?????",
+                        "?????"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "tekinroku",
+            "title": "Cloud Nine Fes 2026『滴音録-Tekinroku-』",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.09.19"
+                    ],
+                    "songs": [
+                        "?????",
+                        "?????",
+                        "?????"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "rijf2026",
+            "title": "ROCK IN JAPAN FES. 2026",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.09.21"
+                    ],
+                    "songs": [
+                        "?????",
+                        "?????",
+                        "?????"
                     ]
                 }
             ]
