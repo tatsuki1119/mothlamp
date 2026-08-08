@@ -1794,9 +1794,35 @@
                         "2026.08.04"
                     ],
                     "songs": [
-                        "?????",
-                        "?????",
-                        "?????"
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "devilish-girl"
+                        },
+                        {
+                            "id": "conflicting"
+                        },
+                        "[MC]",
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        {
+                            "id": "barairo"
+                        },
+                        "[MC（輪廻る アカペラ披露）]",
+                        {
+                            "id": "horror-queen"
+                        }
                     ]
                 }
             ]
