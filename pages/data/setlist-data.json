@@ -14,7 +14,8 @@
         "barairo": "薔薇色の月",
         "mo-ii-kai": "もーいーかい？",
         "horror-queen": "ホラークイーン",
-        "meguru": "輪廻る"
+        "meguru": "輪廻る",
+        "mermaid": "にんぎょひめのうた"
     },
     "lives": [
         {
@@ -197,7 +198,7 @@
             "sections": [
                 {
                     "schedule": [
-                        "2024.11.03"
+                        "2024.11.01"
                     ],
                     "songs": [
                         {
@@ -1699,7 +1700,10 @@
                         "<新曲>（曲名不明、自己紹介曲）",
                         "<新曲> / <span style=\"color: var(--color-mona);\">もな</span>",
                         "[MC]",
-                        "<新曲>（人魚姫の歌？）",
+                        {
+                            "id": "mermaid",
+                            "display": "<新曲>（人魚姫の歌？→にんぎょひめのうた）"
+                        },
                         {
                             "id": "devilish-girl"
                         },
@@ -1722,7 +1726,7 @@
                             "id": "hanabami"
                         },
                         {
-                            "id": "sukikirai"
+                            "id": "sokkuri"
                         },
                         "<新曲> / <span style=\"color: var(--color-miu);\">美雨</span>",
                         {
