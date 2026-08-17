@@ -15,7 +15,13 @@
         "mo-ii-kai": "もーいーかい？",
         "horror-queen": "ホラークイーン",
         "meguru": "輪廻る",
-        "mermaid": "にんぎょひめのうた"
+        "mermaid": "にんぎょひめのうた",
+        "velvet-phantom": "Velvet Phantom",
+        "mona-solo": "私だけしか愛せないビョーキ",
+        "miu-solo": "わたしかくれんぼ",
+        "rinka-solo": "どうしよう！",
+        "moka-solo": "逝人に咲く",
+        "": ""
     },
     "lives": [
         {
@@ -1692,17 +1698,23 @@
                         "[ムービー]",
                         {
                             "id": "just-wanna-xxxx-with-you",
-                            "display": "キミと××××したいだけ（シュガーパレット ver.）"
+                            "display": "キミと××××したいだけ -かわいいりみっくす-"
                         },
                         {
                             "id": "botbakka"
                         },
-                        "<新曲>（曲名不明、自己紹介曲）",
-                        "<新曲> / <span style=\"color: var(--color-mona);\">もな</span>",
+                        {
+                            "id": "velvet-phantom",
+                            "display": "<新曲> Velvet Phantom"
+                        },
+                        {
+                            "id": "mona-solo",
+                            "display": "<新曲> 私だけしか愛せないビョーキ / <span style=\"color: var(--color-mona);\">もな</span>"
+                        },
                         "[MC]",
                         {
                             "id": "mermaid",
-                            "display": "<新曲>（人魚姫の歌？→にんぎょひめのうた）"
+                            "display": "<新曲> にんぎょひめのうた"
                         },
                         {
                             "id": "devilish-girl"
@@ -1710,8 +1722,14 @@
                         {
                             "id": "mo-ii-kai"
                         },
-                        "<新曲> / <span style=\"color: var(--color-rinka);\">凛花</span>",
-                        "<新曲> / <span style=\"color: var(--color-moka);\">百花</span>",
+                        {
+                            "id": "rinka-solo",
+                            "display": "<新曲> どうしよう！ / <span style=\"color: var(--color-rinka);\">凛花</span>"
+                        },
+                        {
+                            "id": "moka-solo",
+                            "display": "<新曲> 逝人に咲く！ / <span style=\"color: var(--color-moka);\">百花</span>"
+                        },
                         {
                             "id": "conflicting"
                         },
@@ -1728,7 +1746,10 @@
                         {
                             "id": "sokkuri"
                         },
-                        "<新曲> / <span style=\"color: var(--color-miu);\">美雨</span>",
+                        {
+                            "id": "moka-solo",
+                            "display": "<新曲> わたしかくれんぼ / <span style=\"color: var(--color-miu);\">美雨</span>"
+                        },
                         {
                             "id": "otomodachi"
                         },
@@ -1748,7 +1769,7 @@
                             "id": "meguru"
                         },
                         "[MC]",
-                        "<新曲>（とおりゃんせ？）",
+                        "<新曲> とおりゃんせ",
                         {
                             "id": "zokuzoku"
                         }
@@ -1840,9 +1861,26 @@
                         "2026.08.09"
                     ],
                     "songs": [
-                        "?????",
-                        "?????",
-                        "?????"
+                        {
+                            "id": "horror-queen"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "hanabami"
+                        },
+                        "[MC]",
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        },
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        }
                     ]
                 }
             ]
@@ -1927,6 +1965,24 @@
             },
             {
                 "id": "meguru"
+            },
+            {
+                "id": "mermaid"
+            },
+            {
+                "id": "velvet-phantom"
+            },
+            {
+                "id": "mona-solo"
+            },
+            {
+                "id": "miu-solo"
+            },
+            {
+                "id": "rinka-solo"
+            },
+            {
+                "id": "moka-solo"
             },
             "新曲"
         ]
