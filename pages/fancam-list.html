@@ -1,35 +1,13 @@
-<div id="page-title" style="display: none;">Fancam [誘蛾灯の導き]</div>
+<div id="page-title" style="display: none;">Fancam 一覧 [誘蛾灯の導き]</div>
 <div id="page-description" style="display: none;">ハイネにより撮影されたライブ映像。</div>
 
-<style>
-    .pagination_radio {
-        display: none;
-    }
-
-    .pagination_label {
-        display: inline-block;
-        width: 15%;
-        background-color: rgba(50, 50, 50, 0.9);
-        border: 1px solid #aaaaaa;
-        text-align: center;
-    }
-
-    .pagination {
-        display: flex;
-        justify-content: center;
-    }
-
-    .pagination_range {
-        text-align: center;
-    }
-
-    input[type="radio"]:checked+label.pagination_label {
-        background-color: rgba(150, 150, 150, 0.9);
-    }
-</style>
-
 <div class="contents_block">
-    <h1 class="glitch-text">ファントムシータ Fancam</h1>
+    <h1 class="glitch-text">ファントムシータ Fancam まとめ</h1>
+</div>
+
+<div class="contents_block contents_block_has_a">
+    <a class="contents_block_a" href="https://forms.gle/Stnwro77Mi635AEc8"></a>
+    <h3>＋新規作成はこちら</h3>
 </div>
 
 <div id="fancam-list-content">
@@ -46,91 +24,19 @@
     </div>
 </div>
 
+<div class="load-content" data-loadfile="/pages/parts/fancam-notice"></div>
+
 <script>
-    // =========================================
-    // 共通：ページネーション
-    // =========================================
-
-    function createPagination(currentPage, totalPages, startIndex, endIndex, totalCount, isBottom = false) {
-        if (totalPages <= 1) {
-            return "";
-        }
-
-        const pages = [];
-
-        if (totalPages <= 5) {
-            for (let i = 1; i <= totalPages; i++) {
-                pages.push(i);
-            }
-        } else if (currentPage <= 3) {
-            pages.push(1, 2, 3, 4);
-            pages.push(0);
-            pages.push(totalPages);
-        } else if (currentPage >= totalPages - 2) {
-            pages.push(1);
-            pages.push(0);
-            pages.push(
-                totalPages - 3,
-                totalPages - 2,
-                totalPages - 1,
-                totalPages
-            );
-        } else {
-            pages.push(1);
-            pages.push(0);
-            pages.push(currentPage - 1, currentPage, currentPage + 1);
-            pages.push(0);
-            pages.push(totalPages);
-        }
-
-        const name = isBottom ? "pagination_page_bottom" : "pagination_page";
-        const suffix = isBottom ? "_" : "";
-
-        const pageHtml = pages.map(page => {
-            if (page === 0) {
-                return "<span>-</span>";
-            }
-
-            return `
-                <input
-                    type="radio"
-                    class="pagination_radio"
-                    name="${name}"
-                    value="${page}"
-                    id="pagination_page_${page}${suffix}"
-                    ${page === currentPage ? "checked" : ""}>
-                <label
-                    class="pagination_label"
-                    for="pagination_page_${page}${suffix}">
-                    ${page}
-                </label>
-            `;
-        }).join("");
-
-        return `
-            <div class="contents_block">
-                <div class="pagination">
-                    ${pageHtml}
-                </div>
-                <p class="pagination_range">
-                    ${startIndex} - ${endIndex} / ${totalCount}
-                </p>
-            </div>
-        `;
+    function escapeHtml(value) {
+        // HTMLエスケープ
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
     }
 
-    document.addEventListener("click", function (event) {
-        if (event.target.matches(".pagination_radio")) {
-            const url = new URL(window.location.href);
-            url.searchParams.set("page", event.target.value);
-            window.location.href = url.href;
-        }
-    });
-
-
-    // =========================================
-    // Fancam専用処理
-    // =========================================
 
     async function loadFancamList() {
         const content = document.getElementById("fancam-list-content");
@@ -154,7 +60,11 @@
             const data = await response.json();
 
             const items = data
-                .filter(item => !item.private)
+                .filter(item =>
+                    !item.private &&
+                    item.report !== "reported" &&
+                    item.report !== "ng"
+                )
                 .sort(
                     (a, b) =>
                         new Date(b.timestamp) - new Date(a.timestamp)
@@ -166,7 +76,8 @@
                 return;
             }
 
-            const perPage = 50;
+            // ページング
+            const perPage = 20;
             const totalPages = Math.ceil(items.length / perPage);
 
             if (page > totalPages) {
@@ -244,21 +155,6 @@
                 "<p>Fancamの取得に失敗しました。</p>";
         }
     }
-
-
-    // =========================================
-    // 共通：HTMLエスケープ
-    // =========================================
-
-    function escapeHtml(value) {
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
-
 
     loadFancamList();
 </script>

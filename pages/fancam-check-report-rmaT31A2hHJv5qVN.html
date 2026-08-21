@@ -1,8 +1,15 @@
 <div id="page-title" style="display: none;">Fancam [誘蛾灯の導き]</div>
 <div id="page-description" style="display: none;">ハイネにより撮影されたライブ映像。</div>
 
+<style>
+    * {
+        border-color: yellow !important;
+        color: yellow !important;
+    }
+</style>
+
 <div class="contents_block">
-    <h1 class="glitch-text">ファントムシータ Fancam</h1>
+    <h1 class="glitch-text">通報確認用ページ</h1>
 </div>
 
 <div id="fancam-content">
@@ -71,20 +78,20 @@
                 return;
             }
 
-            if (item.private) {
-                showPrivate();
-                return;
-            }
+            // if (item.private) {
+            //     showPrivate();
+            //     return;
+            // }
 
-            if (item.report === "reported") {
-                showReported();
-                return;
-            }
+            // if (item.report === "reported") {
+            //     showReported();
+            //     return;
+            // }
 
-            if (item.report === "ng") {
-                showNg();
-                return;
-            }
+            // if (item.report === "ng") {
+            //     showNg();
+            //     return;
+            // }
 
             const urls = item.urls
                 ? item.urls
