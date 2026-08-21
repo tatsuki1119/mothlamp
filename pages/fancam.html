@@ -43,7 +43,7 @@
         const pid = params.get("pid");
 
         if (!pid) {
-            showNotFound();
+            window.location.replace("/?p=fancam-list");
             return;
         }
 
