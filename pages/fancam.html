@@ -198,7 +198,7 @@
                 return false;
             }
 
-            return /^\/[^/]+\/status\/\d+$/.test(parsed.pathname);
+            return /^\/[^/]+\/status\/\d+(?:\/.*)?$/.test(parsed.pathname);
 
         } catch {
             return false;

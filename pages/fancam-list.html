@@ -111,7 +111,8 @@
                 const urlCount = item.urls
                     ? item.urls
                         .split(/\r?\n/)
-                        .filter(url => url.trim())
+                        .map(url => url.trim())
+                        .filter(url => isValidXUrl(url))
                         .length
                     : 0;
 
@@ -153,6 +154,27 @@
 
             content.innerHTML =
                 "<p>Fancamの取得に失敗しました。</p>";
+        }
+    }
+
+
+    function isValidXUrl(url) {
+        // X URL検証
+        try {
+            const parsed = new URL(url);
+
+            if (parsed.protocol !== "https:") {
+                return false;
+            }
+
+            if (parsed.hostname !== "x.com") {
+                return false;
+            }
+
+            return /^\/[^/]+\/status\/\d+(?:\/.*)?$/.test(parsed.pathname);
+
+        } catch {
+            return false;
         }
     }
 
