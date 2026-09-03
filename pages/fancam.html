@@ -1,11 +1,21 @@
 <div id="page-title" style="display: none;">Fancam [誘蛾灯の導き]</div>
-<div id="page-description" style="display: none;">ハイネにより撮影されたライブ映像。</div>
 
-<div class="contents_block">
-    <h1 class="glitch-text">ファントムシータ Fancam</h1>
+<div id="page-description" style="display: none;">
+    ファントムシータのFancamまとめページです。
 </div>
 
-<div id="fancam-content">
+<link rel="stylesheet" href="/static/css/fancam_public.css">
+<link rel="stylesheet" href="/static/css/fancam_report.css">
+
+<div class="contents_block">
+    <div class="fancam-page-nav">
+        <a href="/?p=fancam-list" class="fancam-nav-link">
+            ← Fancam記事一覧へ戻る
+        </a>
+    </div>
+</div>
+
+<div id="fancam-page">
     <div class="contents_block">
         <div class="list-loading">
             <svg role="img" aria-label="リボン">
@@ -19,233 +29,10 @@
     </div>
 </div>
 
-<div class="contents_block contents_block_has_a">
-    <a class="contents_block_a" href="/?p=fancam-list"></a>
-    <p>⬅︎ 一覧へ戻る</p>
+<div id="fancam-posts-block" class="contents_block" style="display: none;">
+    <div id="fancam-detail-post-grid" class="fancam-detail-post-grid"></div>
 </div>
 
-<div class="load-content" data-loadfile="/pages/parts/fancam-notice"></div>
-
-<script>
-    function escapeHtml(value) {
-        // HTMLエスケープ
-        return String(value)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
-
-    async function loadFancam() {
-        const content = document.getElementById("fancam-content");
-        const params = new URLSearchParams(window.location.search);
-        const pid = params.get("pid");
-
-        if (!pid) {
-            window.location.replace("/?p=fancam-list");
-            return;
-        }
-
-        let page = parseInt(params.get("page") || "1", 10);
-
-        if (!Number.isInteger(page) || page < 1) {
-            page = 1;
-        }
-
-        try {
-            const response = await fetch(
-                "https://g-api.mothlamp.info/api?target=fancam"
-            );
-
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            const item = data.find(item => item.pid === pid);
-
-            if (!item) {
-                showNotFound();
-                return;
-            }
-
-            if (item.private) {
-                showPrivate();
-                return;
-            }
-
-            if (item.report === "reported") {
-                showReported();
-                return;
-            }
-
-            if (item.report === "ng") {
-                showNg();
-                return;
-            }
-
-            const urls = item.urls
-                ? item.urls
-                    .split(/\r?\n/)
-                    .map(url => url.trim())
-                    .filter(url => isValidXUrl(url))
-                : [];
-
-            const date = new Date(item.timestamp);
-
-            const timestamp = date.toLocaleDateString("ja-JP", {
-                year: "numeric",
-                month: "2-digit",
-                day: "2-digit"
-            });
-
-            // 通報フォーム
-            const reportUrl =
-                `https://docs.google.com/forms/d/e/1FAIpQLScTJJaEiccUxhlkybm3bWYvpOB-3Jyrxk9_Nigmxseq-Mhu6Q/viewform?usp=pp_url&entry.1735891876=${encodeURIComponent(pid)}`;
-
-            // ページング
-            const perPage = 10;
-            const totalPages = Math.ceil(urls.length / perPage);
-
-            if (page > totalPages && totalPages > 0) {
-                page = totalPages;
-            }
-
-            const startIndex = (page - 1) * perPage;
-            const pageUrls = urls.slice(
-                startIndex,
-                startIndex + perPage
-            );
-
-            const topPagination = createPagination(
-                page,
-                totalPages,
-                startIndex + 1,
-                startIndex + pageUrls.length,
-                urls.length
-            );
-
-            const bottomPagination = createPagination(
-                page,
-                totalPages,
-                startIndex + 1,
-                startIndex + pageUrls.length,
-                urls.length,
-                true
-            );
-
-            // X埋め込み
-            const tweetsHtml = pageUrls.map(url => `
-                <div class="tweet-container">
-                    <a class="twitter-tweet-data" href="${escapeHtml(url)}"></a>
-                </div>
-            `).join("");
-
-            // 通常表示
-            content.innerHTML = `
-                <div class="contents_block">
-                    <p class="block-description">
-                        ${escapeHtml(item["username"])}
-                    </p>
-
-                    <h2>
-                        ${escapeHtml(item.title)}
-                    </h2>
-
-                    <p>
-                        ${timestamp}
-                    </p>
-
-                    <p class="update">
-                        <a href="${reportUrl}" target="_blank" rel="noopener" style="color: #888888">
-                            ⚑ 通報する
-                        </a>
-                    </p>
-                </div>
-
-                ${topPagination}
-
-                <div class="contents_block">
-                    ${tweetsHtml}
-                </div>
-
-                ${bottomPagination}
-            `;
-
-        } catch (error) {
-            console.error(
-                "Fancamの取得に失敗しました:",
-                error
-            );
-
-            content.innerHTML =
-                "<p>Fancamの取得に失敗しました。</p>";
-        }
-    }
-
-    function isValidXUrl(url) {
-        // X URL検証
-        try {
-            const parsed = new URL(url);
-
-            if (parsed.protocol !== "https:") {
-                return false;
-            }
-
-            if (parsed.hostname !== "x.com") {
-                return false;
-            }
-
-            return /^\/[^/]+\/status\/\d+(?:\/.*)?$/.test(parsed.pathname);
-
-        } catch {
-            return false;
-        }
-    }
-
-    function showPrivate() {
-        document.getElementById("fancam-content").innerHTML = `
-        <div class="contents_block">
-            <h2>非公開</h2>
-            <p>この投稿は非公開に設定されています。</p>
-        </div>
-    `;
-    }
-
-    function showReported() {
-        document.getElementById("fancam-content").innerHTML = `
-        <div class="contents_block">
-            <h2>内容確認中</h2>
-            <p>この投稿は現在、管理者による内容確認のため一時的に非表示となっています。</p>
-            <p>確認が完了するまで、しばらくお待ちください。</p>
-    `;
-    }
-
-    function showNg() {
-        document.getElementById("fancam-content").innerHTML = `
-        <div class="contents_block">
-            <h2>コンテンツが削除されました</h2>
-            <p>不適切なコンテンツとして確認されたため、この投稿は削除されました。</p>
-        </div>
-    `;
-    }
-
-    function showNotFound() {
-        // 404
-        document.getElementById("fancam-content").innerHTML = `
-            <div class="contents_block">
-                <img src="/static/img/response/404 NotFound.png" alt="404">
-                <p>logo: <a href="https://github.com/SAWARATSUKI/KawaiiLogos/tree/main">SAWARATSUKI/KawaiiLogos</a></p>
-            </div>
-            <div class="contents_block">
-                <h2>404 Page Not Found.</h2>
-                <p>アクセスしているページは存在しないか、削除されています。</p>
-                <p>URLを確認してください。</p>
-            </div>
-        `;
-    }
-
-    loadFancam();
-</script>
+<script src="/static/js/fancam_public.js"></script>
+<script src="/static/js/fancam_report.js"></script>
+<script src="/static/js/fancam.js"></script>

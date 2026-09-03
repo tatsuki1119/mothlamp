@@ -1,30 +1,21 @@
 <div id="page-title" style="display: none;">Fancam [誘蛾灯の導き]</div>
 
 <div id="page-description" style="display: none;">
-    ファントムシータのFancamをまとめて閲覧できます。
+    ファントムシータのFancamまとめページです。
 </div>
 
 <link rel="stylesheet" href="/static/css/fancam_public.css">
 <link rel="stylesheet" href="/static/css/fancam_report.css">
 
 <div class="contents_block">
-    <h1 class="glitch-text">Fancam</h1>
-
-    <p id="fancam-page-description">
-        ファントムシータのFancamをまとめて閲覧できます。
-    </p>
-
     <div class="fancam-page-nav">
-        <a href="https://fancam.mothlamp.info/create" class="fancam-nav-link">
-            ＋ Fancam記事を作成
-        </a>
-        <a href="/?p=fancam-posts" class="fancam-nav-link">
-            Fancamポスト一覧を見る →
+        <a href="/?p=fancam.list" class="fancam-nav-link">
+            ← Fancam記事一覧へ戻る
         </a>
     </div>
 </div>
 
-<div id="fancam-contents">
+<div id="fancam-page">
     <div class="contents_block">
         <div class="list-loading">
             <svg role="img" aria-label="リボン">
@@ -38,8 +29,10 @@
     </div>
 </div>
 
-<div id="fancam-pagination"></div>
+<div id="fancam-posts-block" class="contents_block" style="display: none;">
+    <div id="fancam-detail-post-grid" class="fancam-detail-post-grid"></div>
+</div>
 
 <script src="/static/js/fancam_public.js"></script>
 <script src="/static/js/fancam_report.js"></script>
-<script src="/static/js/fancam-list.js"></script>
+<script src="/static/js/fancam.js"></script>

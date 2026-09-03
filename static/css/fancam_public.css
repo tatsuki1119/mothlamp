@@ -1,0 +1,418 @@
+/* =========================================================
+Fancam public common
+========================================================= */
+
+.fancam-post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.fancam-post-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border: 1px solid #777777;
+    border-radius: 6px;
+    background-color: rgba(80, 80, 80, 0.5);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.fancam-post-pages {
+    margin-top: 15px;
+}
+
+.fancam-post-pages-title {
+    margin-bottom: 5px;
+    font-size: 0.8rem;
+    color: #bbbbbb;
+}
+
+.fancam-post-page-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.fancam-post-page-link {
+    display: inline-block;
+    padding: 4px 8px;
+    border: 1px solid #aaaaaa;
+    background-color: rgba(80, 80, 80, 0.5);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.fancam-post-page-link:link,
+.fancam-post-page-link:visited {
+    color: #ffffff;
+}
+
+.fancam-post-page-link:hover {
+    background-color: rgba(150, 150, 150, 0.5);
+    text-decoration: none;
+}
+
+.fancam-report-area {
+    text-align: right;
+}
+
+.fancam-status-warning {
+    margin-bottom: 15px;
+    padding: 10px 12px;
+    border: 1px solid #c99a44;
+    background-color: rgba(120, 90, 30, 0.25);
+}
+
+.fancam-status-warning p {
+    margin: 0;
+}
+
+.fancam-blocked-post {
+    padding: 18px 12px;
+    border: 1px solid #aa5555;
+    text-align: center;
+}
+
+.fancam-blocked-post p {
+    margin: 0;
+    color: #ffaaaa;
+}
+
+
+/* =========================================================
+Fancam navigation
+========================================================= */
+
+.fancam-page-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.fancam-nav-link {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 7px 12px;
+    border: 1px solid #aaaaaa;
+    background-color: rgba(80, 80, 80, 0.5);
+    color: #ffffff;
+    text-decoration: none;
+    line-height: 1.4;
+}
+
+.fancam-nav-link:link,
+.fancam-nav-link:visited {
+    color: #ffffff;
+}
+
+.fancam-nav-link:hover {
+    background-color: rgba(150, 150, 150, 0.5);
+    text-decoration: none;
+}
+
+
+/* =========================================================
+Pagination
+========================================================= */
+
+.fancam-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 20px 0;
+}
+
+.fancam-pagination-button {
+    min-width: 38px;
+    min-height: 38px;
+    padding: 6px 10px;
+    border: 1px solid #aaaaaa;
+    background-color: rgba(80, 80, 80, 0.5);
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.fancam-pagination-button:hover:not(:disabled) {
+    background-color: rgba(150, 150, 150, 0.5);
+}
+
+.fancam-pagination-button.current {
+    border-color: #ffffff;
+    background-color: rgba(150, 150, 150, 0.65);
+    font-weight: bold;
+    cursor: default;
+}
+
+.fancam-pagination-button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.fancam-pagination-ellipsis {
+    display: inline-block;
+    min-width: 24px;
+    text-align: center;
+}
+
+.fancam-pagination-info {
+    width: 100%;
+    margin: 0 0 8px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #bbbbbb;
+}
+
+
+/* =========================================================
+Fancam post grid
+========================================================= */
+
+.fancam-post-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.fancam-post-grid-item {
+    box-sizing: border-box;
+    flex: 0 0 50%;
+    width: 50%;
+    min-width: 0;
+    padding: 12px;
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.fancam-post-grid-loading,
+.fancam-post-grid-empty {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px;
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.fancam-post-grid .tweet-container {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.fancam-post-grid .twitter-tweet {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.fancam-post-grid iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+}
+
+.fancam-post-grid .fancam-post-tags {
+    margin-bottom: 8px;
+}
+
+.fancam-post-grid .fancam-post-pages {
+    margin-top: 10px;
+}
+
+.fancam-post-grid .fancam-report-area {
+    margin-top: 5px;
+}
+
+
+@media (min-width: 800px) {
+
+    .fancam-post-grid-item {
+        flex-basis: 33.333%;
+        width: 33.333%;
+    }
+
+}
+
+/* =========================================================
+Fancam detail post grid
+========================================================= */
+
+.fancam-detail-post-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.fancam-detail-post-grid-item {
+    box-sizing: border-box;
+    flex: 0 0 50%;
+    width: 50%;
+    min-width: 0;
+    padding: 2px;
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.fancam-detail-post-grid .tweet-container {
+    min-width: 0;
+    overflow: hidden;
+}
+
+.fancam-detail-post-grid .twitter-tweet {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.fancam-detail-post-grid iframe {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+}
+
+.fancam-detail-post-grid .fancam-post-tags {
+    margin-bottom: 8px;
+}
+
+.fancam-detail-post-grid .fancam-blocked-post {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* Fancam X embed grids: mobile scaling */
+@media (max-width: 799px) {
+
+    /*
+     * グリッド部分は通常の contents_block より
+     * 内側余白を小さくして横幅をできるだけ使う。
+     */
+    #fancam-posts-block,
+    #fancam-post-list-block {
+        padding: 1px;
+    }
+
+
+    .fancam-detail-post-grid-item,
+    .fancam-post-grid-item {
+        box-sizing: border-box;
+
+        flex: 0 0 50%;
+        width: 50%;
+
+        min-width: 0;
+
+        padding: 3px;
+
+        overflow: hidden;
+    }
+
+    .fancam-detail-post-grid .twitter-tweet,
+    .fancam-detail-post-grid iframe,
+    .fancam-post-grid .twitter-tweet,
+    .fancam-post-grid iframe {
+        width: 100% !important;
+        max-width: none !important;
+
+        margin: 0 !important;
+    }
+
+}
+
+/* /Fancam X embed grids: mobile scaling */
+
+
+@media (min-width: 800px) {
+
+    .fancam-detail-post-grid-item {
+        flex-basis: 33.333%;
+        width: 33.333%;
+    }
+
+}
+
+
+/* 
+ * X埋め込みのサイズ対応
+ * 全体を縮小してセル内に収める。
+ *
+ * transformはレイアウト上の高さを縮めないため、
+ * fancam_public.js で余った縦幅を
+ * margin-bottom の負値で補正する。
+ */
+
+.fancam-detail-post-grid .tweet-container,
+.fancam-post-grid .tweet-container {
+    overflow: visible;
+    transform-origin: top left;
+}
+
+
+/* =========================================================
+スマホ：2列
+========================================================= */
+
+
+/* 狭いスマホ */
+@media (max-width: 450px) {
+
+    .fancam-detail-post-grid .tweet-container,
+    .fancam-post-grid .tweet-container {
+        width: 200%;
+        transform: scale(0.5);
+    }
+
+}
+
+
+/* 少し広いスマホ */
+@media (min-width: 451px) and (max-width: 600px) {
+
+    .fancam-detail-post-grid .tweet-container,
+    .fancam-post-grid .tweet-container {
+        width: 142.857%;
+        transform: scale(0.7);
+    }
+
+}
+
+
+/* 2列なら十分な幅がある */
+@media (min-width: 601px) and (max-width: 799px) {
+
+    .fancam-detail-post-grid .tweet-container,
+    .fancam-post-grid .tweet-container {
+        width: 100%;
+        transform: none;
+    }
+
+}
+
+
+/* =========================================================
+PC：3列
+========================================================= */
+
+
+/*
+ * 800pxで3列になるため、
+ * 1セルが急に狭くなるので再び強めに縮小
+ */
+@media (min-width: 800px) {
+
+    .fancam-detail-post-grid .tweet-container,
+    .fancam-post-grid .tweet-container {
+        width: 200%;
+        transform: scale(0.5);
+    }
+
+}
