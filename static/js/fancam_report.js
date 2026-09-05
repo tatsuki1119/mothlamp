@@ -73,7 +73,10 @@
                         </option>
                         <option value="不適切な表現・コメント">
                             不適切な表現・コメント
-                        </option>                        
+                        </option>
+                        <option value="不適切なタグ">
+                            不適切なタグ
+                        </option>
                         <option value="著作権等の侵害・無断転載">
                             著作権等の侵害・無断転載
                         </option>
