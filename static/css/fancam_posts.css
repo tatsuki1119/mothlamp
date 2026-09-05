@@ -70,11 +70,13 @@ body.fancam-filter-modal-open {
     border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: 12px;
     background:
-        linear-gradient(145deg,
+        linear-gradient(
+            145deg,
             #4b0c0c 0%,
             #171010 24%,
             #121212 45%,
-            #080808 100%);
+            #080808 100%
+        );
     color: #ffffff;
     box-shadow: 0 22px 70px rgba(0, 0, 0, 0.58);
 }
@@ -258,13 +260,17 @@ body.fancam-filter-modal-open {
 @media (max-width: 600px) {
 
     .fancam-filter-modal {
-        padding: 8px;
+        padding:
+            max(8px, env(safe-area-inset-top))
+            8px
+            max(14px, env(safe-area-inset-bottom));
         align-items: stretch;
     }
 
     .fancam-filter-dialog {
         width: 100%;
-        max-height: calc(100vh - 16px);
+        max-height: calc(100vh - 22px);
+        max-height: calc(100dvh - 22px);
         margin: auto 0;
     }
 
@@ -276,11 +282,18 @@ body.fancam-filter-modal-open {
     }
 
     .fancam-filter-modal-actions {
-        flex-direction: column-reverse;
+        flex-direction: row;
+        gap: 8px;
+        padding-top: 12px;
+        padding-bottom: calc(12px + env(safe-area-inset-bottom));
     }
 
     .fancam-filter-action-button {
-        width: 100%;
+        flex: 1 1 0;
+        width: auto;
+        min-width: 0;
+        min-height: 44px;
+        padding: 8px 10px;
     }
 
 }

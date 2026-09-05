@@ -1,5 +1,5 @@
 const FANCAM_PAGE_PER_PAGE =
-    20;
+    5;
 
 let fancamPages = [];
 
@@ -269,14 +269,11 @@ function renderFancamPages(
                     page
                 );
 
-                document
-                    .getElementById(
-                        "fancam-contents"
-                    )
-                    .scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth"
+                });
             },
             fancamPages.length
         )

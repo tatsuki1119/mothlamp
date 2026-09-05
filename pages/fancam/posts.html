@@ -23,52 +23,28 @@
 </div>
 
 <div class="contents_block fancam-filter-toolbar">
-    <button
-        type="button"
-        id="open-fancam-filters"
-        class="fancam-filter-open-button"
-    >
+    <button type="button" id="open-fancam-filters" class="fancam-filter-open-button">
         絞り込み
     </button>
 
-    <p
-        id="fancam-filter-summary"
-        class="fancam-filter-summary"
-    >
+    <p id="fancam-filter-summary" class="fancam-filter-summary">
         絞り込み条件なし
     </p>
 </div>
 
-<div
-    id="fancam-filter-modal"
-    class="fancam-filter-modal"
-    aria-hidden="true"
->
-    <div
-        class="fancam-filter-dialog"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="fancam-filter-modal-title"
-    >
+<div id="fancam-filter-modal" class="fancam-filter-modal" aria-hidden="true">
+    <div class="fancam-filter-dialog" role="dialog" aria-modal="true" aria-labelledby="fancam-filter-modal-title">
         <div class="fancam-filter-modal-header">
             <h3 id="fancam-filter-modal-title">
                 Fancamを絞り込む
             </h3>
 
-            <button
-                type="button"
-                id="close-fancam-filters"
-                class="fancam-filter-close-button"
-                aria-label="絞り込みを閉じる"
-            >
+            <button type="button" id="close-fancam-filters" class="fancam-filter-close-button" aria-label="絞り込みを閉じる">
                 ×
             </button>
         </div>
 
-        <div
-            id="fancam-filters"
-            class="fancam-filter-modal-body"
-        >
+        <div id="fancam-filters" class="fancam-filter-modal-body">
             <div class="list-loading">
                 <svg role="img" aria-label="リボン">
                     <use href="#butterfly"></use>
@@ -81,20 +57,12 @@
         </div>
 
         <div class="fancam-filter-modal-actions">
-            <button
-                type="button"
-                id="reset-filters"
-                class="fancam-filter-action-button"
-            >
+            <button type="button" id="reset-filters" class="fancam-filter-action-button">
                 リセット
             </button>
 
-            <button
-                type="button"
-                id="apply-filters"
-                class="fancam-filter-action-button fancam-filter-action-primary"
-            >
-                この条件で絞り込む
+            <button type="button" id="apply-filters" class="fancam-filter-action-button fancam-filter-action-primary">
+                <span class="word-chunk">この条件で</span><span class="word-chunk">絞り込む</span>
             </button>
         </div>
     </div>

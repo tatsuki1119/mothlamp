@@ -176,8 +176,6 @@ Fancam post grid
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-    border-left: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .fancam-post-grid-item {
@@ -186,8 +184,7 @@ Fancam post grid
     width: 50%;
     min-width: 0;
     padding: 12px;
-    border-right: 1px solid rgba(255, 255, 255, 0.18);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .fancam-post-grid-loading,
@@ -195,8 +192,7 @@ Fancam post grid
     box-sizing: border-box;
     width: 100%;
     padding: 15px;
-    border-right: 1px solid rgba(255, 255, 255, 0.18);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .fancam-post-grid .tweet-container {
@@ -248,8 +244,6 @@ Fancam detail post grid
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-    border-left: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .fancam-detail-post-grid-item {
@@ -258,8 +252,7 @@ Fancam detail post grid
     width: 50%;
     min-width: 0;
     padding: 2px;
-    border-right: 1px solid rgba(255, 255, 255, 0.18);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .fancam-detail-post-grid .tweet-container {

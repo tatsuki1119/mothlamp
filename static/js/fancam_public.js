@@ -650,25 +650,13 @@ window.FancamPublic = (() => {
             };
 
 
-        addButton(
-            "‹",
-            currentPage - 1,
-            {
-                disabled:
-                    currentPage <= 1
-            }
-        );
-
-
         const pages =
             new Set([
                 1,
                 totalPages,
-                currentPage - 2,
                 currentPage - 1,
                 currentPage,
-                currentPage + 1,
-                currentPage + 2
+                currentPage + 1
             ]);
 
 
@@ -718,16 +706,6 @@ window.FancamPublic = (() => {
             previousPage =
                 page;
         }
-
-
-        addButton(
-            "›",
-            currentPage + 1,
-            {
-                disabled:
-                    currentPage >= totalPages
-            }
-        );
 
 
         return nav;

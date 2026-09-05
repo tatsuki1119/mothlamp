@@ -1,5 +1,5 @@
 const FANCAM_POST_PER_PAGE =
-    50;
+    5;
 
 let fancamPosts = [];
 let fancamFilteredPosts = [];
@@ -975,18 +975,18 @@ function updateFancamFilterSummary() {
         Object.values(
             fancamAppliedFilters
         )
-        .reduce(
-            function (
-                total,
-                tags
-            ) {
-                return (
-                    total +
-                    tags.length
-                );
-            },
-            0
-        );
+            .reduce(
+                function (
+                    total,
+                    tags
+                ) {
+                    return (
+                        total +
+                        tags.length
+                    );
+                },
+                0
+            );
 
 
     const openButton =
@@ -1247,14 +1247,11 @@ function renderFancamPosts(
                     page
                 );
 
-                document
-                    .getElementById(
-                        "fancam-post-list"
-                    )
-                    .scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth"
+                });
             },
             posts.length
         )
