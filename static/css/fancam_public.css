@@ -416,3 +416,31 @@ PC：3列
     }
 
 }
+
+/* =========================================================
+Fancam article owner edit link
+========================================================= */
+
+.fancam-owner-edit-area {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.fancam-owner-edit-link {
+    display: inline-block;
+    color: #aaaaaa;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.fancam-owner-edit-link:link,
+.fancam-owner-edit-link:visited {
+    color: #aaaaaa;
+}
+
+.fancam-owner-edit-link:hover {
+    color: #ffffff;
+}
+

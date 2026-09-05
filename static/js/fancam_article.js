@@ -10,6 +10,29 @@ $(function () {
             "pid"
         );
 
+
+    const ownerEditLink =
+        document.getElementById(
+            "fancam-owner-edit-link"
+        );
+
+
+    if (
+        pid &&
+        ownerEditLink
+    ) {
+
+        ownerEditLink.href =
+            "https://fancam.mothlamp.info/manage/recover?pid=" +
+            encodeURIComponent(
+                pid
+            );
+
+        ownerEditLink.style.display =
+            "";
+    }
+
+
     if (!pid) {
 
         showFancamPageMessage(
