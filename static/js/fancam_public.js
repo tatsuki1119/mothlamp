@@ -272,7 +272,7 @@ window.FancamPublic = (() => {
             "fancam-post-pages-title";
 
         title.textContent =
-            "このポストを含むまとめ";
+            "このポストを含む記事";
 
         container.appendChild(
             title
