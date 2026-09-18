@@ -82,6 +82,7 @@ async function loadFancamPage(pid) {
 
         if (
             data.status === "private" ||
+            data.status === "auto_review" ||
             data.status === "revision" ||
             data.status === "ng"
         ) {

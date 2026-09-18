@@ -712,6 +712,102 @@ window.FancamPublic = (() => {
     }
 
 
+    function appendFancamLegalLinks() {
+
+        if (
+            document.getElementById(
+                "fancam-legal-links"
+            )
+        ) {
+            return;
+        }
+
+
+        const contents =
+            document.getElementById(
+                "contents"
+            );
+
+        if (!contents) {
+            return;
+        }
+
+
+        const block =
+            document.createElement(
+                "div"
+            );
+
+        block.id =
+            "fancam-legal-links";
+
+        block.className =
+            "contents_block";
+
+
+        const text =
+            document.createElement(
+                "p"
+            );
+
+        text.className =
+            "block-description";
+
+
+        const terms =
+            document.createElement(
+                "a"
+            );
+
+        terms.href =
+            "https://fancam.mothlamp.info/terms";
+
+        terms.textContent =
+            "利用規約";
+
+
+        const separator =
+            document.createTextNode(
+                " / "
+            );
+
+
+        const privacy =
+            document.createElement(
+                "a"
+            );
+
+        privacy.href =
+            "https://fancam.mothlamp.info/privacy";
+
+        privacy.textContent =
+            "プライバシーポリシー";
+
+
+        text.appendChild(
+            terms
+        );
+
+        text.appendChild(
+            separator
+        );
+
+        text.appendChild(
+            privacy
+        );
+
+        block.appendChild(
+            text
+        );
+
+        contents.appendChild(
+            block
+        );
+    }
+
+
+    appendFancamLegalLinks();
+
     initializeFancamTweetSpacing();
 
 
