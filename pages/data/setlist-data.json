@@ -1924,25 +1924,78 @@
                         "2026.09.19"
                     ],
                     "songs": [
-                        "?????",
-                        "?????",
-                        "?????"
+                        {
+                            "id": "horror-queen"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mermaid"
+                        },
+                        {
+                            "id": "botbakka",
+                            "display": "botばっか IVYJCTコラボ"
+                        }
                     ]
                 }
             ]
         },
         {
             "id": "rijf2026",
-            "title": "ROCK IN JAPAN FES. 2026",
+            "title": "【中止】ROCK IN JAPAN FES. 2026",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.09.21"
+                    ],
+                    "songs": []
+                }
+            ]
+        },
+        {
+            "id": "streaming-live",
+            "title": "緊急生配信",
             "sections": [
                 {
                     "schedule": [
                         "2026.09.21"
                     ],
                     "songs": [
-                        "?????",
-                        "?????",
-                        "?????"
+                        {
+                            "id": "barairo"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "velvet-phantom"
+                        },
+                        {
+                            "id": "hanabami",
+                            "display": "花喰み（Band arrange ver.）"
+                        },
+                        "[MC]",
+                        {
+                            "id": "mermaid"
+                        },
+                        {
+                            "id": "devilish-girl"
+                        },
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "[MC]",
+                        {
+                            "id": "horror-queen"
+                        }
                     ]
                 }
             ]
