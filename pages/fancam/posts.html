@@ -1,8 +1,15 @@
 <div id="page-title" style="display: none;">Fancamポスト一覧 [誘蛾灯の導き]</div>
-
 <div id="page-description" style="display: none;">
     ファントムシータのFancamをメンバーや楽曲から絞り込んで閲覧できます。
 </div>
+
+<script>
+    (function () {
+        let currentUrl = new URL(window.location.href);
+        let currentParams = new URLSearchParams(currentUrl.search);
+        history.replaceState(null, "", "/r/fancam-posts?" + currentParams.toString());
+    })();
+</script>
 
 <link rel="stylesheet" href="/static/css/fancam_public.css">
 <link rel="stylesheet" href="/static/css/fancam_report.css">
