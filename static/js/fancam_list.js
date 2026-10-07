@@ -1,5 +1,5 @@
 const FANCAM_PAGE_PER_PAGE =
-    5;
+    20;
 
 let fancamPages = [];
 
