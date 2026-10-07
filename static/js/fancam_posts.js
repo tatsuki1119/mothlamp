@@ -1,5 +1,5 @@
 const FANCAM_POST_PER_PAGE =
-    5;
+    50;
 
 let fancamPosts = [];
 let fancamFilteredPosts = [];
