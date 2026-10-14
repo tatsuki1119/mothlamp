@@ -16,6 +16,7 @@
         "horror-queen": "ホラークイーン",
         "meguru": "輪廻る",
         "mermaid": "にんぎょひめのうた",
+        "sweetpea": "スイートピー",
         "velvet-phantom": "Velvet Phantom",
         "mona-solo": "私だけしか愛せないビョーキ",
         "miu-solo": "わたしかくれんぼ",
@@ -101,7 +102,7 @@
             ]
         },
         {
-            "id": "boukenou2024",
+            "id": "boukenou-2024",
             "title": "お台場冒険王2024",
             "sections": [
                 {
@@ -123,7 +124,7 @@
             ]
         },
         {
-            "id": "atjamexpo2024",
+            "id": "atjamexpo-2024",
             "title": "@JAM EXPO 2024 supported by UP-T",
             "sections": [
                 {
@@ -152,7 +153,7 @@
             ]
         },
         {
-            "id": "nstfes2024",
+            "id": "nstfes-2024",
             "title": "NSTまつり2024アイドルスペシャルライブ",
             "sections": [
                 {
@@ -177,7 +178,7 @@
             ]
         },
         {
-            "id": "larmefes1",
+            "id": "larmefes-vol1",
             "title": "LARME fes vol.1",
             "sections": [
                 {
@@ -199,7 +200,7 @@
             ]
         },
         {
-            "id": "heine",
+            "id": "haine",
             "title": "ファントムシータ 1st LIVE 2024「ハイネ」",
             "sections": [
                 {
@@ -248,7 +249,7 @@
             ]
         },
         {
-            "id": "akumanight",
+            "id": "akuma-night-duel-buster",
             "title": "悪魔のキッスpresents「悪魔Night Duel Buster」",
             "sections": [
                 {
@@ -282,7 +283,7 @@
             ]
         },
         {
-            "id": "cdj2425",
+            "id": "cdj-2425",
             "title": "COUNTDOWN JAPAN 24/25",
             "sections": [
                 {
@@ -321,7 +322,7 @@
             ]
         },
         {
-            "id": "mothtoaflame",
+            "id": "moth-to-a-flame",
             "title": "Phantom Siita 1st WORLD TOUR “Moth to a flame”",
             "sections": [
                 {
@@ -382,7 +383,7 @@
             ]
         },
         {
-            "id": "dreamscape",
+            "id": "dreamscape-aichi",
             "title": "yosugala presents -DREAMSCAPE-\"AICHI\"",
             "sections": [
                 {
@@ -421,7 +422,7 @@
             ]
         },
         {
-            "id": "ladysteadypremium",
+            "id": "lady-steady-premium",
             "title": "Lady Steady Premium",
             "sections": [
                 {
@@ -500,7 +501,7 @@
             ]
         },
         {
-            "id": "atjam2025",
+            "id": "atjam-2025",
             "title": "@JAM 2025 Day2 ～SUPER LIVE～ <1部>",
             "sections": [
                 {
@@ -530,7 +531,7 @@
             ]
         },
         {
-            "id": "cloudninepark",
+            "id": "cloudnine-park",
             "title": "クラウドナインパーク オープニングイベント @ナガシマスパーランド",
             "sections": [
                 {
@@ -555,7 +556,7 @@
             ]
         },
         {
-            "id": "majordebutevent",
+            "id": "major-debut-event",
             "title": "メジャーデビューイベント",
             "sections": [
                 {
@@ -582,7 +583,7 @@
             ]
         },
         {
-            "id": "flamemedusa",
+            "id": "flame-medusa",
             "title": "ファントムシータ 1st JAPAN TOUR 「フレイム・メドゥーサ」",
             "sections": [
                 {
@@ -643,7 +644,7 @@
             ]
         },
         {
-            "id": "tif2025",
+            "id": "tif-2025",
             "title": "TOKYO IDOL FESTIVAL 2025",
             "sections": [
                 {
@@ -676,7 +677,7 @@
             ]
         },
         {
-            "id": "atjamexpo2025",
+            "id": "atjam-expo-2025",
             "title": "@JAM EXPO 2025 supported by UP-T",
             "sections": [
                 {
@@ -704,7 +705,7 @@
             ]
         },
         {
-            "id": "rijf2025",
+            "id": "rijf-2025",
             "title": "ROCK IN JAPAN FESTIVAL 2025",
             "sections": [
                 {
@@ -739,7 +740,7 @@
             ]
         },
         {
-            "id": "utsufes2025",
+            "id": "utsufes-2025",
             "title": "アーバンギャルド presents 鬱フェス 2025",
             "sections": [
                 {
@@ -772,7 +773,7 @@
             ]
         },
         {
-            "id": "kyururinclinic",
+            "id": "kyururin-clinic",
             "title": "Kyururin♡Clinic ～No.3ファントムシータ～",
             "sections": [
                 {
@@ -816,7 +817,7 @@
             ]
         },
         {
-            "id": "kyoyocollectionvol8",
+            "id": "kyoyo-collection-vol8",
             "title": "KYOTO COLLECTION vol.8 後夜祭",
             "sections": [
                 {
@@ -849,7 +850,7 @@
             ]
         },
         {
-            "id": "gigagigasonic",
+            "id": "gigagiga-sonic",
             "title": "GIGA•GIGA SONIC presented by UtaTen / チェキチャ 〜推ししか勝たん！君と僕とのギガ推し祭🏮〜",
             "sections": [
                 {
@@ -885,7 +886,7 @@
             ]
         },
         {
-            "id": "idolfilefes2025",
+            "id": "idolfile-fes-2025",
             "title": "IDOL FILE FESTIVAL 2025",
             "sections": [
                 {
@@ -921,7 +922,7 @@
             ]
         },
         {
-            "id": "larmefes25",
+            "id": "larme-fes-25",
             "title": "LARME FES’ 25",
             "sections": [
                 {
@@ -944,7 +945,7 @@
             ]
         },
         {
-            "id": "mousepeacefes2025",
+            "id": "mousepeace-fes-2025",
             "title": "MOUSE PEACE FES. 2025 2nd Bite",
             "sections": [
                 {
@@ -1006,7 +1007,7 @@
             ]
         },
         {
-            "id": "cionslovecall2025",
+            "id": "cions-lovecall-2025",
             "title": "CiON’s Love Call TOUR 2025",
             "sections": [
                 {
@@ -1048,7 +1049,7 @@
             ]
         },
         {
-            "id": "hbcidolfes",
+            "id": "hbc-idol-fes",
             "title": "Pococha presents HBCアイドル祭り2026 なまらめんこいアイドルWinter！",
             "sections": [
                 {
@@ -1136,7 +1137,7 @@
             ]
         },
         {
-            "id": "oshiviewfes",
+            "id": "oshiview-fes",
             "title": "OSHIVIEW Music Wave～Girls Pop Collective～",
             "sections": [
                 {
@@ -1169,7 +1170,7 @@
             ]
         },
         {
-            "id": "ladysteadypremium-1year-sp",
+            "id": "lady-stead-ypremium-1year-sp",
             "title": "LadySteady Premium1周年SP",
             "sections": [
                 {
@@ -1198,7 +1199,7 @@
             ]
         },
         {
-            "id": "kansaicollection-2026-ss",
+            "id": "kansai-collection-2026-ss",
             "title": "KANSAI COLLECTION 2026 SPRING & SUMMER",
             "sections": [
                 {
@@ -1581,7 +1582,7 @@
             ]
         },
         {
-            "id": "atjam2026",
+            "id": "atjam-2026",
             "title": "@JAM 2026 Day2 ～SUPER LIVE～ <1部>",
             "sections": [
                 {
@@ -1779,7 +1780,7 @@
             ]
         },
         {
-            "id": "tif2026",
+            "id": "tif-2026",
             "title": "TOKYO IDOL FESTIVAL 2026",
             "sections": [
                 {
@@ -1854,7 +1855,7 @@
             ]
         },
         {
-            "id": "luckyfes26",
+            "id": "luckyfes-26",
             "title": "LuckyFes’26",
             "sections": [
                 {
@@ -1887,7 +1888,7 @@
             ]
         },
         {
-            "id": "atjamexpo2026",
+            "id": "atjam-expo-2026",
             "title": "@JAM EXPO 2026 supported by UP-T",
             "sections": [
                 {
@@ -1946,7 +1947,7 @@
             ]
         },
         {
-            "id": "rijf2026",
+            "id": "rijf-2026",
             "title": "【中止】ROCK IN JAPAN FES. 2026",
             "sections": [
                 {
@@ -1996,6 +1997,114 @@
                         {
                             "id": "horror-queen"
                         }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "beeeem-fes-vol11-dx-sp",
+            "title": "BEEEEM FES Vol.11 DX SP",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.09.29"
+                    ],
+                    "songs": [
+                        {
+                            "id": "mermaid"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        {
+                            "id": "devilish-girl"
+                        },
+                        "[MC]",
+                        {
+                            "id": "zokuzoku"
+                        },
+                        {
+                            "id": "barairo"
+                        },
+                        {
+                            "id": "horror-queen"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cions-love-call-2026",
+            "title": "CiON’s Love Call 2026 supported by BEEEEM",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.10.09"
+                    ],
+                    "songs": [
+                        {
+                            "id": "horror-queen"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        "[MC]",
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        {
+                            "id": "mermaid"
+                        },
+                        "[MC]",
+                        {
+                            "id": "conflicting"
+                        },
+                        {
+                            "id": "barairo"
+                        },
+                        {
+                            "id": "zokuzoku"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "zombie-fes-2026-day4",
+            "title": "ZOMBIE FES 2026 DAY4",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.11.01"
+                    ],
+                    "songs": [
+                        "???",
+                        "???",
+                        "???",
+                        "???"
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "idol-xmas-fes-2026",
+            "title": "Idol Xmas Fes 2026",
+            "sections": [
+                {
+                    "schedule": [
+                        "2026.12.24"
+                    ],
+                    "songs": [
+                        "???",
+                        "???",
+                        "???",
+                        "???"
                     ]
                 }
             ]
@@ -2051,6 +2160,9 @@
             },
             {
                 "id": "mermaid"
+            },
+            {
+                "id": "sweetpea"
             },
             {
                 "id": "velvet-phantom"
