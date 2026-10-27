@@ -91,11 +91,6 @@
 
 </div>
 
-<div id="show-past-link" class="contents_block contents_block_has_a">
-    <a class="contents_block_a" href="javascript:void(0);"></a>
-    <p>過去のスケジュールを表示</p>
-</div>
-
 <div class="contents_block">
     <div id="schedule-loading" class="list-loading">
         <svg role="img" aria-label="リボン">
@@ -107,7 +102,6 @@
         </svg>
     </div>
     <ul class="link-list">
-        <div id="schedule-past" style="display: none;"></div>
         <div id="schedule"></div>
     </ul>
 </div>
@@ -245,29 +239,6 @@
     .month-separator .year {
         font-size: 0.9em;
     }
-
-    /* ==================================================
-    過去スケジュール表示
-    ================================================== */
-
-    #schedule-past * {
-        color: #777777;
-        fill: #777777;
-    }
-
-    #schedule-past .month-separator {
-        border-color: #77777755;
-    }
-
-    #schedule-past .month,
-    #schedule-past .year {
-        color: #777777;
-    }
-
-    #schedule-past .month-separator .month,
-    #schedule-past .month-separator .year {
-        color: #777;
-    }
 </style>
 
 
@@ -363,15 +334,28 @@
     }
 
     // =========================
-    // 月切り替え
+    // 月切り替え・URL同期
     // =========================
+    function updateMonthUrl() {
+        const params = new URLSearchParams(location.search);
+        params.set('p', 'schedule');
+        params.set('m', `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`);
+        history.replaceState(null, '', `${location.pathname}?${params.toString()}${location.hash}`);
+    }
+
+    function renderSelectedMonth() {
+        renderCalendar(currentYear, currentMonth);
+        applyMonthFilter();
+    }
+
     $('#prev-month').on('click', function () {
         currentMonth--;
         if (currentMonth < 0) {
             currentMonth = 11;
             currentYear--;
         }
-        renderCalendar(currentYear, currentMonth);
+        updateMonthUrl();
+        renderSelectedMonth();
     });
     $('#next-month').on('click', function () {
         currentMonth++;
@@ -379,8 +363,30 @@
             currentMonth = 0;
             currentYear++;
         }
-        renderCalendar(currentYear, currentMonth);
+        updateMonthUrl();
+        renderSelectedMonth();
     });
+
+    function applyMonthFilter() {
+        const selectedMonth = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`;
+        const monthSpecified = new URLSearchParams(location.search).has('m');
+        const jstNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+        const today = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
+
+        $('#schedule li[class^="schedule_"]').each(function () {
+            const $item = $(this);
+            const itemDate = new Date($item.attr('data-date'));
+            const visible = monthSpecified ? $item.attr('data-month') === selectedMonth : itemDate >= today;
+            $item.closest('a').toggle(visible);
+        });
+
+        $('#schedule .month-separator').each(function () {
+            const $separator = $(this);
+            const hasItems = $separator.nextUntil('.month-separator').filter('a:visible').length > 0;
+            $separator.toggle(hasItems);
+        });
+        applyFilter($('.filter-toggle.active').data('key'));
+    }
 
     // =========================
     // フィルター切り替え
@@ -393,7 +399,7 @@
     });
     // フィルター適用関数（key: all, live, other など）
     function applyFilter(key) {
-        const $containers = $('#schedule, #schedule-past');
+        const $containers = $('#schedule');
         $containers.find('[class^="schedule_"]').each(function () {
             const $item = $(this);
             if (key === 'all' || $item.hasClass(`schedule_${key}`)) {
@@ -428,7 +434,7 @@
             });
         });
         // ★ 表示中の最初の月セパレータを特定
-        $('#schedule, #schedule-past').each(function () {
+        $('#schedule').each(function () {
             const $container = $(this);
             // まず「全部」から除去（visible 条件なし）
             $container.find('.month-separator')
@@ -440,10 +446,7 @@
                 .addClass('is-first-visible');
         });
         $('.no-schedule-message').remove();
-        const hasVisibleItem =
-            $('#schedule [class^="schedule_"]:visible').length > 0 ||
-            ($('#schedule-past').is(':visible') &&
-                $('#schedule-past [class^="schedule_"]:visible').length > 0);
+        const hasVisibleItem = $('#schedule [class^="schedule_"]:visible').length > 0;
         if (!hasVisibleItem) {
             $('#schedule').prepend(`
             <div class="no-schedule-message" style="padding: 10px 0; text-align: center; opacity: 0.7;">
@@ -464,108 +467,46 @@
     // =========================
     function renderSchedule(data) {
         const youbiArray = ['日', '月', '火', '水', '木', '金', '土'];
-        const jstNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
-        const jstToday = new Date(jstNow.getFullYear(), jstNow.getMonth(), jstNow.getDate());
-        let nextMarked = false;
-        // 日付順にソート（昇順）
         data.sort((a, b) => new Date(a.date) - new Date(b.date));
-        let lastFutureMonth = '';
-        let lastPastMonth = '';
-        for (let i = 0; i < data.length; i++) {
-            const schedule = data[i];
-            const scheduleDate = new Date(
-                new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" })
-            );
-            const scheduleDay = new Date(
-                scheduleDate.getFullYear(),
-                scheduleDate.getMonth(),
-                scheduleDate.getDate()
-            );
+        let lastMonth = '';
+        $('#schedule').empty();
+
+        data.forEach(schedule => {
+            const scheduleDate = new Date(new Date(schedule.date).toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
             const year = scheduleDate.getFullYear();
             const month = String(scheduleDate.getMonth() + 1).padStart(2, '0');
             const day = String(scheduleDate.getDate()).padStart(2, '0');
             const formattedDate = `${year}.${month}.${day}`;
             const dayOfWeek = youbiArray[scheduleDate.getDay()];
-            const ymKey = `${year}.${month}`;
+            const ymKey = `${year}-${month}`;
             const tagClass = `schedule_${String(schedule.tag).toLowerCase()}`;
             const tagText = String(schedule.tag).toUpperCase();
-            const listItem = `
-                        <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
-                            <li class="${tagClass}">
-                                <p class="date">
-                                    <svg role="img" aria-label="蝶々">
-                                        <use href="#butterfly"></use>
-                                    </svg>${formattedDate}（${dayOfWeek}）【${tagText}】
-                                </p>
-                                <p class="title">${schedule.title}</p>
-                            </li>
-                        </a>`;
-            // ==========
-            // 未来
-            // ==========
-            if (scheduleDay >= jstToday) {
-                if (lastFutureMonth !== ymKey) {
-                    $('#schedule').append(`
-                                <div class="month-separator">
-                                    <span class="month">${month}</span>
-                                    <span class="year">${year}</span>
-                                </div>
-                            `);
-                    lastFutureMonth = ymKey;
-                }
-                // ★ 最初の未来イベントだけ #next を付与
-                let $item = $(listItem);
-                if (!nextMarked) {
-                    $('#schedule').append(`<div id="next-anchor"></div>`);
-                    nextMarked = true;
-                }
-                $('#schedule').append(listItem);
-            }
-            // ==========
-            // 過去
-            // ==========
-            else {
-                if (lastPastMonth !== ymKey) {
-                    $('#schedule-past').append(`
-                                <div class="month-separator">
-                                    <span class="month">${month}</span>
-                                    <span class="year">${year}</span>
-                                </div>
-                            `);
-                    lastPastMonth = ymKey;
-                }
-                $('#schedule-past').append(listItem);
-            }
-        }
-        $('#schedule-loading').hide();
-        applyFilter($('.filter-toggle.active').data('key'));
-    }
 
-    // 過去を表示
-    $('#show-past-link').on('click', function () {
-        const $past = $('#schedule-past');
-        const isVisible = $past.is(':visible');
-        if (isVisible) {
-            $past.hide();
-            $('body').removeClass('showing-past'); // ★
-            $('#show-past-link p').text('過去のスケジュールを表示');
-            applyFilter($('.filter-toggle.active').data('key'));
-        } else {
-            $past.show();
-            $('body').addClass('showing-past');
-            $('#show-past-link p').text('過去のスケジュールを非表示');
-            applyFilter($('.filter-toggle.active').data('key'));
-            // ★ レイアウト確定後にスクロール
-            requestAnimationFrame(() => {
-                const $next = $('#next-anchor');
-                if ($next.length) {
-                    $('html, body').animate({
-                        scrollTop: $next.offset().top - 80
-                    }, 10);
-                }
-            });
-        }
-    });
+            if (lastMonth !== ymKey) {
+                $('#schedule').append(`
+                    <div class="month-separator" data-month="${ymKey}">
+                        <span class="month">${month}</span>
+                        <span class="year">${year}</span>
+                    </div>
+                `);
+                lastMonth = ymKey;
+            }
+
+            $('#schedule').append(`
+                <a href="/?p=schedule_detail&sc=${schedule.index}" class="link-list-a">
+                    <li class="${tagClass}" data-date="${scheduleDate.toISOString()}" data-month="${ymKey}">
+                        <p class="date">
+                            <svg role="img" aria-label="蝶々"><use href="#butterfly"></use></svg>${formattedDate}（${dayOfWeek}）【${tagText}】
+                        </p>
+                        <p class="title">${schedule.title}</p>
+                    </li>
+                </a>
+            `);
+        });
+
+        $('#schedule-loading').hide();
+        applyMonthFilter();
+    }
 
     $(function () {
         // =========================
@@ -573,9 +514,11 @@
         // =========================
         loadScheduleData().then(function (data) {
             scheduleData = data;
-            const today = new Date();
-            currentYear = today.getFullYear();
-            currentMonth = today.getMonth();
+            const today = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+            const params = new URLSearchParams(location.search);
+            const requestedMonth = /^(\\d{4})-(0[1-9]|1[0-2])$/.exec(params.get('m') || '');
+            currentYear = requestedMonth ? Number(requestedMonth[1]) : today.getFullYear();
+            currentMonth = requestedMonth ? Number(requestedMonth[2]) - 1 : today.getMonth();
             renderCalendar(currentYear, currentMonth);
             $('#calendar-loading').hide();
             renderSchedule(data);
