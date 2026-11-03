@@ -19,7 +19,7 @@
             <h5 style="display: inline-block;">カレンダーデータの公開 (Google, iCal)</h5>
         </summary>
         <hr>
-        <p>本ページに掲載の日程を、Googleカレンダーの公開URL、および iCal形式にて公開しています。</p>
+        <p>本ページに掲載のスケジュールを、Googleカレンダーの公開URL、および iCal形式にて公開しています。</p>
         <p>ご利用のカレンダーに取り込んで使用することが可能ですので、ぜひご利用ください。</p>
         <p>
         <ul>
@@ -40,6 +40,246 @@
         <p>お使いのカレンダーアプリでの導入の仕方については、ご自身で検索いただきますようお願いします。</p>
     </details>
 </div>
+
+
+<div class="contents_block">
+    <details>
+        <summary>
+            <h5 style="display: inline-block;">iPhone用ウィジェット</h5>
+        </summary>
+        <hr>
+
+        <p>
+            本ページに掲載しているスケジュールを、iPhoneのホーム画面に表示できるウィジェットを配布しています。
+        </p>
+        <p>
+            ホーム画面から今後の予定を確認でき、ウィジェットをタップするとスケジュールページを開けます。
+            ぜひご利用ください。
+        </p>
+
+        <h5>■ 必要なアプリ</h5>
+        <p>
+            ウィジェットの表示には、iPhone用アプリ「Scriptable」を使用します。
+            無料でインストールできます。
+        </p>
+        <p>
+            <a href="https://apps.apple.com/jp/app/scriptable/id1405459188" target="_blank" rel="noopener">
+                <strong>Scriptable をApp Storeで入手する</strong>
+            </a>
+        </p>
+
+        <h5>■ 設定方法</h5>
+        <ol>
+            <li>上記リンクからScriptableをインストールします。</li>
+            <li>Scriptableを開き、画面右上の「＋」から新しいスクリプトを作成します。</li>
+            <li>下のコード欄にある「コードを一括コピー」を押します。</li>
+            <li>Scriptableで作成したスクリプトにコードを貼り付け、保存します。</li>
+            <li>iPhoneのホーム画面を長押しし、「＋」からウィジェットを追加します。</li>
+            <li>アプリ一覧からScriptableを選択し、好みのサイズで配置します。</li>
+            <li>配置したウィジェットを長押しして「ウィジェットを編集」を開き、Scriptから登録したスクリプトを選択します。</li>
+        </ol>
+
+        <h5>■ ウィジェットの種類</h5>
+        <ul>
+            <li><strong>スモール：</strong>直近2件の予定を表示</li>
+            <li><strong>ミディアム：</strong>複数の予定を一覧表示</li>
+            <li><strong>ラージ：</strong>より多くの予定を一覧表示</li>
+        </ul>
+
+        <p>
+            <small>
+                ※予定はインターネット経由で取得します。更新タイミングはiOSによって管理されるため、常に即時更新されるわけではありません。
+            </small>
+        </p>
+
+        <h5>■ スクリプトコード</h5>
+        <p>
+            以下のコードをScriptableに登録してください。
+            コピーがうまくいかない場合は、ファイルをダウンロードすることもできます。
+        </p>
+
+        <div class="mothlamp-widget-code">
+            <div class="mothlamp-widget-code-header">
+                <span>ファントムシータ スケジュールウィジェット</span>
+                <button type="button" class="mothlamp-widget-copy" disabled>
+                    読み込み中...
+                </button>
+            </div>
+
+            <textarea class="mothlamp-widget-code-content" readonly spellcheck="false" aria-label="Scriptable用ウィジェットコード"
+                rows="16"></textarea>
+
+            <div class="mothlamp-widget-code-footer">
+                <span class="mothlamp-widget-status">コードを読み込んでいます...</span>
+                <a href="/static/widget/mothlamp-schedule-widget.txt" download>
+                    コードファイルをダウンロード
+                </a>
+            </div>
+        </div>
+
+        <p>
+            <small>
+                ※本ウィジェットは「誘蛾灯の導き」による非公式のファン制作ツールです。公式とは関係ありません。
+            </small>
+        </p>
+
+    </details>
+</div>
+
+<style>
+    .mothlamp-widget-code {
+        margin: 12px 0 18px;
+        border: 1px solid #493638;
+        border-radius: 6px;
+        overflow: hidden;
+        background: #171112;
+        color: #f4eded;
+    }
+
+    .mothlamp-widget-code-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 10px 12px;
+        background: #292022;
+        font-size: 0.85em;
+    }
+
+    .mothlamp-widget-copy {
+        flex-shrink: 0;
+        padding: 7px 12px;
+        border: 1px solid #a85b60;
+        border-radius: 4px;
+        background: #600E0E;
+        color: #fff;
+        cursor: pointer;
+        font-size: 0.9em;
+    }
+
+    .mothlamp-widget-copy:disabled {
+        opacity: 0.5;
+        cursor: default;
+    }
+
+    .mothlamp-widget-code-content {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 260px;
+        padding: 12px;
+        border: 0;
+        border-radius: 0;
+        outline: none;
+        resize: vertical;
+        background: #171112;
+        color: #e5dada;
+        font-family: Consolas, Monaco, monospace;
+        font-size: 12px;
+        line-height: 1.5;
+        white-space: pre;
+        overflow: auto;
+        tab-size: 4;
+    }
+
+    .mothlamp-widget-code-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 9px 12px;
+        border-top: 1px solid #493638;
+        font-size: 0.8em;
+    }
+
+    .mothlamp-widget-status {
+        color: #bdaaaa;
+    }
+
+    .mothlamp-widget-code-footer a {
+        color: #e5a6a8;
+    }
+
+    @media (max-width: 480px) {
+        .mothlamp-widget-code-header {
+            align-items: flex-start;
+            font-size: 0.78em;
+        }
+
+        .mothlamp-widget-code-content {
+            font-size: 11px;
+        }
+    }
+</style>
+
+<script>
+    (function () {
+        const blocks = document.querySelectorAll(".mothlamp-widget-code");
+
+        blocks.forEach(function (block) {
+            const textarea = block.querySelector(".mothlamp-widget-code-content");
+            const button = block.querySelector(".mothlamp-widget-copy");
+            const status = block.querySelector(".mothlamp-widget-status");
+
+            // コードファイルを読み込む
+            fetch("/static/widget/mothlamp-schedule-widget.txt", {
+                cache: "no-cache"
+            })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("HTTP " + response.status);
+                    }
+                    return response.text();
+                })
+                .then(function (code) {
+                    textarea.value = code;
+                    button.disabled = false;
+                    button.textContent = "コードを一括コピー";
+                    status.textContent = "読み込み完了";
+                })
+                .catch(function (error) {
+                    console.error("Widget code load error:", error);
+                    button.textContent = "読み込み失敗";
+                    status.textContent = "コードを読み込めませんでした。ダウンロードをお試しください。";
+                });
+
+            // コードを一括コピー
+            button.addEventListener("click", async function () {
+                const code = textarea.value;
+
+                if (!code) return;
+
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(code);
+                    } else {
+                        textarea.focus();
+                        textarea.select();
+                        const copied = document.execCommand("copy");
+
+                        if (!copied) {
+                            throw new Error("Copy failed");
+                        }
+                    }
+
+                    button.textContent = "コピーしました！";
+                    status.textContent = "Scriptableに貼り付けてください。";
+
+                    setTimeout(function () {
+                        button.textContent = "コードを一括コピー";
+                    }, 2000);
+
+                } catch (error) {
+                    console.error("Widget code copy error:", error);
+                    status.textContent = "コピーできませんでした。コード欄を長押ししてコピーしてください。";
+                    textarea.focus();
+                    textarea.select();
+                }
+            });
+        });
+    })();
+</script>
 
 
 <div class="calendar-wrapper">

@@ -1,0 +1,472 @@
+/*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ファントムシータ スケジュールウィジェット
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+■ 概要
+ファントムシータの今後のスケジュールを、
+iPhoneのホーム画面に表示するウィジェットです。
+
+公式スケジュール情報を取得し、日付順に予定を表示します。
+ウィジェットをタップすると、スケジュールページを開きます。
+
+■ 使用するアプリ
+Scriptable（無料）
+
+App Store：
+https://apps.apple.com/jp/app/scriptable/id1405459188
+
+■ インストール・設定方法
+
+【1. Scriptableをインストール】
+上記のApp StoreリンクからScriptableをインストールします。
+
+【2. スクリプトを登録】
+1. Scriptableを開きます。
+2. 画面右上の「＋」から新しいスクリプトを作成します。
+3. このファイルのコードをすべてコピーします。
+4. 作成したスクリプトにコードを貼り付けます。
+5. スクリプト名を「ファントムシータ スケジュール」など、
+   分かりやすい名前に変更して保存します。
+
+【3. ホーム画面にウィジェットを設置】
+1. iPhoneのホーム画面を長押しします。
+2. 画面左上の「＋」をタップします。
+3. アプリ一覧から「Scriptable」を選択します。
+4. 好みのウィジェットサイズを選択して追加します。
+5. 追加したウィジェットを長押しし、「ウィジェットを編集」を開きます。
+6. Scriptの項目から、先ほど登録したスクリプトを選択します。
+
+これで設定完了です。
+
+■ ウィジェットの種類
+・スモール：直近2件の予定を表示
+・ミディアム：複数の予定を一覧表示
+・ラージ：より多くの予定を一覧表示
+
+※表示される予定は、スケジュールの登録状況や
+  ウィジェットのサイズによって異なります。
+
+■ ご利用にあたって
+・インターネット接続が必要です。
+・Scriptableのインストールが必要です。
+・ウィジェットの更新タイミングはiOSによって管理されます。
+・本ウィジェットは非公式のファン制作ツールです。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+誘蛾灯の導き 
+https://mothlamp.info
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+
+const API_URL = "https://g-api.mothlamp.info/api?target=schedule&source=widget";
+const SCHEDULE_URL = "https://mothlamp.info/?p=schedule";
+
+// ========================================
+// 表示調整パラメータ
+// ========================================
+
+const DISPLAY = {
+    headerFontSize: 14,
+    footerFontSize: 9,
+    headerBottomSpacing: 3,
+    footerTopSpacing: 2,
+
+    // 日付列の幅
+    dateWidth: {
+        small: 45,
+        medium: 45,
+        large: 45
+    },
+
+    // カテゴリ列の幅
+    tagWidth: {
+        small: 48,
+        medium: 53,
+        large: 53
+    },
+
+    // 各列の文字サイズ
+    fontSize: {
+        small: 9,
+        medium: 10,
+        large: 10
+    },
+
+    // カテゴリの文字サイズ補正
+    tagFontOffset: -1,
+
+    // 列間の余白
+    columnSpacing: 0,
+
+    // 予定同士の余白
+    rowSpacing: 4,
+
+    // 予定表示に使用する高さの上限
+    heightLimit: {
+        small: 189,
+        medium: 120,
+        large: 330
+    },
+
+    // タイトルの1行あたりの文字幅目安
+    // 日本語の全角文字を1として換算
+    charsPerLine: {
+        small: 4,
+        medium: 21,
+        large: 20
+    },
+
+    // タイトルの最大表示行数
+    maxTitleLines: 2,
+
+    // 1行あたりの高さ補正
+    lineHeightRatio: 1.35,
+
+    // スモール専用設定
+    small: {
+        headerFontSize: 11,
+        dateFontSize: 8,
+        tagFontSize: 8,
+        titleFontSize: 9,
+        headerBottomSpacing: 7,
+        eventSpacing: 9,
+        metaBottomSpacing: 2,
+        eventCount: 2
+    }
+};
+
+// ========================================
+// ウィジェット基本設定
+// ========================================
+
+const widget = new ListWidget();
+
+const colors = {
+    background: Color.dynamic(new Color("#fbf7f5"), new Color("#171112")),
+    header: Color.dynamic(new Color("#600E0E"), new Color("#e5a6a8")),
+    date: Color.dynamic(new Color("#665252"), new Color("#d8c5c5")),
+    tag: Color.dynamic(new Color("#600E0E"), new Color("#e5a6a8")),
+    title: Color.dynamic(new Color("#292222"), new Color("#f4eded")),
+    muted: Color.dynamic(new Color("#8a7777"), new Color("#a88f90")),
+    line: Color.dynamic(new Color("#e3d5d2"), new Color("#493638")),
+    error: Color.dynamic(new Color("#b32626"), new Color("#ff7777"))
+};
+
+widget.backgroundColor = colors.background;
+widget.setPadding(12, 14, 10, 14);
+widget.spacing = 0;
+widget.url = SCHEDULE_URL;
+
+// ========================================
+// 共通関数
+// ========================================
+
+// JSTの日付に変換
+function getJSTParts(date) {
+    const parts = new Intl.DateTimeFormat("ja-JP", {
+        timeZone: "Asia/Tokyo",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        weekday: "short"
+    }).formatToParts(date);
+
+    const result = {};
+    for (const part of parts) result[part.type] = part.value;
+    return result;
+}
+
+function getJSTDateKey(date) {
+    const p = getJSTParts(date);
+    return `${p.year}-${p.month}-${p.day}`;
+}
+
+function formatDate(date) {
+    const p = getJSTParts(date);
+    return `${p.month}/${p.day}(${p.weekday})`;
+}
+
+function addText(parent, text, size, color, bold = false) {
+    const element = parent.addText(text);
+    element.font = bold ? Font.boldSystemFont(size) : Font.systemFont(size);
+    element.textColor = color;
+    return element;
+}
+
+// タイトルの文字幅を全角文字換算で計算
+function getTextWidth(text) {
+    let width = 0;
+
+    for (const char of text) {
+        if (/[ -~]/.test(char)) {
+            width += char === " " ? 0.3 : 0.55;
+        } else {
+            width += 1;
+        }
+    }
+
+    return width;
+}
+
+// フッターの更新時刻
+function getUpdateTime() {
+    return new Date().toLocaleTimeString("ja-JP", {
+        timeZone: "Asia/Tokyo",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+    });
+}
+
+function addFooter() {
+    widget.addSpacer();
+
+    const footerLine = widget.addStack();
+    footerLine.size = new Size(0, 1);
+    footerLine.backgroundColor = colors.line;
+
+    widget.addSpacer(DISPLAY.footerTopSpacing);
+
+    const footer = widget.addStack();
+    footer.layoutHorizontally();
+
+    addText(footer, `更新 ${getUpdateTime()}`, DISPLAY.footerFontSize, colors.muted);
+    footer.addSpacer();
+    addText(footer, "誘蛾灯の導き", DISPLAY.footerFontSize, colors.header, true);
+}
+
+// ========================================
+// スモール専用表示
+// ========================================
+
+function addSmallLayout(events) {
+    const small = DISPLAY.small;
+
+    // ヘッダー1行目
+    addText(
+        widget,
+        "ファントムシータ",
+        small.headerFontSize,
+        colors.header,
+        true
+    );
+
+    // ヘッダー2行目：右寄せ
+    const headerSecond = widget.addStack();
+    headerSecond.layoutHorizontally();
+    headerSecond.addSpacer();
+
+    addText(
+        headerSecond,
+        "スケジュール",
+        small.headerFontSize,
+        colors.header,
+        true
+    );
+
+    widget.addSpacer(small.headerBottomSpacing);
+
+    const displayEvents = events.slice(0, small.eventCount);
+
+    if (displayEvents.length === 0) {
+        addText(widget, "現在、今後の予定はありません", 9, colors.muted);
+        return;
+    }
+
+    for (let i = 0; i < displayEvents.length; i++) {
+        const event = displayEvents[i];
+
+        // 日付・カテゴリ行
+        const metaRow = widget.addStack();
+        metaRow.layoutHorizontally();
+        metaRow.centerAlignContent();
+        metaRow.spacing = 5;
+
+        addText(
+            metaRow,
+            formatDate(event.dateObject),
+            small.dateFontSize,
+            colors.date
+        );
+
+        addText(
+            metaRow,
+            (event.tag || "OTHER").toUpperCase(),
+            small.tagFontSize,
+            colors.tag,
+            true
+        );
+
+        widget.addSpacer(small.metaBottomSpacing);
+
+        // タイトル：最大2行
+        const titleText = addText(
+            widget,
+            event.title,
+            small.titleFontSize,
+            colors.title
+        );
+        titleText.lineLimit = 2;
+
+        // 予定同士の余白
+        if (i < displayEvents.length - 1) {
+            widget.addSpacer(small.eventSpacing);
+        }
+    }
+}
+
+// ========================================
+// スケジュール取得・表示
+// ========================================
+
+try {
+    const req = new Request(API_URL);
+    req.timeoutInterval = 15;
+    const data = await req.loadJSON();
+
+    const today = getJSTDateKey(new Date());
+
+    const events = data
+        .filter(event => event.date && event.title)
+        .map(event => ({
+            ...event,
+            dateObject: new Date(event.date)
+        }))
+        .filter(event =>
+            !isNaN(event.dateObject.getTime()) &&
+            getJSTDateKey(event.dateObject) >= today
+        )
+        .sort((a, b) => a.dateObject - b.dateObject);
+
+    // ウィジェットサイズごとの設定
+    const family = config.widgetFamily || "medium";
+    const size = ["small", "medium", "large"].includes(family)
+        ? family
+        : "medium";
+
+    // スモールは専用レイアウト
+    if (size === "small") {
+        addSmallLayout(events);
+    } else {
+        const settings = {
+            fontSize: DISPLAY.fontSize[size],
+            dateWidth: DISPLAY.dateWidth[size],
+            tagWidth: DISPLAY.tagWidth[size],
+            charsPerLine: DISPLAY.charsPerLine[size],
+            heightLimit: DISPLAY.heightLimit[size]
+        };
+
+        // タイトルの長さから表示に必要な高さを概算
+        function estimateHeight(event) {
+            const width = getTextWidth(event.title);
+            const lines = Math.min(
+                DISPLAY.maxTitleLines,
+                Math.max(1, Math.ceil(width / settings.charsPerLine))
+            );
+
+            return Math.max(
+                settings.fontSize * 1.5,
+                lines * settings.fontSize * DISPLAY.lineHeightRatio
+            );
+        }
+
+        // フッター用の領域を残して予定を選択
+        const displayEvents = [];
+        let usedHeight = 0;
+
+        for (const event of events) {
+            const height = estimateHeight(event);
+            const spacing = displayEvents.length > 0 ? DISPLAY.rowSpacing : 0;
+
+            if (displayEvents.length > 0 &&
+                usedHeight + spacing + height > settings.heightLimit) {
+                break;
+            }
+
+            displayEvents.push(event);
+            usedHeight += spacing + height;
+        }
+
+        // ヘッダー
+        const header = addText(
+            widget,
+            "ファントムシータ スケジュール",
+            DISPLAY.headerFontSize,
+            colors.header,
+            true
+        );
+        header.lineLimit = 1;
+
+        widget.addSpacer(DISPLAY.headerBottomSpacing);
+
+        if (displayEvents.length === 0) {
+            addText(widget, "現在、今後の予定はありません", 11, colors.muted);
+        } else {
+            for (let i = 0; i < displayEvents.length; i++) {
+                const event = displayEvents[i];
+
+                const row = widget.addStack();
+                row.layoutHorizontally();
+                row.topAlignContent();
+                row.spacing = DISPLAY.columnSpacing;
+
+                // 日付列：左寄せ・1行固定
+                const dateColumn = row.addStack();
+                dateColumn.size = new Size(settings.dateWidth, 0);
+
+                const dateText = addText(
+                    dateColumn,
+                    formatDate(event.dateObject),
+                    settings.fontSize,
+                    colors.date
+                );
+                dateText.lineLimit = 1;
+                dateText.minimumScaleFactor = 1;
+
+                // カテゴリ列：中央寄せ・1行固定
+                const tagColumn = row.addStack();
+                tagColumn.size = new Size(settings.tagWidth, 0);
+                tagColumn.centerAlignContent();
+
+                const tagText = addText(
+                    tagColumn,
+                    (event.tag || "OTHER").toUpperCase(),
+                    settings.fontSize + DISPLAY.tagFontOffset,
+                    colors.tag,
+                    true
+                );
+                tagText.lineLimit = 1;
+                tagText.minimumScaleFactor = 1;
+
+                // タイトル列：最大2行
+                const titleText = addText(
+                    row,
+                    event.title,
+                    settings.fontSize,
+                    colors.title
+                );
+                titleText.lineLimit = DISPLAY.maxTitleLines;
+
+                // 予定同士の余白
+                if (i < displayEvents.length - 1) {
+                    widget.addSpacer(DISPLAY.rowSpacing);
+                }
+            }
+        }
+    }
+
+    addFooter();
+
+} catch (error) {
+    addText(widget, "スケジュールを取得できませんでした", 11, colors.error);
+    addText(widget, String(error), 9, colors.muted);
+    addFooter();
+}
+
+// 5分後を次回更新可能時刻として指定
+widget.refreshAfterDate = new Date(Date.now() + 5 * 60 * 1000);
+
+Script.setWidget(widget);
+Script.complete();
