@@ -1954,7 +1954,29 @@
                     "schedule": [
                         "2026.09.21"
                     ],
-                    "songs": []
+                    "songs": [
+                        "<披露予定だったセットリスト>",
+                        {
+                            "id": "barairo"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        },
+                        {
+                            "id": "mermaid"
+                        },
+                        {
+                            "id": "hanabami",
+                            "display": "花喰み（Band arrange ver.）"
+                        },
+                        "踊（Bon-Odo Remix）（Ado）",
+                        {
+                            "id": "horror-queen"
+                        }
+                    ]
                 }
             ]
         },
