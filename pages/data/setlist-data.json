@@ -2084,10 +2084,120 @@
                         "2026.11.01"
                     ],
                     "songs": [
-                        "???",
-                        "???",
-                        "???",
-                        "???"
+                        "<1部>",
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        "好き好き大好き（戸川純）",
+                        {
+                            "id": "mermaid"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "hanabami",
+                            "display": "花喰み（Band arrange ver.）"
+                        },
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "sokkuri"
+                        },
+                        {
+                            "id": "mo-ii-kai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "devilish-girl"
+                        },
+                        {
+                            "id": "barairo"
+                        },
+                        {
+                            "id": "horror-queen"
+                        },
+                        "[アンコール]",
+                        {
+                            "id": "sweetpea"
+                        },
+                        "唱（Ado）",
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "<br>",
+                        "<映画撮影>",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "愛 AM ZOMBIE（映画オリジナル曲）",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "愛 AM ZOMBIE（映画オリジナル曲）",
+                        "<br>",
+                        "<br>",
+                        "<2部>",
+                        {
+                            "id": "just-wanna-xxxx-with-you"
+                        },
+                        {
+                            "id": "noah"
+                        },
+                        "好き好き大好き（戸川純）",
+                        {
+                            "id": "mermaid"
+                        },
+                        {
+                            "id": "sukikirai"
+                        },
+                        "[MC]",
+                        {
+                            "id": "hanabami",
+                            "display": "花喰み（Band arrange ver.）"
+                        },
+                        {
+                            "id": "botbakka"
+                        },
+                        {
+                            "id": "sokkuri"
+                        },
+                        {
+                            "id": "otomodachi"
+                        },
+                        "[MC]",
+                        {
+                            "id": "conflicting"
+                        },
+                        {
+                            "id": "barairo"
+                        },
+                        {
+                            "id": "horror-queen"
+                        },
+                        "[アンコール]",
+                        {
+                            "id": "sweetpea"
+                        },
+                        "唱（Ado）",
+                        {
+                            "id": "zokuzoku"
+                        },
+                        "<br>",
+                        "<映画撮影>",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "愛 AM ZOMBIE（映画オリジナル曲）",
+                        {
+                            "id": "horror-queen"
+                        },
+                        "愛 AM ZOMBIE（映画オリジナル曲）"
                     ]
                 }
             ]

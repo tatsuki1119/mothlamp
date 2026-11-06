@@ -6,7 +6,7 @@
     (function () {
         let currentUrl = new URL(window.location.href);
         let currentParams = new URLSearchParams(currentUrl.search);
-        history.replaceState(null, "", "/r/setlist?" + currentParams.toString());
+        history.replaceState(null, "", "/r/setlist?" + currentParams.toString() + currentUrl.hash);
     })();
 </script>
 
