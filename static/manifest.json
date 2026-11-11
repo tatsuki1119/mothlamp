@@ -9,7 +9,7 @@
     "orientation": "any",
     "icons": [
         {
-            "src": "/static/apple-touch-icon.png",
+            "src": "/apple-touch-icon.png",
             "sizes": "180x180"
         }
     ]
