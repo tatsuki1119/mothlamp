@@ -564,7 +564,7 @@
         }
 
         function isSameDay(dateStr, year, month, day) {
-            const d = new Date(dateStr.toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
+            const d = new Date(new Date(dateStr).toLocaleString("en-US", { timeZone: "Asia/Tokyo" }));
             return (
                 d.getFullYear() === year &&
                 d.getMonth() === month &&
